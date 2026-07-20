@@ -1,0 +1,22 @@
+generated: '2026-07-19'
+method: searched
+source: openapi/flipturn-openapi.yml
+docs: https://api-docs.getflipturn.com/authorization.md
+notes: >-
+  Flipturn uses a single bearer API key passed in the Authorization header
+  (`Authorization: Bearer {api_key}`). API keys are created in the Flipturn app
+  (cloud.getflipturn.com > Manage > API Keys) by an Owner-level user and can be
+  scoped to a specific site or subset of chargers. There is no OAuth or OpenID
+  Connect surface.
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: 'API key passed as a bearer token in the Authorization header: `Authorization:
+    Bearer {api_key}`. Keys are created in the Flipturn app (Manage > API Keys) by an Owner
+    and can be scoped to specific sites or chargers.'
+  sources:
+  - openapi/flipturn-openapi.yml
