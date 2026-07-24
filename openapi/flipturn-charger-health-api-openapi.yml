@@ -1,0 +1,100 @@
+openapi: 3.1.0
+info:
+  title: Flipturn Access IDs Charger Health API
+  version: '1.0'
+  description: 'The Flipturn API provides read and write access to the Flipturn EV charging management platform: sites, chargers and ports, charging sessions, charger health and uptime, access IDs (RFID cards and vehicles), vehicles, alerts, charger errors, raw OCPP messages, reservations, site power limits, vehicle departure times, and maintenance windows. It is a JSON REST API secured with a bearer API key, designed for integrating Flipturn charging data with ticketing platforms, data warehouses, transportation management systems, and fleet operations tooling. Flipturn also supports OCPI for roaming-partner integration (contact support to enable).'
+  contact:
+    name: Flipturn Support
+    email: support@getflipturn.com
+    url: https://api-docs.getflipturn.com/
+  x-apievangelist-generated: '2026-07-19'
+  x-apievangelist-method: generated
+  x-apievangelist-source: https://api-docs.getflipturn.com/llms.txt
+servers:
+- url: https://api.getflipturn.com/api
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Charger Health
+  description: Uptime, error, and utilization statistics.
+paths:
+  /charger-health:
+    get:
+      operationId: getChargerHealth
+      tags:
+      - Charger Health
+      summary: Get charger health statistics
+      description: Retrieve health, uptime, error, and utilization statistics for all chargers in an organization over a time interval, grouped by charger and port. Defaults to the last 30 days. Subject to stricter rate limits.
+      parameters:
+      - name: startTimestamp
+        in: query
+        description: ISO 8601 start of interval. Defaults to 30 days ago.
+        schema:
+          type: string
+          format: date-time
+      - name: endTimestamp
+        in: query
+        description: ISO 8601 end of interval. Defaults to now; future dates capped at now.
+        schema:
+          type: string
+          format: date-time
+      - name: siteIds
+        in: query
+        description: Filter by site IDs.
+        schema:
+          type: array
+          items:
+            type: integer
+      - name: chargerIds
+        in: query
+        description: Filter by charger IDs.
+        schema:
+          type: array
+          items:
+            type: integer
+      responses:
+        '200':
+          description: Aggregate summary plus per-charger and per-port statistics.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  summary:
+                    type: object
+                  data:
+                    type: array
+                    items:
+                      type: object
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+components:
+  responses:
+    RateLimited:
+      description: Rate limit exceeded (200 requests per minute per API key).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Invalid API key or Authorization header.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      description: Flipturn error envelope.
+      properties:
+        error:
+          type: string
+          description: Human-readable error message.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'API key passed as a bearer token in the Authorization header: `Authorization: Bearer {api_key}`. Keys are created in the Flipturn app (Manage > API Keys) by an Owner and can be scoped to specific sites or chargers.'

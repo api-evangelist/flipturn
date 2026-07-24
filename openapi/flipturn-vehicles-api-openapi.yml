@@ -1,0 +1,265 @@
+openapi: 3.1.0
+info:
+  title: Flipturn Access IDs Vehicles API
+  version: '1.0'
+  description: 'The Flipturn API provides read and write access to the Flipturn EV charging management platform: sites, chargers and ports, charging sessions, charger health and uptime, access IDs (RFID cards and vehicles), vehicles, alerts, charger errors, raw OCPP messages, reservations, site power limits, vehicle departure times, and maintenance windows. It is a JSON REST API secured with a bearer API key, designed for integrating Flipturn charging data with ticketing platforms, data warehouses, transportation management systems, and fleet operations tooling. Flipturn also supports OCPI for roaming-partner integration (contact support to enable).'
+  contact:
+    name: Flipturn Support
+    email: support@getflipturn.com
+    url: https://api-docs.getflipturn.com/
+  x-apievangelist-generated: '2026-07-19'
+  x-apievangelist-method: generated
+  x-apievangelist-source: https://api-docs.getflipturn.com/llms.txt
+servers:
+- url: https://api.getflipturn.com/api
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Vehicles
+  description: Electric vehicles and their associated access IDs.
+paths:
+  /vehicles:
+    get:
+      operationId: listVehicles
+      tags:
+      - Vehicles
+      summary: List vehicles
+      description: Retrieve a paginated list of all electric vehicles and their associated access IDs.
+      parameters:
+      - $ref: '#/components/parameters/NextPageCursor'
+      responses:
+        '200':
+          description: A paginated list of vehicles.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Vehicle'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createVehicle
+      tags:
+      - Vehicles
+      summary: Create a vehicle
+      description: Create a new vehicle, optionally associating one or more access IDs and a customer.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - vehicle
+              properties:
+                vehicle:
+                  $ref: '#/components/schemas/VehicleCreate'
+      responses:
+        '200':
+          description: The created vehicle.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  vehicle:
+                    $ref: '#/components/schemas/Vehicle'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /vehicles/{id}:
+    get:
+      operationId: getVehicle
+      tags:
+      - Vehicles
+      summary: Get a vehicle
+      description: Retrieve the details for a specific vehicle.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: The vehicle.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  vehicle:
+                    $ref: '#/components/schemas/Vehicle'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateVehicle
+      tags:
+      - Vehicles
+      summary: Update a vehicle
+      description: Update a vehicle. Explicitly providing null deletes an optional value; omitting a field leaves it unchanged.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - vehicle
+              properties:
+                vehicle:
+                  $ref: '#/components/schemas/VehicleCreate'
+      responses:
+        '200':
+          description: The updated vehicle.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  vehicle:
+                    $ref: '#/components/schemas/Vehicle'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    Vehicle:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+          nullable: true
+        make:
+          type: string
+          nullable: true
+        model:
+          type: string
+          nullable: true
+        vin:
+          type: string
+          nullable: true
+        licensePlate:
+          type: string
+          nullable: true
+        hasTelematics:
+          type: boolean
+        customer:
+          $ref: '#/components/schemas/Customer'
+        accessIds:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              ocppIdTag:
+                type: string
+              authorizationStatus:
+                type: string
+                enum:
+                - Authorized
+                - Revoked
+    Error:
+      type: object
+      description: Flipturn error envelope.
+      properties:
+        error:
+          type: string
+          description: Human-readable error message.
+    VehicleCreate:
+      type: object
+      properties:
+        name:
+          type: string
+        make:
+          type: string
+          nullable: true
+        model:
+          type: string
+          nullable: true
+        vin:
+          type: string
+          nullable: true
+        licensePlate:
+          type: string
+          nullable: true
+        customer:
+          $ref: '#/components/schemas/Customer'
+        accessIds:
+          type: array
+          items:
+            type: object
+            properties:
+              ocppIdTag:
+                type: string
+              authorizationStatus:
+                type: string
+                enum:
+                - Authorized
+                - Revoked
+    Customer:
+      type: object
+      properties:
+        name:
+          type: string
+    Pagination:
+      type: object
+      properties:
+        hasNextPage:
+          type: boolean
+        nextPageCursor:
+          type: string
+          nullable: true
+  responses:
+    NotFound:
+      description: The requested resource or endpoint does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid parameters passed to the API endpoint.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Invalid API key or Authorization header.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    NextPageCursor:
+      name: nextPageCursor
+      in: query
+      description: Opaque cursor from the previous response's pagination.nextPageCursor to fetch the next page. Keep all other parameters identical.
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'API key passed as a bearer token in the Authorization header: `Authorization: Bearer {api_key}`. Keys are created in the Flipturn app (Manage > API Keys) by an Owner and can be scoped to specific sites or chargers.'

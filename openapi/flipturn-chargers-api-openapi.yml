@@ -1,0 +1,268 @@
+openapi: 3.1.0
+info:
+  title: Flipturn Access IDs Chargers API
+  version: '1.0'
+  description: 'The Flipturn API provides read and write access to the Flipturn EV charging management platform: sites, chargers and ports, charging sessions, charger health and uptime, access IDs (RFID cards and vehicles), vehicles, alerts, charger errors, raw OCPP messages, reservations, site power limits, vehicle departure times, and maintenance windows. It is a JSON REST API secured with a bearer API key, designed for integrating Flipturn charging data with ticketing platforms, data warehouses, transportation management systems, and fleet operations tooling. Flipturn also supports OCPI for roaming-partner integration (contact support to enable).'
+  contact:
+    name: Flipturn Support
+    email: support@getflipturn.com
+    url: https://api-docs.getflipturn.com/
+  x-apievangelist-generated: '2026-07-19'
+  x-apievangelist-method: generated
+  x-apievangelist-source: https://api-docs.getflipturn.com/llms.txt
+servers:
+- url: https://api.getflipturn.com/api
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Chargers
+  description: Individual charger detail lookups.
+paths:
+  /chargers/{id}:
+    get:
+      operationId: getCharger
+      tags:
+      - Chargers
+      summary: Get a charger by internal ID
+      description: Retrieve detailed information about a specific charger by its internal Flipturn ID, including ports, connection status, and any ongoing session.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The internal ID of the charger.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Charger detail.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Charger'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /chargers/by-external-id/{id}:
+    get:
+      operationId: getChargerByExternalId
+      tags:
+      - Chargers
+      summary: Get a charger by external (network station) ID
+      description: Retrieve a charger by its external network station ID. Response structure is identical to getCharger.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The external ID (network station ID) of the charger.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Charger detail.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Charger'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /chargers/by-ocpp-id/{id}:
+    get:
+      operationId: getChargerByOcppId
+      tags:
+      - Chargers
+      summary: Get a charger by OCPP ID
+      description: Retrieve a charger by its OCPP identifier. Response structure is identical to getCharger.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The OCPP identifier of the charger.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Charger detail.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Charger'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    CurrentChargingSession:
+      type: object
+      nullable: true
+      properties:
+        id:
+          type: integer
+        startTime:
+          type: string
+          format: date-time
+        socStartPercent:
+          type: number
+          nullable: true
+        energyDeliveredKwh:
+          type: number
+        ocppIdTag:
+          type: string
+          nullable: true
+        ocppTransactionId:
+          type: integer
+          nullable: true
+        vehicle:
+          $ref: '#/components/schemas/VehicleRef'
+        customer:
+          $ref: '#/components/schemas/Customer'
+    VehicleRef:
+      type: object
+      nullable: true
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+          nullable: true
+        make:
+          type: string
+          nullable: true
+        model:
+          type: string
+          nullable: true
+        vin:
+          type: string
+          nullable: true
+    Error:
+      type: object
+      description: Flipturn error envelope.
+      properties:
+        error:
+          type: string
+          description: Human-readable error message.
+    Port:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        portNumber:
+          type: integer
+        maximumPowerKw:
+          type: number
+          nullable: true
+        connectorType:
+          type: string
+          description: CCS1, J1772, or NACS.
+        ocppStatus:
+          type: object
+          nullable: true
+          properties:
+            status:
+              type: string
+            timestamp:
+              type: string
+              format: date-time
+            errorCode:
+              type: string
+            vendorErrorCode:
+              type: string
+              nullable: true
+            info:
+              type: string
+              nullable: true
+        currentChargingSession:
+          $ref: '#/components/schemas/CurrentChargingSession'
+    Charger:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        manufacturer:
+          type: string
+          nullable: true
+        model:
+          type: string
+          nullable: true
+        serialNumber:
+          type: string
+          nullable: true
+        firmwareVersion:
+          type: string
+          nullable: true
+        latitude:
+          type: number
+          nullable: true
+        longitude:
+          type: number
+          nullable: true
+        externalId:
+          type: string
+          nullable: true
+        ocppId:
+          type: string
+          nullable: true
+        type:
+          type: string
+          description: '"DCFC" or "Level 2".'
+        networkServiceProvider:
+          type: string
+        chargerType:
+          type: string
+        numberOfPorts:
+          type: integer
+        powerSharing:
+          type: boolean
+        connectionStatus:
+          type: object
+          nullable: true
+          properties:
+            status:
+              type: string
+            timestamp:
+              type: string
+              format: date-time
+        ports:
+          type: array
+          items:
+            $ref: '#/components/schemas/Port'
+    Customer:
+      type: object
+      properties:
+        name:
+          type: string
+  responses:
+    NotFound:
+      description: The requested resource or endpoint does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Invalid API key or Authorization header.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'API key passed as a bearer token in the Authorization header: `Authorization: Bearer {api_key}`. Keys are created in the Flipturn app (Manage > API Keys) by an Owner and can be scoped to specific sites or chargers.'

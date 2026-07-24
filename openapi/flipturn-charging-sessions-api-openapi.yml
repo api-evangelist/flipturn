@@ -1,0 +1,406 @@
+openapi: 3.1.0
+info:
+  title: Flipturn Access IDs Charging Sessions API
+  version: '1.0'
+  description: 'The Flipturn API provides read and write access to the Flipturn EV charging management platform: sites, chargers and ports, charging sessions, charger health and uptime, access IDs (RFID cards and vehicles), vehicles, alerts, charger errors, raw OCPP messages, reservations, site power limits, vehicle departure times, and maintenance windows. It is a JSON REST API secured with a bearer API key, designed for integrating Flipturn charging data with ticketing platforms, data warehouses, transportation management systems, and fleet operations tooling. Flipturn also supports OCPI for roaming-partner integration (contact support to enable).'
+  contact:
+    name: Flipturn Support
+    email: support@getflipturn.com
+    url: https://api-docs.getflipturn.com/
+  x-apievangelist-generated: '2026-07-19'
+  x-apievangelist-method: generated
+  x-apievangelist-source: https://api-docs.getflipturn.com/llms.txt
+servers:
+- url: https://api.getflipturn.com/api
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Charging Sessions
+  description: Historical and in-progress charging sessions.
+paths:
+  /charging-sessions:
+    get:
+      operationId: listChargingSessions
+      tags:
+      - Charging Sessions
+      summary: List charging sessions
+      description: Retrieve a paginated list of charging sessions, filterable by start/end time, site, charger, and customer. Optional includes add per-interval statistics, time-of-use energy, and in-progress sessions. Results are paginated with an opaque cursor.
+      parameters:
+      - name: startTimeAfter
+        in: query
+        description: 'ISO 8601: only sessions started at or after this time.'
+        schema:
+          type: string
+          format: date-time
+      - name: startTimeBefore
+        in: query
+        description: 'ISO 8601: only sessions started before this time.'
+        schema:
+          type: string
+          format: date-time
+      - name: endTimeAfter
+        in: query
+        description: 'ISO 8601: only sessions ended at or after this time.'
+        schema:
+          type: string
+          format: date-time
+      - name: endTimeBefore
+        in: query
+        description: 'ISO 8601: only sessions ended before this time.'
+        schema:
+          type: string
+          format: date-time
+      - name: includeIntervals
+        in: query
+        description: Include per-15-minute interval statistics and max demand. Limits the key to 1 concurrent request.
+        schema:
+          type: boolean
+      - name: includeTouEnergy
+        in: query
+        description: Include energy usage grouped into time-of-use periods.
+        schema:
+          type: boolean
+      - name: includeInProgressSessions
+        in: query
+        description: Include charging sessions that are in progress.
+        schema:
+          type: boolean
+      - name: siteIds
+        in: query
+        description: Filter by site IDs, e.g. siteIds[]=101&siteIds[]=102.
+        schema:
+          type: array
+          items:
+            type: integer
+      - name: chargerIds
+        in: query
+        description: Filter by charger IDs.
+        schema:
+          type: array
+          items:
+            type: integer
+      - name: customerIds
+        in: query
+        description: Filter by customer IDs.
+        schema:
+          type: array
+          items:
+            type: integer
+      - name: customerNames
+        in: query
+        description: Filter by customer names.
+        schema:
+          type: array
+          items:
+            type: string
+      - $ref: '#/components/parameters/NextPageCursor'
+      responses:
+        '200':
+          description: A paginated list of charging sessions.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ChargingSession'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+components:
+  schemas:
+    RfidRef:
+      type: object
+      nullable: true
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+          nullable: true
+    PortRef:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        portNumber:
+          type: integer
+        maximumPowerKw:
+          type: number
+          nullable: true
+    CurrentChargingSession:
+      type: object
+      nullable: true
+      properties:
+        id:
+          type: integer
+        startTime:
+          type: string
+          format: date-time
+        socStartPercent:
+          type: number
+          nullable: true
+        energyDeliveredKwh:
+          type: number
+        ocppIdTag:
+          type: string
+          nullable: true
+        ocppTransactionId:
+          type: integer
+          nullable: true
+        vehicle:
+          $ref: '#/components/schemas/VehicleRef'
+        customer:
+          $ref: '#/components/schemas/Customer'
+    VehicleRef:
+      type: object
+      nullable: true
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+          nullable: true
+        make:
+          type: string
+          nullable: true
+        model:
+          type: string
+          nullable: true
+        vin:
+          type: string
+          nullable: true
+    ChargingSession:
+      type: object
+      properties:
+        id:
+          type: integer
+        startTime:
+          type: string
+          format: date-time
+        endTime:
+          type: string
+          format: date-time
+          nullable: true
+        updatedAt:
+          type: string
+          format: date-time
+        durationSeconds:
+          type: integer
+          nullable: true
+        chargingStartTime:
+          type: string
+          format: date-time
+        chargingEndTime:
+          type: string
+          format: date-time
+          nullable: true
+        chargingDurationSeconds:
+          type: integer
+          nullable: true
+        socStartPercent:
+          type: number
+          nullable: true
+        socEndPercent:
+          type: number
+          nullable: true
+        energyDeliveredKwh:
+          type: number
+          nullable: true
+        averageDemandKw:
+          type: number
+          nullable: true
+        maxDemandKw:
+          type: number
+          nullable: true
+        ocppIdTag:
+          type: string
+          nullable: true
+        ocppTransactionId:
+          type: integer
+          nullable: true
+        tags:
+          type: array
+          items:
+            type: string
+        site:
+          $ref: '#/components/schemas/SiteRef'
+        charger:
+          $ref: '#/components/schemas/Charger'
+        port:
+          $ref: '#/components/schemas/PortRef'
+        vehicle:
+          $ref: '#/components/schemas/VehicleRef'
+        rfid:
+          $ref: '#/components/schemas/RfidRef'
+        customer:
+          $ref: '#/components/schemas/Customer'
+        organization:
+          $ref: '#/components/schemas/Organization'
+    SiteRef:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        locationId:
+          type: string
+          nullable: true
+    Error:
+      type: object
+      description: Flipturn error envelope.
+      properties:
+        error:
+          type: string
+          description: Human-readable error message.
+    Port:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        portNumber:
+          type: integer
+        maximumPowerKw:
+          type: number
+          nullable: true
+        connectorType:
+          type: string
+          description: CCS1, J1772, or NACS.
+        ocppStatus:
+          type: object
+          nullable: true
+          properties:
+            status:
+              type: string
+            timestamp:
+              type: string
+              format: date-time
+            errorCode:
+              type: string
+            vendorErrorCode:
+              type: string
+              nullable: true
+            info:
+              type: string
+              nullable: true
+        currentChargingSession:
+          $ref: '#/components/schemas/CurrentChargingSession'
+    Organization:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+    Charger:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        manufacturer:
+          type: string
+          nullable: true
+        model:
+          type: string
+          nullable: true
+        serialNumber:
+          type: string
+          nullable: true
+        firmwareVersion:
+          type: string
+          nullable: true
+        latitude:
+          type: number
+          nullable: true
+        longitude:
+          type: number
+          nullable: true
+        externalId:
+          type: string
+          nullable: true
+        ocppId:
+          type: string
+          nullable: true
+        type:
+          type: string
+          description: '"DCFC" or "Level 2".'
+        networkServiceProvider:
+          type: string
+        chargerType:
+          type: string
+        numberOfPorts:
+          type: integer
+        powerSharing:
+          type: boolean
+        connectionStatus:
+          type: object
+          nullable: true
+          properties:
+            status:
+              type: string
+            timestamp:
+              type: string
+              format: date-time
+        ports:
+          type: array
+          items:
+            $ref: '#/components/schemas/Port'
+    Customer:
+      type: object
+      properties:
+        name:
+          type: string
+    Pagination:
+      type: object
+      properties:
+        hasNextPage:
+          type: boolean
+        nextPageCursor:
+          type: string
+          nullable: true
+  responses:
+    RateLimited:
+      description: Rate limit exceeded (200 requests per minute per API key).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Invalid API key or Authorization header.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid parameters passed to the API endpoint.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    NextPageCursor:
+      name: nextPageCursor
+      in: query
+      description: Opaque cursor from the previous response's pagination.nextPageCursor to fetch the next page. Keep all other parameters identical.
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'API key passed as a bearer token in the Authorization header: `Authorization: Bearer {api_key}`. Keys are created in the Flipturn app (Manage > API Keys) by an Owner and can be scoped to specific sites or chargers.'

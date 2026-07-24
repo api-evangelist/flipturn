@@ -1,0 +1,161 @@
+openapi: 3.1.0
+info:
+  title: Flipturn Access IDs Reservations API
+  version: '1.0'
+  description: 'The Flipturn API provides read and write access to the Flipturn EV charging management platform: sites, chargers and ports, charging sessions, charger health and uptime, access IDs (RFID cards and vehicles), vehicles, alerts, charger errors, raw OCPP messages, reservations, site power limits, vehicle departure times, and maintenance windows. It is a JSON REST API secured with a bearer API key, designed for integrating Flipturn charging data with ticketing platforms, data warehouses, transportation management systems, and fleet operations tooling. Flipturn also supports OCPI for roaming-partner integration (contact support to enable).'
+  contact:
+    name: Flipturn Support
+    email: support@getflipturn.com
+    url: https://api-docs.getflipturn.com/
+  x-apievangelist-generated: '2026-07-19'
+  x-apievangelist-method: generated
+  x-apievangelist-source: https://api-docs.getflipturn.com/llms.txt
+servers:
+- url: https://api.getflipturn.com/api
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Reservations
+  description: OCPP ReserveNow / CancelReservation port reservations.
+paths:
+  /ocpp/reservations:
+    post:
+      operationId: createReservation
+      tags:
+      - Reservations
+      summary: Reserve a charging port
+      description: Reserve a charging port for a specific user via the OCPP ReserveNow message. The reservation is active immediately and expires at expiryDate. Supports OCPP 1.6 and 2.0.1 chargers with the Reservation profile.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - portId
+              - expiryDate
+              - idTag
+              - reservationId
+              properties:
+                portId:
+                  type: integer
+                  description: Flipturn charging port ID.
+                expiryDate:
+                  type: string
+                  format: date-time
+                  description: ISO 8601 datetime when the reservation expires.
+                idTag:
+                  type: string
+                  maxLength: 20
+                  description: Identifier of the user (RFID UID, token, etc).
+                reservationId:
+                  type: integer
+                  description: Unique caller-assigned integer identifier for this reservation.
+                parentIdTag:
+                  type: string
+                  description: Optional parent identifier for group reservations (OCPP 1.6 only).
+                idTokenType:
+                  type: string
+                  enum:
+                  - Central
+                  - eMAID
+                  - ISO14443
+                  - ISO15693
+                  - KeyCode
+                  - Local
+                  - MacAddress
+                  description: OCPP 2.0.1 only. Defaults to Central.
+      responses:
+        '200':
+          description: Reservation outcome.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      status:
+                        type: string
+                        enum:
+                        - Accepted
+                        - Faulted
+                        - Occupied
+                        - Rejected
+                        - Unavailable
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /ocpp/reservations/cancel:
+    post:
+      operationId: cancelReservation
+      tags:
+      - Reservations
+      summary: Cancel a reservation
+      description: Cancel an active reservation on a charger via the OCPP CancelReservation message.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - chargerId
+              - reservationId
+              properties:
+                chargerId:
+                  type: integer
+                  description: Flipturn charger ID.
+                reservationId:
+                  type: integer
+                  description: The reservation ID used when creating the reservation.
+      responses:
+        '200':
+          description: Cancellation outcome.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      status:
+                        type: string
+                        enum:
+                        - Accepted
+                        - Rejected
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  responses:
+    BadRequest:
+      description: Invalid parameters passed to the API endpoint.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Invalid API key or Authorization header.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      description: Flipturn error envelope.
+      properties:
+        error:
+          type: string
+          description: Human-readable error message.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'API key passed as a bearer token in the Authorization header: `Authorization: Bearer {api_key}`. Keys are created in the Flipturn app (Manage > API Keys) by an Owner and can be scoped to specific sites or chargers.'

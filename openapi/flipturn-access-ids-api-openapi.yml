@@ -1,0 +1,392 @@
+openapi: 3.1.0
+info:
+  title: Flipturn Access IDs API
+  version: '1.0'
+  description: 'The Flipturn API provides read and write access to the Flipturn EV charging management platform: sites, chargers and ports, charging sessions, charger health and uptime, access IDs (RFID cards and vehicles), vehicles, alerts, charger errors, raw OCPP messages, reservations, site power limits, vehicle departure times, and maintenance windows. It is a JSON REST API secured with a bearer API key, designed for integrating Flipturn charging data with ticketing platforms, data warehouses, transportation management systems, and fleet operations tooling. Flipturn also supports OCPI for roaming-partner integration (contact support to enable).'
+  contact:
+    name: Flipturn Support
+    email: support@getflipturn.com
+    url: https://api-docs.getflipturn.com/
+  x-apievangelist-generated: '2026-07-19'
+  x-apievangelist-method: generated
+  x-apievangelist-source: https://api-docs.getflipturn.com/llms.txt
+servers:
+- url: https://api.getflipturn.com/api
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Access IDs
+  description: RFID cards and vehicle MAC IDs used to authorize charging.
+paths:
+  /access-ids:
+    get:
+      operationId: listAccessIds
+      tags:
+      - Access IDs
+      summary: List access IDs
+      description: Retrieve a paginated list of all access IDs (RFID cards and vehicle MAC IDs).
+      parameters:
+      - $ref: '#/components/parameters/NextPageCursor'
+      responses:
+        '200':
+          description: A paginated list of access IDs.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AccessId'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createAccessId
+      tags:
+      - Access IDs
+      summary: Create an access ID
+      description: Create a new access ID of type RFID or Vehicle. For a Vehicle, either create a new vehicle inline or associate an existing one via vehicleId. An optional customer is created if no case-insensitive name match exists.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - accessId
+              properties:
+                accessId:
+                  $ref: '#/components/schemas/AccessIdCreate'
+      responses:
+        '200':
+          description: The created access ID.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accessId:
+                    $ref: '#/components/schemas/AccessId'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /access-ids/{id}:
+    get:
+      operationId: getAccessId
+      tags:
+      - Access IDs
+      summary: Get an access ID
+      description: Retrieve the details for a specific access ID (RFID card or vehicle).
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: The access ID.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accessId:
+                    $ref: '#/components/schemas/AccessId'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateAccessId
+      tags:
+      - Access IDs
+      summary: Update an access ID
+      description: Update an access ID. For optional fields, explicitly providing null deletes the value.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - accessId
+              properties:
+                accessId:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    authorizationStatus:
+                      type: string
+                      enum:
+                      - Authorized
+                      - Revoked
+                    vehicle:
+                      type: object
+                      properties:
+                        make:
+                          type: string
+                        model:
+                          type: string
+                        vin:
+                          type: string
+                    customer:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+      responses:
+        '200':
+          description: The updated access ID.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accessId:
+                    $ref: '#/components/schemas/AccessId'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /access-ids/batch:
+    put:
+      operationId: batchUpsertAccessIds
+      tags:
+      - Access IDs
+      summary: Batch create or update access IDs
+      description: Create or update up to 1000 access IDs in one request, matched by ocppIdTag. Vehicles are matched by case-insensitive name. Access IDs not included are never deleted. Each result carries an outcome of created, updated, or error.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - accessIds
+              properties:
+                accessIds:
+                  type: array
+                  maxItems: 1000
+                  items:
+                    $ref: '#/components/schemas/AccessIdBatchItem'
+      responses:
+        '200':
+          description: Per-item results.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        ocppIdTag:
+                          type: string
+                        outcome:
+                          type: string
+                          enum:
+                          - created
+                          - updated
+                          - error
+                        accessId:
+                          $ref: '#/components/schemas/AccessId'
+                        error:
+                          type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    VehicleRef:
+      type: object
+      nullable: true
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+          nullable: true
+        make:
+          type: string
+          nullable: true
+        model:
+          type: string
+          nullable: true
+        vin:
+          type: string
+          nullable: true
+    Error:
+      type: object
+      description: Flipturn error envelope.
+      properties:
+        error:
+          type: string
+          description: Human-readable error message.
+    AccessIdCreate:
+      type: object
+      required:
+      - type
+      - name
+      - ocppIdTag
+      properties:
+        type:
+          type: string
+          enum:
+          - RFID
+          - Vehicle
+        name:
+          type: string
+        ocppIdTag:
+          type: string
+        authorizationStatus:
+          type: string
+          enum:
+          - Authorized
+          - Revoked
+          default: Authorized
+        vehicle:
+          type: object
+          properties:
+            make:
+              type: string
+            model:
+              type: string
+            vin:
+              type: string
+        vehicleId:
+          type: integer
+        customer:
+          $ref: '#/components/schemas/Customer'
+    AccessIdBatchItem:
+      type: object
+      required:
+      - ocppIdTag
+      - name
+      - type
+      properties:
+        ocppIdTag:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+          - RFID
+          - Vehicle
+        authorizationStatus:
+          type: string
+          enum:
+          - Authorized
+          - Revoked
+        vehicle:
+          type: object
+          properties:
+            make:
+              type: string
+              nullable: true
+            model:
+              type: string
+              nullable: true
+            vin:
+              type: string
+              nullable: true
+        customer:
+          $ref: '#/components/schemas/Customer'
+    Customer:
+      type: object
+      properties:
+        name:
+          type: string
+    AccessId:
+      type: object
+      properties:
+        id:
+          type: integer
+        ocppIdTag:
+          type: string
+        type:
+          type: string
+          enum:
+          - RFID
+          - Vehicle
+        name:
+          type: string
+        authorizationStatus:
+          type: string
+          enum:
+          - Authorized
+          - Revoked
+        authorizedAt:
+          type: string
+          format: date-time
+        revokedAt:
+          type: string
+          format: date-time
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        vehicle:
+          $ref: '#/components/schemas/VehicleRef'
+        customer:
+          $ref: '#/components/schemas/Customer'
+    Pagination:
+      type: object
+      properties:
+        hasNextPage:
+          type: boolean
+        nextPageCursor:
+          type: string
+          nullable: true
+  responses:
+    NotFound:
+      description: The requested resource or endpoint does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid parameters passed to the API endpoint.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Invalid API key or Authorization header.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    NextPageCursor:
+      name: nextPageCursor
+      in: query
+      description: Opaque cursor from the previous response's pagination.nextPageCursor to fetch the next page. Keep all other parameters identical.
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'API key passed as a bearer token in the Authorization header: `Authorization: Bearer {api_key}`. Keys are created in the Flipturn app (Manage > API Keys) by an Owner and can be scoped to specific sites or chargers.'

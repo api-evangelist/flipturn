@@ -1,0 +1,142 @@
+openapi: 3.1.0
+info:
+  title: Flipturn Access IDs OCPP Messages API
+  version: '1.0'
+  description: 'The Flipturn API provides read and write access to the Flipturn EV charging management platform: sites, chargers and ports, charging sessions, charger health and uptime, access IDs (RFID cards and vehicles), vehicles, alerts, charger errors, raw OCPP messages, reservations, site power limits, vehicle departure times, and maintenance windows. It is a JSON REST API secured with a bearer API key, designed for integrating Flipturn charging data with ticketing platforms, data warehouses, transportation management systems, and fleet operations tooling. Flipturn also supports OCPI for roaming-partner integration (contact support to enable).'
+  contact:
+    name: Flipturn Support
+    email: support@getflipturn.com
+    url: https://api-docs.getflipturn.com/
+  x-apievangelist-generated: '2026-07-19'
+  x-apievangelist-method: generated
+  x-apievangelist-source: https://api-docs.getflipturn.com/llms.txt
+servers:
+- url: https://api.getflipturn.com/api
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: OCPP Messages
+  description: Raw OCPP protocol messages for a charger.
+paths:
+  /ocpp-messages:
+    get:
+      operationId: listOcppMessages
+      tags:
+      - OCPP Messages
+      summary: List OCPP messages for a charger
+      description: Retrieve raw OCPP (Open Charge Point Protocol) messages for a specific charger, newest first. The date range must be under 8 days. Page size is controlled by limit (default 50, max 500).
+      parameters:
+      - name: chargerId
+        in: query
+        required: true
+        description: The ID of the charger to retrieve messages for.
+        schema:
+          type: integer
+      - name: startTimestamp
+        in: query
+        description: 'ISO 8601: messages after this time. Defaults to 24 hours ago.'
+        schema:
+          type: string
+          format: date-time
+      - name: endTimestamp
+        in: query
+        description: 'ISO 8601: messages before this time. Defaults to now.'
+        schema:
+          type: string
+          format: date-time
+      - name: messageType
+        in: query
+        description: Filter by OCPP message type(s), e.g. Authorize or messageType[]=StartTransaction.
+        schema:
+          type: array
+          items:
+            type: string
+      - name: limit
+        in: query
+        description: Page size (default 50
+        max 500).: null
+        schema:
+          type: integer
+          default: 50
+          maximum: 500
+      - $ref: '#/components/parameters/NextPageCursor'
+      responses:
+        '200':
+          description: A paginated list of OCPP messages.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/OcppMessage'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  responses:
+    BadRequest:
+      description: Invalid parameters passed to the API endpoint.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Invalid API key or Authorization header.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      description: Flipturn error envelope.
+      properties:
+        error:
+          type: string
+          description: Human-readable error message.
+    OcppMessage:
+      type: object
+      properties:
+        id:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+        ocppChargerIdentity:
+          type: string
+        messageType:
+          type: string
+        messagePayload: {}
+        messageResponse: {}
+        chargerId:
+          type: integer
+        protocol:
+          type: string
+          description: '''ocpp1.6'' or ''ocpp2.0.1''.'
+    Pagination:
+      type: object
+      properties:
+        hasNextPage:
+          type: boolean
+        nextPageCursor:
+          type: string
+          nullable: true
+  parameters:
+    NextPageCursor:
+      name: nextPageCursor
+      in: query
+      description: Opaque cursor from the previous response's pagination.nextPageCursor to fetch the next page. Keep all other parameters identical.
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'API key passed as a bearer token in the Authorization header: `Authorization: Bearer {api_key}`. Keys are created in the Flipturn app (Manage > API Keys) by an Owner and can be scoped to specific sites or chargers.'

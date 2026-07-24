@@ -1,0 +1,205 @@
+openapi: 3.1.0
+info:
+  title: Flipturn Access IDs Site Power Limits API
+  version: '1.0'
+  description: 'The Flipturn API provides read and write access to the Flipturn EV charging management platform: sites, chargers and ports, charging sessions, charger health and uptime, access IDs (RFID cards and vehicles), vehicles, alerts, charger errors, raw OCPP messages, reservations, site power limits, vehicle departure times, and maintenance windows. It is a JSON REST API secured with a bearer API key, designed for integrating Flipturn charging data with ticketing platforms, data warehouses, transportation management systems, and fleet operations tooling. Flipturn also supports OCPI for roaming-partner integration (contact support to enable).'
+  contact:
+    name: Flipturn Support
+    email: support@getflipturn.com
+    url: https://api-docs.getflipturn.com/
+  x-apievangelist-generated: '2026-07-19'
+  x-apievangelist-method: generated
+  x-apievangelist-source: https://api-docs.getflipturn.com/llms.txt
+servers:
+- url: https://api.getflipturn.com/api
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Site Power Limits
+  description: Cost and capacity power limits for a site.
+paths:
+  /site/{site-id}/limits:
+    get:
+      operationId: getSitePowerLimits
+      tags:
+      - Site Power Limits
+      summary: Get site power limits
+      description: Return the active cost and/or capacity power limits for a site (up to one schedule per type). Returns an empty array if none are set.
+      parameters:
+      - name: site-id
+        in: path
+        required: true
+        description: Flipturn site ID.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: The site's power limit schedules.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  sitePowerLimitSchedules:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SitePowerLimitSchedule'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    post:
+      operationId: createSitePowerLimit
+      tags:
+      - Site Power Limits
+      summary: Create a site power limit
+      description: Create a new site power limit, replacing the current limit of that type. Cost limits are a soft cap; capacity limits are a hard cap. Amp-based limits are not supported on sites containing DCFC chargers.
+      parameters:
+      - name: site-id
+        in: path
+        required: true
+        description: Flipturn site ID.
+        schema:
+          type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - sitePowerLimitSchedule
+              properties:
+                sitePowerLimitSchedule:
+                  type: object
+                  required:
+                  - type
+                  - limit
+                  - chargingRateUnit
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - cost
+                      - capacity
+                    limit:
+                      type: integer
+                      description: Positive integer limit.
+                    chargingRateUnit:
+                      type: string
+                      enum:
+                      - W
+                      - A
+                      description: Watts or amps.
+      responses:
+        '200':
+          description: The created schedule ID.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  sitePowerLimitScheduleId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /site/{site-id}/limits/{schedule-id}:
+    delete:
+      operationId: deleteSitePowerLimit
+      tags:
+      - Site Power Limits
+      summary: Delete a site power limit
+      description: Remove a site power limit schedule.
+      parameters:
+      - name: site-id
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: schedule-id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Deleted.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  responses:
+    NotFound:
+      description: The requested resource or endpoint does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid parameters passed to the API endpoint.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Invalid API key or Authorization header.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      description: Flipturn error envelope.
+      properties:
+        error:
+          type: string
+          description: Human-readable error message.
+    SitePowerLimitSchedule:
+      type: object
+      properties:
+        id:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        source:
+          type: string
+          description: How the limit was created - "manual", "api", etc.
+        type:
+          type: string
+          enum:
+          - cost
+          - capacity
+        schedules:
+          type: array
+          items:
+            type: object
+            properties:
+              daysOfWeek:
+                type: array
+                items:
+                  type: integer
+              chargingRateUnit:
+                type: string
+                enum:
+                - W
+                - A
+              chargingSchedulePeriods:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    startPeriod:
+                      type: integer
+                    limit:
+                      type: number
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'API key passed as a bearer token in the Authorization header: `Authorization: Bearer {api_key}`. Keys are created in the Flipturn app (Manage > API Keys) by an Owner and can be scoped to specific sites or chargers.'

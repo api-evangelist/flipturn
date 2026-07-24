@@ -1,0 +1,208 @@
+openapi: 3.1.0
+info:
+  title: Flipturn Access IDs Departure Times API
+  version: '1.0'
+  description: 'The Flipturn API provides read and write access to the Flipturn EV charging management platform: sites, chargers and ports, charging sessions, charger health and uptime, access IDs (RFID cards and vehicles), vehicles, alerts, charger errors, raw OCPP messages, reservations, site power limits, vehicle departure times, and maintenance windows. It is a JSON REST API secured with a bearer API key, designed for integrating Flipturn charging data with ticketing platforms, data warehouses, transportation management systems, and fleet operations tooling. Flipturn also supports OCPI for roaming-partner integration (contact support to enable).'
+  contact:
+    name: Flipturn Support
+    email: support@getflipturn.com
+    url: https://api-docs.getflipturn.com/
+  x-apievangelist-generated: '2026-07-19'
+  x-apievangelist-method: generated
+  x-apievangelist-source: https://api-docs.getflipturn.com/llms.txt
+servers:
+- url: https://api.getflipturn.com/api
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Departure Times
+  description: Scheduled vehicle departure times synced from a TMS.
+paths:
+  /departure-times/vehicle:
+    post:
+      operationId: syncVehicleDepartureTimes
+      tags:
+      - Departure Times
+      summary: Sync departure times for a vehicle
+      description: Atomically replace all future departure times for a single vehicle (identified by vehicleVin or vehicleId, not both). Past departures in the request are skipped; existing past departures are left unchanged.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - departureTimes
+              properties:
+                vehicleVin:
+                  type: string
+                  description: Either VIN or vehicle ID must be provided.
+                vehicleId:
+                  type: integer
+                departureTimes:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/DepartureTimeInput'
+      responses:
+        '200':
+          description: Per-departure outcomes.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  departureTimes:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DepartureTimeResult'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /departure-times/batch:
+    post:
+      operationId: batchSyncDepartureTimes
+      tags:
+      - Departure Times
+      summary: Sync departure times for multiple vehicles
+      description: Sync departure times for multiple vehicles in a single request. Each vehicle is processed independently.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - vehicles
+              properties:
+                vehicles:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                    - departureTimes
+                    properties:
+                      vehicleVin:
+                        type: string
+                      vehicleId:
+                        type: integer
+                      departureTimes:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/DepartureTimeInput'
+      responses:
+        '200':
+          description: Per-vehicle results.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        vehicleId:
+                          type: integer
+                          nullable: true
+                        vehicleVin:
+                          type: string
+                          nullable: true
+                        outcome:
+                          type: string
+                          enum:
+                          - success
+                          - error
+                        departureTimes:
+                          type: array
+                          items:
+                            $ref: '#/components/schemas/DepartureTimeResult'
+                        error:
+                          type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    DepartureTimeInput:
+      type: object
+      required:
+      - departureTime
+      properties:
+        departureTime:
+          type: string
+          format: date-time
+        shiftName:
+          type: string
+        routeName:
+          type: string
+        targetSoc:
+          type: integer
+          minimum: 0
+          maximum: 100
+          default: 90
+    DepartureTimeResult:
+      type: object
+      properties:
+        departureTime:
+          type: string
+          format: date-time
+        outcome:
+          type: string
+          enum:
+          - created
+          - skipped
+        id:
+          type: integer
+          nullable: true
+        vehicleId:
+          type: integer
+          nullable: true
+        vehicleVin:
+          type: string
+          nullable: true
+        shiftName:
+          type: string
+          nullable: true
+        routeName:
+          type: string
+          nullable: true
+        targetSoc:
+          type: integer
+          nullable: true
+    Error:
+      type: object
+      description: Flipturn error envelope.
+      properties:
+        error:
+          type: string
+          description: Human-readable error message.
+  responses:
+    NotFound:
+      description: The requested resource or endpoint does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid parameters passed to the API endpoint.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Invalid API key or Authorization header.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'API key passed as a bearer token in the Authorization header: `Authorization: Bearer {api_key}`. Keys are created in the Flipturn app (Manage > API Keys) by an Owner and can be scoped to specific sites or chargers.'
