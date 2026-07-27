@@ -1,0 +1,21 @@
+generated: '2026-07-19'
+method: searched
+source: https://api-docs.getflipturn.com/
+versioning:
+  scheme: uri-path
+  base_path: /api
+  current: v1-unversioned
+  notes: Served under https://api.getflipturn.com/api with no explicit version segment.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  notes: No public deprecation policy or Sunset/Deprecation header support documented.
+sla:
+  url: null
+  uptime_target: null
+status_page: https://status.getflipturn.com/
+status_page_provider: UptimeRobot
+interop:
+  ocpp: [ocpp1.6, ocpp2.0.1]
+  ocpi: supported (contact support to enable roaming-partner integration)
+deprecated_operations: []

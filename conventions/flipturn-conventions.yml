@@ -1,0 +1,57 @@
+generated: '2026-07-19'
+method: searched
+source: https://api-docs.getflipturn.com/pagination-and-errors.md
+docs:
+  - https://api-docs.getflipturn.com/authorization.md
+  - https://api-docs.getflipturn.com/pagination-and-errors.md
+authentication:
+  style: bearer-api-key
+  header: Authorization
+  format: 'Bearer {api_key}'
+  scoping: API keys can be limited to a specific site or subset of chargers.
+  see: authentication/flipturn-authentication.yml
+pagination:
+  style: cursor
+  request_param: nextPageCursor
+  response_field: pagination.nextPageCursor
+  has_more_field: pagination.hasNextPage
+  notes: >-
+    List endpoints return a `pagination` object. When `hasNextPage` is true,
+    pass `nextPageCursor` back on the next request keeping all other parameters
+    identical. Page sizes vary by endpoint (errors up to 2000 rows/page;
+    maintenance-windows up to 50/page; ocpp-messages default 50, max 500 via
+    `limit`).
+idempotency:
+  supported: false
+  notes: >-
+    Flipturn documents no idempotency-key header. Some write flows are
+    idempotent by design instead: PUT /access-ids/batch upserts (matched by
+    ocppIdTag), and the departure-time sync endpoints atomically replace all
+    future departures for a vehicle, so re-posting the same payload converges to
+    the same state. Reservations use a caller-assigned integer `reservationId`.
+filtering:
+  style: repeated-query-params
+  notes: >-
+    Multi-value filters are passed by repeating the parameter, e.g.
+    `siteIds[]=101&siteIds[]=102` or `chargerIds=1&chargerIds=2`.
+versioning:
+  scheme: uri-path
+  base_path: /api
+  current: v1-unversioned
+  notes: The API is served under /api with no explicit version segment.
+error_envelope:
+  shape: '{ "error": string }'
+  content_type: application/json
+  status_codes: [400, 401, 404, 429, 500]
+  see: errors/flipturn-problem-types.yml
+rate_limiting:
+  default: 200 requests per minute per API key
+  concurrency: 'charging-sessions with includeIntervals=true is limited to 1 concurrent request per key'
+  stricter_endpoints: [charger-health]
+  see: rate-limits/flipturn-rate-limits.yml
+data_format:
+  timestamps: ISO 8601
+  identifiers: integer IDs for most resources; opaque string IDs for site power limit schedules
+lifecycle:
+  status_page: https://status.getflipturn.com/
+  see: lifecycle/flipturn-lifecycle.yml

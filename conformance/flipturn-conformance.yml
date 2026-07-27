@@ -1,0 +1,40 @@
+generated: '2026-07-19'
+method: searched
+source:
+  - https://api-docs.getflipturn.com/
+  - https://api-docs.getflipturn.com/reservations.md
+  - https://api-docs.getflipturn.com/ocpp-messages.md
+  - https://www.getflipturn.com/product/security
+standards:
+  - id: ocpp-1.6
+    conforms: true
+    evidence: 'Reservations use OCPP 1.6 ReserveNow/CancelReservation; ocpp-messages returns protocol "ocpp1.6".'
+  - id: ocpp-2.0.1
+    conforms: true
+    evidence: 'OCPP 2.0.1 chargers supported for reservations (idTokenType values); ocpp-messages returns protocol "ocpp2.0.1".'
+  - id: ocpi
+    conforms: true
+    evidence: 'Docs state Flipturn supports OCPI for integration with roaming partners (contact support to enable).'
+  - id: bearer-token-auth
+    conforms: true
+    evidence: 'Authorization: Bearer {api_key} across all operations.'
+  - id: oauth2
+    conforms: false
+    evidence: No OAuth2 security scheme documented.
+  - id: openid-connect
+    conforms: false
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: 'Errors use a flat { "error": string } envelope, not application/problem+json.'
+  - id: cursor-pagination
+    conforms: true
+    evidence: 'List endpoints use opaque nextPageCursor with pagination.hasNextPage.'
+  - id: iso8601-datetimes
+    conforms: true
+    evidence: All timestamps are ISO 8601.
+  - id: soc2
+    conforms: true
+    evidence: 'SOC 2 referenced on the Flipturn security page.'
+  - id: gdpr
+    conforms: true
+    evidence: 'GDPR referenced on the Flipturn security page.'

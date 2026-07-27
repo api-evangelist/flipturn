@@ -1,0 +1,30 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Flipturn API
+  version: 1.0.0
+extends: openapi/flipturn-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-rating: 4
+      x-apievangelist-provenance:
+        method: generated
+        source: https://api-docs.getflipturn.com/llms.txt
+        generated: '2026-07-19'
+      x-interop:
+        ocpp: [ocpp1.6, ocpp2.0.1]
+        ocpi: supported
+      x-conventions: conventions/flipturn-conventions.yml
+      x-errors: errors/flipturn-problem-types.yml
+      x-rate-limits: rate-limits/flipturn-rate-limits.yml
+  - target: $.components.securitySchemes.bearerAuth
+    update:
+      x-authentication: authentication/flipturn-authentication.yml
+  - target: "$.paths['/ocpp/reservations'].post"
+    update:
+      x-agentic-consequence: physical
+      x-note: Reserves a physical charging connector via OCPP ReserveNow; blocks the port for other users.
+  - target: "$.paths['/site/{site-id}/limits'].post"
+    update:
+      x-agentic-consequence: physical
+      x-note: Changes the power a site's chargers may draw; capacity limits are a hard physical cap.

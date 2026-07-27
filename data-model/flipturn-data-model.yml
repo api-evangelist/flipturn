@@ -1,0 +1,85 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/flipturn-openapi.yml
+notes: >-
+  Entity-relationship graph derived from the Flipturn OpenAPI schema $ref links
+  and id-reference fields. IDs are integers unless noted; site power limit
+  schedule IDs are opaque strings.
+entities:
+  - name: Organization
+    id: id (integer)
+    fields: [name]
+  - name: Site
+    id: id (integer)
+    fields: [name, address, timezone, locationId]
+  - name: Charger
+    id: id (integer)
+    alt_ids: [externalId, ocppId, serialNumber]
+    fields: [name, manufacturer, model, firmwareVersion, type, networkServiceProvider, numberOfPorts, powerSharing, latitude, longitude]
+  - name: Port
+    id: id (integer)
+    fields: [name, portNumber, maximumPowerKw, connectorType]
+  - name: ChargingSession
+    id: id (integer)
+    alt_ids: [ocppTransactionId]
+    fields: [startTime, endTime, energyDeliveredKwh, socStartPercent, socEndPercent, maxDemandKw, tags]
+  - name: AccessId
+    id: id (integer)
+    alt_ids: [ocppIdTag]
+    fields: [type, name, authorizationStatus, authorizedAt, revokedAt]
+  - name: Vehicle
+    id: id (integer)
+    alt_ids: [vin]
+    fields: [name, make, model, licensePlate, hasTelematics]
+  - name: Customer
+    id: name (natural key, case-insensitive)
+  - name: Alert
+    id: id (integer)
+    fields: [type, startTimestamp, muted]
+  - name: ChargerError
+    id: id (integer)
+    fields: [timestamp, ocppErrorCode, ocppStatus, errorCategory]
+  - name: OcppMessage
+    id: id (integer)
+    fields: [createdAt, messageType, protocol, ocppChargerIdentity]
+  - name: SitePowerLimitSchedule
+    id: id (string)
+    fields: [type, source, chargingRateUnit, schedules]
+  - name: Reservation
+    id: reservationId (caller-assigned integer)
+    fields: [portId, idTag, expiryDate]
+  - name: DepartureTime
+    id: id (integer)
+    fields: [departureTime, shiftName, routeName, targetSoc]
+  - name: MaintenanceWindow
+    id: id (integer)
+    fields: [startTimestamp, endTimestamp, comment, userEmail]
+relationships:
+  - { from: Site, to: Organization, type: belongs_to, via: organization }
+  - { from: Site, to: Charger, type: has_many, via: chargers }
+  - { from: Charger, to: Port, type: has_many, via: ports }
+  - { from: Port, to: ChargingSession, type: has_one, via: currentChargingSession }
+  - { from: ChargingSession, to: Site, type: belongs_to, via: site }
+  - { from: ChargingSession, to: Charger, type: belongs_to, via: charger }
+  - { from: ChargingSession, to: Port, type: belongs_to, via: port }
+  - { from: ChargingSession, to: Vehicle, type: belongs_to, via: vehicle }
+  - { from: ChargingSession, to: AccessId, type: belongs_to, via: rfid }
+  - { from: ChargingSession, to: Customer, type: belongs_to, via: customer }
+  - { from: ChargingSession, to: Organization, type: belongs_to, via: organization }
+  - { from: AccessId, to: Vehicle, type: belongs_to, via: vehicle }
+  - { from: AccessId, to: Customer, type: belongs_to, via: customer }
+  - { from: Vehicle, to: AccessId, type: has_many, via: accessIds }
+  - { from: Vehicle, to: Customer, type: belongs_to, via: customer }
+  - { from: Vehicle, to: DepartureTime, type: has_many, via: vehicleId/vehicleVin }
+  - { from: Alert, to: Site, type: belongs_to, via: site }
+  - { from: Alert, to: Charger, type: belongs_to, via: charger }
+  - { from: Alert, to: ChargingSession, type: belongs_to, via: chargingSession }
+  - { from: ChargerError, to: Charger, type: belongs_to, via: charger }
+  - { from: ChargerError, to: Port, type: belongs_to, via: port }
+  - { from: ChargerError, to: ChargingSession, type: belongs_to, via: chargingSession }
+  - { from: ChargerError, to: Site, type: belongs_to, via: site }
+  - { from: OcppMessage, to: Charger, type: belongs_to, via: chargerId }
+  - { from: SitePowerLimitSchedule, to: Site, type: belongs_to, via: site-id }
+  - { from: Reservation, to: Port, type: belongs_to, via: portId }
+  - { from: MaintenanceWindow, to: Charger, type: belongs_to, via: charger }
+  - { from: MaintenanceWindow, to: Site, type: belongs_to, via: site }

@@ -1,0 +1,36 @@
+# Flipturn API Documentation
+
+## Flipturn API Docs
+
+- [Overview](https://api-docs.getflipturn.com/readme.md)
+- [Authorization](https://api-docs.getflipturn.com/authorization.md)
+- [Sites](https://api-docs.getflipturn.com/sites.md)
+- [Chargers](https://api-docs.getflipturn.com/chargers.md)
+- [Charging Sessions](https://api-docs.getflipturn.com/charging-sessions.md)
+- [Charger Health](https://api-docs.getflipturn.com/charger-health.md)
+- [Access IDs](https://api-docs.getflipturn.com/access-ids.md)
+- [Vehicles](https://api-docs.getflipturn.com/vehicles.md)
+- [Alerts](https://api-docs.getflipturn.com/alerts.md)
+- [Errors](https://api-docs.getflipturn.com/errors.md)
+- [OCPP Messages](https://api-docs.getflipturn.com/ocpp-messages.md)
+- [Reservations](https://api-docs.getflipturn.com/reservations.md)
+- [Site Power Limits](https://api-docs.getflipturn.com/site-power-limit.md)
+- [Departure Times](https://api-docs.getflipturn.com/departure-times.md)
+- [Maintenance Windows](https://api-docs.getflipturn.com/maintenance-windows.md)
+- [Pagination and Error Handling](https://api-docs.getflipturn.com/pagination-and-errors.md)
+
+
+---
+
+# Agent Instructions
+This documentation is published with GitBook. GitBook is the documentation platform designed so that both humans and AI agents can read, navigate, and reason over technical content effectively. Learn more at gitbook.com.
+
+## Querying This Documentation
+If you need additional information, you can query the documentation dynamically by asking a question.
+Perform an HTTP GET request on a page URL with the `ask` query parameter:
+```
+GET https://api-docs.getflipturn.com/readme.md?ask=<question>
+```
+The question should be specific, self-contained, and written in natural language.
+The response will contain a direct answer to the question and relevant excerpts and sources from the documentation.
+Use this mechanism when the answer is not explicitly present in the current page, you need clarification or additional context, or you want to retrieve related documentation sections.

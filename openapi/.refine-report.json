@@ -1,0 +1,38 @@
+{
+  "provider": "flipturn",
+  "sources": [
+    "flipturn-access-ids-api-openapi.yml",
+    "flipturn-alerts-api-openapi.yml",
+    "flipturn-charger-health-api-openapi.yml",
+    "flipturn-chargers-api-openapi.yml",
+    "flipturn-charging-sessions-api-openapi.yml",
+    "flipturn-departure-times-api-openapi.yml",
+    "flipturn-errors-api-openapi.yml",
+    "flipturn-maintenance-windows-api-openapi.yml",
+    "flipturn-ocpp-messages-api-openapi.yml",
+    "flipturn-reservations-api-openapi.yml",
+    "flipturn-site-power-limits-api-openapi.yml",
+    "flipturn-sites-api-openapi.yml",
+    "flipturn-vehicles-api-openapi.yml"
+  ],
+  "outputs": [
+    "flipturn-access-ids-api-openapi.yml",
+    "flipturn-alerts-api-openapi.yml",
+    "flipturn-charger-health-api-openapi.yml",
+    "flipturn-chargers-api-openapi.yml",
+    "flipturn-charging-sessions-api-openapi.yml",
+    "flipturn-departure-times-api-openapi.yml",
+    "flipturn-errors-api-openapi.yml",
+    "flipturn-maintenance-windows-api-openapi.yml",
+    "flipturn-ocpp-messages-api-openapi.yml",
+    "flipturn-reservations-api-openapi.yml",
+    "flipturn-site-power-limits-api-openapi.yml",
+    "flipturn-sites-api-openapi.yml",
+    "flipturn-vehicles-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

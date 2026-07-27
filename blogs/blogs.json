@@ -1,0 +1,21 @@
+{
+  "repo": "flipturn",
+  "feeds": [
+    {
+      "source": "https://www.getflipturn.com/blog/rss.xml",
+      "feed_url": "https://www.getflipturn.com/blog/rss.xml",
+      "title": "",
+      "saved": 10,
+      "method": "feed"
+    },
+    {
+      "source": "https://www.getflipturn.com/contact-us",
+      "feed_url": "https://www.getflipturn.com/blog/rss.xml",
+      "title": "",
+      "saved": 0,
+      "method": "discovered"
+    }
+  ],
+  "post_count": 60,
+  "fetched": "2026-07-25T15:00:33Z"
+}

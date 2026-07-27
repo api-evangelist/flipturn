@@ -1,28 +1,451 @@
 aid: flipturn
 name: Flipturn
-description: 'Flipturn is a company surfaced as a portfolio company of accel, crv and added to the API
-  Evangelist network as a stub for enrichment. Sector: consumer. This profile is a lead awaiting the enrichment
-  pipeline.'
+description: >-
+  Flipturn is an EV charging management platform that gives businesses and fleet
+  operators one system to monitor chargers, manage energy costs, run fleet
+  charging operations, control access, and handle payments and billing. Its
+  software layer sits on top of OCPP 1.6 and 2.0.1 chargers (with OCPI support
+  for roaming partners) and serves delivery fleets, transit agencies,
+  multifamily housing, dealerships, workplaces, hospitality, retail, parking,
+  and valet. Flipturn also publishes a JSON REST API, secured with a bearer API
+  key, that exposes sites, chargers and ports, charging sessions, charger health
+  and uptime, access IDs (RFID cards and vehicles), vehicles, alerts, charger
+  errors, raw OCPP messages, port reservations, site power limits, vehicle
+  departure times, and maintenance windows — designed for integrating charging
+  data with ticketing platforms, data warehouses, and transportation management
+  systems. Flipturn is backed by Accel and CRV.
 url: https://raw.githubusercontent.com/api-evangelist/flipturn/refs/heads/main/apis.yml
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://cdn.prod.website-files.com/64b825ce3428b050ac90c545/6a0deea6bb9839d3ec28999f_Opengraph_hi-res.avif
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - accel
 - crv
-x-tier: stub
-x-tier-reason: portfolio-lead
+x-tier: enriched
+x-tier-reason: portfolio-lead-enriched
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-19'
 tags:
 - Company
-- Consumer
-apis: []
+- EV Charging
+- Electric Vehicles
+- Fleet Management
+- Energy
+- Charging Infrastructure
+- OCPP
+- OCPI
+- Mobility
+- REST API
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+apis:
+- aid: flipturn:flipturn-access-ids-api
+  name: Flipturn Access IDs API
+  description: RFID cards and vehicle MAC IDs used to authorize charging.
+  humanURL: https://api-docs.getflipturn.com/
+  baseURL: https://api.getflipturn.com/api
+  tags:
+  - Access IDs
+  properties:
+  - type: OpenAPI
+    url: openapi/flipturn-access-ids-api-openapi.yml
+  - type: Authentication
+    url: authentication/flipturn-authentication.yml
+  - type: Conventions
+    url: conventions/flipturn-conventions.yml
+  - type: ErrorCatalog
+    url: errors/flipturn-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/flipturn-rate-limits.yml
+  - type: DataModel
+    url: data-model/flipturn-data-model.yml
+  - type: Conformance
+    url: conformance/flipturn-conformance.yml
+  - type: AgenticAccess
+    url: agentic-access/flipturn-agentic-access.yml
+  - type: LLMsTxt
+    url: llms/flipturn-llms.txt
+- aid: flipturn:flipturn-alerts-api
+  name: Flipturn Alerts API
+  description: Alerts raised by the platform.
+  humanURL: https://api-docs.getflipturn.com/
+  baseURL: https://api.getflipturn.com/api
+  tags:
+  - Alerts
+  properties:
+  - type: OpenAPI
+    url: openapi/flipturn-alerts-api-openapi.yml
+  - type: Authentication
+    url: authentication/flipturn-authentication.yml
+  - type: Conventions
+    url: conventions/flipturn-conventions.yml
+  - type: ErrorCatalog
+    url: errors/flipturn-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/flipturn-rate-limits.yml
+  - type: DataModel
+    url: data-model/flipturn-data-model.yml
+  - type: Conformance
+    url: conformance/flipturn-conformance.yml
+  - type: AgenticAccess
+    url: agentic-access/flipturn-agentic-access.yml
+  - type: LLMsTxt
+    url: llms/flipturn-llms.txt
+- aid: flipturn:flipturn-charger-health-api
+  name: Flipturn Charger Health API
+  description: Uptime, error, and utilization statistics.
+  humanURL: https://api-docs.getflipturn.com/
+  baseURL: https://api.getflipturn.com/api
+  tags:
+  - Charger Health
+  properties:
+  - type: OpenAPI
+    url: openapi/flipturn-charger-health-api-openapi.yml
+  - type: Authentication
+    url: authentication/flipturn-authentication.yml
+  - type: Conventions
+    url: conventions/flipturn-conventions.yml
+  - type: ErrorCatalog
+    url: errors/flipturn-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/flipturn-rate-limits.yml
+  - type: DataModel
+    url: data-model/flipturn-data-model.yml
+  - type: Conformance
+    url: conformance/flipturn-conformance.yml
+  - type: AgenticAccess
+    url: agentic-access/flipturn-agentic-access.yml
+  - type: LLMsTxt
+    url: llms/flipturn-llms.txt
+- aid: flipturn:flipturn-chargers-api
+  name: Flipturn Chargers API
+  description: Individual charger detail lookups.
+  humanURL: https://api-docs.getflipturn.com/
+  baseURL: https://api.getflipturn.com/api
+  tags:
+  - Chargers
+  properties:
+  - type: OpenAPI
+    url: openapi/flipturn-chargers-api-openapi.yml
+  - type: Authentication
+    url: authentication/flipturn-authentication.yml
+  - type: Conventions
+    url: conventions/flipturn-conventions.yml
+  - type: ErrorCatalog
+    url: errors/flipturn-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/flipturn-rate-limits.yml
+  - type: DataModel
+    url: data-model/flipturn-data-model.yml
+  - type: Conformance
+    url: conformance/flipturn-conformance.yml
+  - type: AgenticAccess
+    url: agentic-access/flipturn-agentic-access.yml
+  - type: LLMsTxt
+    url: llms/flipturn-llms.txt
+- aid: flipturn:flipturn-charging-sessions-api
+  name: Flipturn Charging Sessions API
+  description: Historical and in-progress charging sessions.
+  humanURL: https://api-docs.getflipturn.com/
+  baseURL: https://api.getflipturn.com/api
+  tags:
+  - Charging Sessions
+  properties:
+  - type: OpenAPI
+    url: openapi/flipturn-charging-sessions-api-openapi.yml
+  - type: Authentication
+    url: authentication/flipturn-authentication.yml
+  - type: Conventions
+    url: conventions/flipturn-conventions.yml
+  - type: ErrorCatalog
+    url: errors/flipturn-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/flipturn-rate-limits.yml
+  - type: DataModel
+    url: data-model/flipturn-data-model.yml
+  - type: Conformance
+    url: conformance/flipturn-conformance.yml
+  - type: AgenticAccess
+    url: agentic-access/flipturn-agentic-access.yml
+  - type: LLMsTxt
+    url: llms/flipturn-llms.txt
+- aid: flipturn:flipturn-departure-times-api
+  name: Flipturn Departure Times API
+  description: Scheduled vehicle departure times synced from a TMS.
+  humanURL: https://api-docs.getflipturn.com/
+  baseURL: https://api.getflipturn.com/api
+  tags:
+  - Departure Times
+  properties:
+  - type: OpenAPI
+    url: openapi/flipturn-departure-times-api-openapi.yml
+  - type: Authentication
+    url: authentication/flipturn-authentication.yml
+  - type: Conventions
+    url: conventions/flipturn-conventions.yml
+  - type: ErrorCatalog
+    url: errors/flipturn-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/flipturn-rate-limits.yml
+  - type: DataModel
+    url: data-model/flipturn-data-model.yml
+  - type: Conformance
+    url: conformance/flipturn-conformance.yml
+  - type: AgenticAccess
+    url: agentic-access/flipturn-agentic-access.yml
+  - type: LLMsTxt
+    url: llms/flipturn-llms.txt
+- aid: flipturn:flipturn-errors-api
+  name: Flipturn Errors API
+  description: Charger error records.
+  humanURL: https://api-docs.getflipturn.com/
+  baseURL: https://api.getflipturn.com/api
+  tags:
+  - Errors
+  properties:
+  - type: OpenAPI
+    url: openapi/flipturn-errors-api-openapi.yml
+  - type: Authentication
+    url: authentication/flipturn-authentication.yml
+  - type: Conventions
+    url: conventions/flipturn-conventions.yml
+  - type: ErrorCatalog
+    url: errors/flipturn-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/flipturn-rate-limits.yml
+  - type: DataModel
+    url: data-model/flipturn-data-model.yml
+  - type: Conformance
+    url: conformance/flipturn-conformance.yml
+  - type: AgenticAccess
+    url: agentic-access/flipturn-agentic-access.yml
+  - type: LLMsTxt
+    url: llms/flipturn-llms.txt
+- aid: flipturn:flipturn-maintenance-windows-api
+  name: Flipturn Maintenance Windows API
+  description: Scheduled maintenance windows for chargers.
+  humanURL: https://api-docs.getflipturn.com/
+  baseURL: https://api.getflipturn.com/api
+  tags:
+  - Maintenance Windows
+  properties:
+  - type: OpenAPI
+    url: openapi/flipturn-maintenance-windows-api-openapi.yml
+  - type: Authentication
+    url: authentication/flipturn-authentication.yml
+  - type: Conventions
+    url: conventions/flipturn-conventions.yml
+  - type: ErrorCatalog
+    url: errors/flipturn-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/flipturn-rate-limits.yml
+  - type: DataModel
+    url: data-model/flipturn-data-model.yml
+  - type: Conformance
+    url: conformance/flipturn-conformance.yml
+  - type: AgenticAccess
+    url: agentic-access/flipturn-agentic-access.yml
+  - type: LLMsTxt
+    url: llms/flipturn-llms.txt
+- aid: flipturn:flipturn-ocpp-messages-api
+  name: Flipturn OCPP Messages API
+  description: Raw OCPP protocol messages for a charger.
+  humanURL: https://api-docs.getflipturn.com/
+  baseURL: https://api.getflipturn.com/api
+  tags:
+  - OCPP Messages
+  properties:
+  - type: OpenAPI
+    url: openapi/flipturn-ocpp-messages-api-openapi.yml
+  - type: Authentication
+    url: authentication/flipturn-authentication.yml
+  - type: Conventions
+    url: conventions/flipturn-conventions.yml
+  - type: ErrorCatalog
+    url: errors/flipturn-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/flipturn-rate-limits.yml
+  - type: DataModel
+    url: data-model/flipturn-data-model.yml
+  - type: Conformance
+    url: conformance/flipturn-conformance.yml
+  - type: AgenticAccess
+    url: agentic-access/flipturn-agentic-access.yml
+  - type: LLMsTxt
+    url: llms/flipturn-llms.txt
+- aid: flipturn:flipturn-reservations-api
+  name: Flipturn Reservations API
+  description: OCPP ReserveNow / CancelReservation port reservations.
+  humanURL: https://api-docs.getflipturn.com/
+  baseURL: https://api.getflipturn.com/api
+  tags:
+  - Reservations
+  properties:
+  - type: OpenAPI
+    url: openapi/flipturn-reservations-api-openapi.yml
+  - type: Authentication
+    url: authentication/flipturn-authentication.yml
+  - type: Conventions
+    url: conventions/flipturn-conventions.yml
+  - type: ErrorCatalog
+    url: errors/flipturn-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/flipturn-rate-limits.yml
+  - type: DataModel
+    url: data-model/flipturn-data-model.yml
+  - type: Conformance
+    url: conformance/flipturn-conformance.yml
+  - type: AgenticAccess
+    url: agentic-access/flipturn-agentic-access.yml
+  - type: LLMsTxt
+    url: llms/flipturn-llms.txt
+- aid: flipturn:flipturn-site-power-limits-api
+  name: Flipturn Site Power Limits API
+  description: Cost and capacity power limits for a site.
+  humanURL: https://api-docs.getflipturn.com/
+  baseURL: https://api.getflipturn.com/api
+  tags:
+  - Site Power Limits
+  properties:
+  - type: OpenAPI
+    url: openapi/flipturn-site-power-limits-api-openapi.yml
+  - type: Authentication
+    url: authentication/flipturn-authentication.yml
+  - type: Conventions
+    url: conventions/flipturn-conventions.yml
+  - type: ErrorCatalog
+    url: errors/flipturn-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/flipturn-rate-limits.yml
+  - type: DataModel
+    url: data-model/flipturn-data-model.yml
+  - type: Conformance
+    url: conformance/flipturn-conformance.yml
+  - type: AgenticAccess
+    url: agentic-access/flipturn-agentic-access.yml
+  - type: LLMsTxt
+    url: llms/flipturn-llms.txt
+- aid: flipturn:flipturn-sites-api
+  name: Flipturn Sites API
+  description: Sites, their chargers and ports, and current status.
+  humanURL: https://api-docs.getflipturn.com/
+  baseURL: https://api.getflipturn.com/api
+  tags:
+  - Sites
+  properties:
+  - type: OpenAPI
+    url: openapi/flipturn-sites-api-openapi.yml
+  - type: Authentication
+    url: authentication/flipturn-authentication.yml
+  - type: Conventions
+    url: conventions/flipturn-conventions.yml
+  - type: ErrorCatalog
+    url: errors/flipturn-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/flipturn-rate-limits.yml
+  - type: DataModel
+    url: data-model/flipturn-data-model.yml
+  - type: Conformance
+    url: conformance/flipturn-conformance.yml
+  - type: AgenticAccess
+    url: agentic-access/flipturn-agentic-access.yml
+  - type: LLMsTxt
+    url: llms/flipturn-llms.txt
+- aid: flipturn:flipturn-vehicles-api
+  name: Flipturn Vehicles API
+  description: Electric vehicles and their associated access IDs.
+  humanURL: https://api-docs.getflipturn.com/
+  baseURL: https://api.getflipturn.com/api
+  tags:
+  - Vehicles
+  properties:
+  - type: OpenAPI
+    url: openapi/flipturn-vehicles-api-openapi.yml
+  - type: Authentication
+    url: authentication/flipturn-authentication.yml
+  - type: Conventions
+    url: conventions/flipturn-conventions.yml
+  - type: ErrorCatalog
+    url: errors/flipturn-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/flipturn-rate-limits.yml
+  - type: DataModel
+    url: data-model/flipturn-data-model.yml
+  - type: Conformance
+    url: conformance/flipturn-conformance.yml
+  - type: AgenticAccess
+    url: agentic-access/flipturn-agentic-access.yml
+  - type: LLMsTxt
+    url: llms/flipturn-llms.txt
 common:
 - type: Website
   url: http://www.getflipturn.com
+- type: DeveloperPortal
+  url: https://api-docs.getflipturn.com/
+- type: Documentation
+  url: https://api-docs.getflipturn.com/
+- type: APIReference
+  url: https://api-docs.getflipturn.com/
+- type: GettingStarted
+  url: https://api-docs.getflipturn.com/authorization.md
+- type: Authentication
+  url: authentication/flipturn-authentication.yml
+- type: Conventions
+  url: conventions/flipturn-conventions.yml
+- type: RateLimits
+  url: rate-limits/flipturn-rate-limits.yml
+- type: ErrorCatalog
+  url: errors/flipturn-problem-types.yml
+- type: LLMsTxt
+  url: llms/flipturn-llms.txt
+- type: MCPServer
+  url: mcp/flipturn-mcp.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: AgenticAccess
+  url: agentic-access/flipturn-agentic-access.yml
+- type: Lifecycle
+  url: lifecycle/flipturn-lifecycle.yml
+- type: StatusPage
+  url: https://status.getflipturn.com/
+- type: Conformance
+  url: conformance/flipturn-conformance.yml
+- type: Compliance
+  url: https://www.getflipturn.com/product/security
+- type: TrustCenter
+  url: security/flipturn-trust-center.yml
+- type: DomainSecurity
+  url: security/flipturn-domain-security.yml
+- type: Support
+  url: https://www.getflipturn.com/contact-us
+- type: Blog
+  url: https://www.getflipturn.com/blog
+- type: SignUp
+  url: https://www.getflipturn.com/getdemo
+- type: Login
+  url: https://cloud.getflipturn.com
+- type: TermsOfService
+  url: https://www.getflipturn.com/terms-of-service
+- type: PrivacyPolicy
+  url: https://www.getflipturn.com/privacy-policy
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence

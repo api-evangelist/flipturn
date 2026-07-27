@@ -1,0 +1,16 @@
+generated: '2026-07-19'
+method: generated
+source: openapi/flipturn-openapi.yml
+skills:
+  - file: flipturn-export-charging-sessions.md
+    name: Export Flipturn charging sessions to a data warehouse
+    api: openapi/flipturn-openapi.yml
+    operations: [listSites, listChargingSessions]
+  - file: flipturn-sync-fleet-access-ids.md
+    name: Sync a fleet of vehicles and RFID cards into Flipturn
+    api: openapi/flipturn-openapi.yml
+    operations: [batchUpsertAccessIds, listAccessIds, listVehicles]
+  - file: flipturn-monitor-charger-health.md
+    name: Monitor Flipturn charger health, errors, and alerts
+    api: openapi/flipturn-openapi.yml
+    operations: [getChargerHealth, listErrors, listAlerts, listSites]

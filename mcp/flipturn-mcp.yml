@@ -1,0 +1,41 @@
+generated: '2026-07-19'
+method: derived
+status: candidate
+source: openapi/flipturn-openapi.yml
+notes: >-
+  Flipturn publishes no official hosted MCP server (none found in docs, npm
+  @modelcontextprotocol, or MCP registries as of 2026-07-19). This is a
+  candidate tool list derived one-per-operation from the OpenAPI, for exposing
+  the Flipturn API to agents. Read operations are safe; write operations
+  (create/update/reserve/limit/sync) act on physical charging infrastructure and
+  should require confirmation — see agentic-access/flipturn-agentic-access.yml.
+server:
+  name: flipturn
+  transport: http
+tools:
+  - { name: list_sites, description: List sites, chargers, ports, and current status., source_operation: 'openapi/flipturn-openapi.yml#listSites' }
+  - { name: get_charger, description: Get a charger by internal ID., source_operation: 'openapi/flipturn-openapi.yml#getCharger' }
+  - { name: get_charger_by_external_id, description: Get a charger by external/network station ID., source_operation: 'openapi/flipturn-openapi.yml#getChargerByExternalId' }
+  - { name: get_charger_by_ocpp_id, description: Get a charger by OCPP ID., source_operation: 'openapi/flipturn-openapi.yml#getChargerByOcppId' }
+  - { name: list_charging_sessions, description: List charging sessions with filters and optional intervals/TOU., source_operation: 'openapi/flipturn-openapi.yml#listChargingSessions' }
+  - { name: get_charger_health, description: Get uptime/error/utilization statistics., source_operation: 'openapi/flipturn-openapi.yml#getChargerHealth' }
+  - { name: list_access_ids, description: List access IDs (RFID/vehicle)., source_operation: 'openapi/flipturn-openapi.yml#listAccessIds' }
+  - { name: get_access_id, description: Get an access ID., source_operation: 'openapi/flipturn-openapi.yml#getAccessId' }
+  - { name: create_access_id, description: Create an access ID., source_operation: 'openapi/flipturn-openapi.yml#createAccessId' }
+  - { name: update_access_id, description: Update an access ID., source_operation: 'openapi/flipturn-openapi.yml#updateAccessId' }
+  - { name: batch_upsert_access_ids, description: Batch create/update up to 1000 access IDs., source_operation: 'openapi/flipturn-openapi.yml#batchUpsertAccessIds' }
+  - { name: list_vehicles, description: List vehicles., source_operation: 'openapi/flipturn-openapi.yml#listVehicles' }
+  - { name: get_vehicle, description: Get a vehicle., source_operation: 'openapi/flipturn-openapi.yml#getVehicle' }
+  - { name: create_vehicle, description: Create a vehicle., source_operation: 'openapi/flipturn-openapi.yml#createVehicle' }
+  - { name: update_vehicle, description: Update a vehicle., source_operation: 'openapi/flipturn-openapi.yml#updateVehicle' }
+  - { name: list_alerts, description: List alerts., source_operation: 'openapi/flipturn-openapi.yml#listAlerts' }
+  - { name: list_errors, description: List charger errors., source_operation: 'openapi/flipturn-openapi.yml#listErrors' }
+  - { name: list_ocpp_messages, description: List raw OCPP messages for a charger., source_operation: 'openapi/flipturn-openapi.yml#listOcppMessages' }
+  - { name: create_reservation, description: Reserve a charging port (OCPP ReserveNow)., source_operation: 'openapi/flipturn-openapi.yml#createReservation' }
+  - { name: cancel_reservation, description: Cancel a reservation., source_operation: 'openapi/flipturn-openapi.yml#cancelReservation' }
+  - { name: get_site_power_limits, description: Get site power limits., source_operation: 'openapi/flipturn-openapi.yml#getSitePowerLimits' }
+  - { name: create_site_power_limit, description: Create/replace a site power limit., source_operation: 'openapi/flipturn-openapi.yml#createSitePowerLimit' }
+  - { name: delete_site_power_limit, description: Delete a site power limit., source_operation: 'openapi/flipturn-openapi.yml#deleteSitePowerLimit' }
+  - { name: sync_vehicle_departure_times, description: Sync departure times for a vehicle., source_operation: 'openapi/flipturn-openapi.yml#syncVehicleDepartureTimes' }
+  - { name: batch_sync_departure_times, description: Sync departure times for multiple vehicles., source_operation: 'openapi/flipturn-openapi.yml#batchSyncDepartureTimes' }
+  - { name: list_maintenance_windows, description: List maintenance windows., source_operation: 'openapi/flipturn-openapi.yml#listMaintenanceWindows' }

@@ -1,0 +1,22 @@
+generated: '2026-07-19'
+method: searched
+source: https://api-docs.getflipturn.com/pagination-and-errors.md
+rate_limits:
+  - scope: per-api-key
+    limit_count: 200
+    window: 1m
+    description: Each API key is limited to 200 requests per minute.
+  - scope: charging-sessions-include-intervals
+    limit_count: 1
+    window: concurrent
+    description: >-
+      When fetching charging sessions with includeIntervals=true, an API key is
+      limited to 1 concurrent request.
+  - scope: charger-health
+    limit_count: null
+    window: null
+    description: The charger-health endpoint enforces stricter (unspecified) rate limits.
+overage:
+  http_status: 429
+  message: '{ "error": ... }'
+  guidance: Contact Flipturn to discuss a higher rate limit for your use case.

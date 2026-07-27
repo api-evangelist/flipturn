@@ -1,0 +1,36 @@
+generated: '2026-07-19'
+method: searched
+source: https://api-docs.getflipturn.com/pagination-and-errors.md
+derived_from: openapi/flipturn-openapi.yml
+format: custom
+envelope:
+  shape: '{ "error": string }'
+  content_type: application/json
+  example: '{ "error": "Invalid API key" }'
+notes: >-
+  Flipturn returns a flat JSON error envelope with a single `error` string and
+  an appropriate HTTP status code. It does not use RFC 9457
+  application/problem+json. Response codes in the 400 range indicate a request
+  problem; 500 indicates an internal Flipturn issue.
+problems:
+  - status: 400
+    title: Bad Request
+    meaning: Invalid parameters passed to the API endpoint.
+    remediation: Check query/body parameters, types, and date ranges (e.g. ocpp-messages range must be under 8 days).
+  - status: 401
+    title: Unauthorized
+    meaning: Invalid API key or Authorization header.
+    example: '{ "error": "Invalid API key" }'
+    remediation: 'Provide a valid `Authorization: Bearer {api_key}` header.'
+  - status: 404
+    title: Not Found
+    meaning: The endpoint or resource does not exist (e.g. unknown vehicleId on departure-times).
+    remediation: Verify the path and resource ID.
+  - status: 429
+    title: Too Many Requests
+    meaning: Exceeded the rate limit (200 requests/minute per API key, stricter on some endpoints).
+    remediation: Back off and retry; contact support for a higher limit.
+  - status: 500
+    title: Internal Server Error
+    meaning: An internal issue on Flipturn's side.
+    remediation: Retry later; contact support@getflipturn.com if it persists.
