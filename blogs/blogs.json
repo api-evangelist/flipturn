@@ -5,7 +5,7 @@
       "source": "https://www.getflipturn.com/blog/rss.xml",
       "feed_url": "https://www.getflipturn.com/blog/rss.xml",
       "title": "",
-      "saved": 10,
+      "saved": 0,
       "method": "feed"
     },
     {
@@ -17,5 +17,5 @@
     }
   ],
   "post_count": 60,
-  "fetched": "2026-07-25T15:00:33Z"
+  "fetched": "2026-08-01T15:49:00Z"
 }
