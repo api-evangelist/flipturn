@@ -394,6 +394,8 @@ apis:
   - type: LLMsTxt
     url: llms/flipturn-llms.txt
 common:
+- type: Overlay
+  url: overlays/flipturn-openapi-overlay.yaml
 - type: Website
   url: http://www.getflipturn.com
 - type: DeveloperPortal
