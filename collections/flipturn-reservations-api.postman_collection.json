@@ -1,0 +1,455 @@
+{
+  "item": [
+    {
+      "id": "e0549cc9-1214-447f-a672-8fc3a977530c",
+      "name": "Reservations",
+      "description": {
+        "content": "OCPP ReserveNow / CancelReservation port reservations.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "17987698-c506-4016-b8ce-efe1eb53b29a",
+          "name": "Reserve a charging port",
+          "request": {
+            "name": "Reserve a charging port",
+            "description": {
+              "content": "Reserve a charging port for a specific user via the OCPP ReserveNow message. The reservation is active immediately and expires at expiryDate. Supports OCPP 1.6 and 2.0.1 chargers with the Reservation profile.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ocpp",
+                "reservations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"portId\": \"<integer>\",\n  \"expiryDate\": \"<dateTime>\",\n  \"idTag\": \"<string>\",\n  \"reservationId\": \"<integer>\",\n  \"parentIdTag\": \"<string>\",\n  \"idTokenType\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9273f37d-6e00-448d-abe4-3db3ae6c5747",
+              "name": "Reservation outcome.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ocpp",
+                    "reservations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"portId\": \"<integer>\",\n  \"expiryDate\": \"<dateTime>\",\n  \"idTag\": \"<string>\",\n  \"reservationId\": \"<integer>\",\n  \"parentIdTag\": \"<string>\",\n  \"idTokenType\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"status\": \"Occupied\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a6965ea8-7e71-4e66-bb76-54439c88d27b",
+              "name": "Invalid parameters passed to the API endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ocpp",
+                    "reservations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"portId\": \"<integer>\",\n  \"expiryDate\": \"<dateTime>\",\n  \"idTag\": \"<string>\",\n  \"reservationId\": \"<integer>\",\n  \"parentIdTag\": \"<string>\",\n  \"idTokenType\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "39a0bf20-a131-47ec-a18a-47dddaa2a1ea",
+              "name": "Invalid API key or Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ocpp",
+                    "reservations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"portId\": \"<integer>\",\n  \"expiryDate\": \"<dateTime>\",\n  \"idTag\": \"<string>\",\n  \"reservationId\": \"<integer>\",\n  \"parentIdTag\": \"<string>\",\n  \"idTokenType\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3273e0b3-023c-4f9e-b430-08bdec44c0c2",
+          "name": "Cancel a reservation",
+          "request": {
+            "name": "Cancel a reservation",
+            "description": {
+              "content": "Cancel an active reservation on a charger via the OCPP CancelReservation message.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ocpp",
+                "reservations",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"chargerId\": \"<integer>\",\n  \"reservationId\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b1d65ee9-30e1-47db-b7b9-6e3cf39a29db",
+              "name": "Cancellation outcome.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ocpp",
+                    "reservations",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"chargerId\": \"<integer>\",\n  \"reservationId\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"status\": \"Rejected\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "727f9e98-d41b-442c-8232-326cfeaaee3b",
+              "name": "Invalid parameters passed to the API endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ocpp",
+                    "reservations",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"chargerId\": \"<integer>\",\n  \"reservationId\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "83bf2b05-3133-4a12-9ff9-3f063b925389",
+              "name": "Invalid API key or Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ocpp",
+                    "reservations",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"chargerId\": \"<integer>\",\n  \"reservationId\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.getflipturn.com/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d259ea55-501c-4a13-99c6-55b153776a9a",
+    "name": "Flipturn Access IDs Reservations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Flipturn API provides read and write access to the Flipturn EV charging management platform: sites, chargers and ports, charging sessions, charger health and uptime, access IDs (RFID cards and vehicles), vehicles, alerts, charger errors, raw OCPP messages, reservations, site power limits, vehicle departure times, and maintenance windows. It is a JSON REST API secured with a bearer API key, designed for integrating Flipturn charging data with ticketing platforms, data warehouses, transportation management systems, and fleet operations tooling. Flipturn also supports OCPI for roaming-partner integration (contact support to enable).\n\nContact Support:\n Name: Flipturn Support\n Email: support@getflipturn.com",
+      "type": "text/plain"
+    }
+  }
+}

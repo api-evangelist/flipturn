@@ -1,0 +1,54 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Flipturn Access IDs Departure Times API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Departure Times",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sync departure times for a vehicle",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.getflipturn.com/api/departure-times/vehicle",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Atomically replace all future departure times for a single vehicle (identified by vehicleVin or vehicleId, not both). Past departures in the request are skipped; existing past departures are left unchanged."
+        },
+        {
+          "info": {
+            "name": "Sync departure times for multiple vehicles",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.getflipturn.com/api/departure-times/batch",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sync departure times for multiple vehicles in a single request. Each vehicle is processed independently."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

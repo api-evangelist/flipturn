@@ -1,0 +1,718 @@
+{
+  "item": [
+    {
+      "id": "7535cf0a-1883-423f-bdf8-f0df9456782a",
+      "name": "Site Power Limits",
+      "description": {
+        "content": "Cost and capacity power limits for a site.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b7ae52c4-3b08-4f9a-a67d-e146536cd0f1",
+          "name": "Get site power limits",
+          "request": {
+            "name": "Get site power limits",
+            "description": {
+              "content": "Return the active cost and/or capacity power limits for a site (up to one schedule per type). Returns an empty array if none are set.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "site",
+                ":site-id",
+                "limits"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "site-id",
+                  "description": "(Required) Flipturn site ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "84f01ba7-6211-4540-b34b-8ff5b207b08a",
+              "name": "The site's power limit schedules.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "site",
+                    ":site-id",
+                    "limits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "site-id",
+                      "description": "(Required) Flipturn site ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"sitePowerLimitSchedules\": [\n    {\n      \"id\": \"string\",\n      \"createdAt\": \"2018-01-26T21:17:43.077Z\",\n      \"source\": \"string\",\n      \"type\": \"cost\",\n      \"schedules\": [\n        {\n          \"daysOfWeek\": [\n            97,\n            641\n          ],\n          \"chargingRateUnit\": \"A\",\n          \"chargingSchedulePeriods\": [\n            {\n              \"startPeriod\": 7435,\n              \"limit\": 3131.5732766411606\n            },\n            {\n              \"startPeriod\": 4681,\n              \"limit\": 972.4635979071771\n            }\n          ]\n        },\n        {\n          \"daysOfWeek\": [\n            8133,\n            7984\n          ],\n          \"chargingRateUnit\": \"W\",\n          \"chargingSchedulePeriods\": [\n            {\n              \"startPeriod\": 5451,\n              \"limit\": 4180.623973007128\n            },\n            {\n              \"startPeriod\": 4337,\n              \"limit\": 4497.115058263913\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"createdAt\": \"1978-03-23T21:42:22.127Z\",\n      \"source\": \"string\",\n      \"type\": \"capacity\",\n      \"schedules\": [\n        {\n          \"daysOfWeek\": [\n            3652,\n            4346\n          ],\n          \"chargingRateUnit\": \"W\",\n          \"chargingSchedulePeriods\": [\n            {\n              \"startPeriod\": 2939,\n              \"limit\": 2665.090350650203\n            },\n            {\n              \"startPeriod\": 4324,\n              \"limit\": 673.2924354227509\n            }\n          ]\n        },\n        {\n          \"daysOfWeek\": [\n            3512,\n            1953\n          ],\n          \"chargingRateUnit\": \"A\",\n          \"chargingSchedulePeriods\": [\n            {\n              \"startPeriod\": 8937,\n              \"limit\": 118.11992258605409\n            },\n            {\n              \"startPeriod\": 9133,\n              \"limit\": 7355.535361634647\n            }\n          ]\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "da61f841-6039-486c-bd3b-8da47fe17058",
+              "name": "Invalid API key or Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "site",
+                    ":site-id",
+                    "limits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "site-id",
+                      "description": "(Required) Flipturn site ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fa937390-7bc9-4d08-bb51-24a2be57af57",
+              "name": "The requested resource or endpoint does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "site",
+                    ":site-id",
+                    "limits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "site-id",
+                      "description": "(Required) Flipturn site ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d80a78c7-22c5-4344-840f-705018fae2f5",
+          "name": "Create a site power limit",
+          "request": {
+            "name": "Create a site power limit",
+            "description": {
+              "content": "Create a new site power limit, replacing the current limit of that type. Cost limits are a soft cap; capacity limits are a hard cap. Amp-based limits are not supported on sites containing DCFC chargers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "site",
+                ":site-id",
+                "limits"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "site-id",
+                  "description": "(Required) Flipturn site ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sitePowerLimitSchedule\": {\n    \"type\": \"<string>\",\n    \"limit\": \"<integer>\",\n    \"chargingRateUnit\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "12994afa-6ddd-4212-81d6-a474d73fe525",
+              "name": "The created schedule ID.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "site",
+                    ":site-id",
+                    "limits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "site-id",
+                      "description": "(Required) Flipturn site ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sitePowerLimitSchedule\": {\n    \"type\": \"<string>\",\n    \"limit\": \"<integer>\",\n    \"chargingRateUnit\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"sitePowerLimitScheduleId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f5737efb-d868-487a-a8ca-9618c37bdd83",
+              "name": "Invalid parameters passed to the API endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "site",
+                    ":site-id",
+                    "limits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "site-id",
+                      "description": "(Required) Flipturn site ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sitePowerLimitSchedule\": {\n    \"type\": \"<string>\",\n    \"limit\": \"<integer>\",\n    \"chargingRateUnit\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6de8524b-c5d8-4271-a3f6-5f8f4f851dc7",
+              "name": "Invalid API key or Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "site",
+                    ":site-id",
+                    "limits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "site-id",
+                      "description": "(Required) Flipturn site ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sitePowerLimitSchedule\": {\n    \"type\": \"<string>\",\n    \"limit\": \"<integer>\",\n    \"chargingRateUnit\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2e2b3e07-3293-420e-bc5f-f18257b5cba7",
+          "name": "Delete a site power limit",
+          "request": {
+            "name": "Delete a site power limit",
+            "description": {
+              "content": "Remove a site power limit schedule.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "site",
+                ":site-id",
+                "limits",
+                ":schedule-id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "site-id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "schedule-id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4bc6946c-9935-4e70-a246-99967c424adc",
+              "name": "Deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "site",
+                    ":site-id",
+                    "limits",
+                    ":schedule-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "site-id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "schedule-id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cac44eaa-bd34-4d8c-b44c-0d1cdb38f84e",
+              "name": "Invalid API key or Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "site",
+                    ":site-id",
+                    "limits",
+                    ":schedule-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "site-id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "schedule-id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fde75799-c1fd-44b0-8226-07d5de4b80f3",
+              "name": "The requested resource or endpoint does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "site",
+                    ":site-id",
+                    "limits",
+                    ":schedule-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "site-id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "schedule-id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.getflipturn.com/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "768dd6c1-e9a3-4b7e-8711-10ed51056a04",
+    "name": "Flipturn Access IDs Site Power Limits API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Flipturn API provides read and write access to the Flipturn EV charging management platform: sites, chargers and ports, charging sessions, charger health and uptime, access IDs (RFID cards and vehicles), vehicles, alerts, charger errors, raw OCPP messages, reservations, site power limits, vehicle departure times, and maintenance windows. It is a JSON REST API secured with a bearer API key, designed for integrating Flipturn charging data with ticketing platforms, data warehouses, transportation management systems, and fleet operations tooling. Flipturn also supports OCPI for roaming-partner integration (contact support to enable).\n\nContact Support:\n Name: Flipturn Support\n Email: support@getflipturn.com",
+      "type": "text/plain"
+    }
+  }
+}

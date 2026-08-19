@@ -1,0 +1,73 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Flipturn Access IDs Maintenance Windows API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Maintenance Windows",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List maintenance windows",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getflipturn.com/api/maintenance-windows",
+            "params": [
+              {
+                "name": "afterTimestamp",
+                "value": "",
+                "type": "query",
+                "description": "ISO 8601: windows whose end time is after this timestamp."
+              },
+              {
+                "name": "beforeTimestamp",
+                "value": "",
+                "type": "query",
+                "description": "ISO 8601: windows whose start time is before this timestamp."
+              },
+              {
+                "name": "chargerIds",
+                "value": "",
+                "type": "query",
+                "description": "Filter to specific charger IDs."
+              },
+              {
+                "name": "siteIds",
+                "value": "",
+                "type": "query",
+                "description": "Filter to chargers at specific site IDs."
+              },
+              {
+                "name": "organizationIds",
+                "value": "",
+                "type": "query",
+                "description": "Filter to specific organization IDs (parent-org keys only)."
+              },
+              {
+                "name": "nextPageCursor",
+                "value": "",
+                "type": "query",
+                "description": "Opaque cursor from the previous response's pagination.nextPageCursor to fetch the next page. Keep all other parameters identical."
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of maintenance windows across chargers (up to 50 per page). Parent-org keys return windows for all child organizations."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,35 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Flipturn Access IDs Sites API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sites",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List sites",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getflipturn.com/api/sites"
+          },
+          "docs": "Retrieve all of an organization's sites, chargers, and ports, along with their most recent status and details about any ongoing charging sessions. Takes no parameters and returns everything each call."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

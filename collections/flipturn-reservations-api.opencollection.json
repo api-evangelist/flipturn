@@ -1,0 +1,54 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Flipturn Access IDs Reservations API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reservations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Reserve a charging port",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.getflipturn.com/api/ocpp/reservations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Reserve a charging port for a specific user via the OCPP ReserveNow message. The reservation is active immediately and expires at expiryDate. Supports OCPP 1.6 and 2.0.1 chargers with the Reservation profile."
+        },
+        {
+          "info": {
+            "name": "Cancel a reservation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.getflipturn.com/api/ocpp/reservations/cancel",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancel an active reservation on a charger via the OCPP CancelReservation message."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

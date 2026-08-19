@@ -1,0 +1,877 @@
+{
+  "item": [
+    {
+      "id": "cef0d1bd-5e04-4c33-b1d4-7f7349c9c501",
+      "name": "Vehicles",
+      "description": {
+        "content": "Electric vehicles and their associated access IDs.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ab0275a7-ab3c-4bb3-8b01-201f76169e22",
+          "name": "List vehicles",
+          "request": {
+            "name": "List vehicles",
+            "description": {
+              "content": "Retrieve a paginated list of all electric vehicles and their associated access IDs.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vehicles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "nextPageCursor",
+                  "value": "<string>",
+                  "description": "Opaque cursor from the previous response's pagination.nextPageCursor to fetch the next page. Keep all other parameters identical."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "872641e8-7984-4f8a-9195-805f3dc05ef5",
+              "name": "A paginated list of vehicles.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vehicles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "nextPageCursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 9369,\n      \"name\": \"string\",\n      \"make\": \"string\",\n      \"model\": \"string\",\n      \"vin\": \"string\",\n      \"licensePlate\": \"string\",\n      \"hasTelematics\": true,\n      \"customer\": {\n        \"name\": \"string\"\n      },\n      \"accessIds\": [\n        {\n          \"id\": 7181,\n          \"ocppIdTag\": \"string\",\n          \"authorizationStatus\": \"Revoked\"\n        },\n        {\n          \"id\": 937,\n          \"ocppIdTag\": \"string\",\n          \"authorizationStatus\": \"Revoked\"\n        }\n      ]\n    },\n    {\n      \"id\": 5785,\n      \"name\": \"string\",\n      \"make\": \"string\",\n      \"model\": \"string\",\n      \"vin\": \"string\",\n      \"licensePlate\": \"string\",\n      \"hasTelematics\": true,\n      \"customer\": {\n        \"name\": \"string\"\n      },\n      \"accessIds\": [\n        {\n          \"id\": 1463,\n          \"ocppIdTag\": \"string\",\n          \"authorizationStatus\": \"Revoked\"\n        },\n        {\n          \"id\": 7757,\n          \"ocppIdTag\": \"string\",\n          \"authorizationStatus\": \"Revoked\"\n        }\n      ]\n    }\n  ],\n  \"pagination\": {\n    \"hasNextPage\": false,\n    \"nextPageCursor\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5fe8a7c5-9e9b-4989-aff9-ca97d223cf36",
+              "name": "Invalid API key or Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vehicles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "nextPageCursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "27b21014-517c-4c08-ad96-d2c514a4b718",
+          "name": "Create a vehicle",
+          "request": {
+            "name": "Create a vehicle",
+            "description": {
+              "content": "Create a new vehicle, optionally associating one or more access IDs and a customer.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vehicles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"vehicle\": {\n    \"name\": \"<string>\",\n    \"make\": \"<string>\",\n    \"model\": \"<string>\",\n    \"vin\": \"<string>\",\n    \"licensePlate\": \"<string>\",\n    \"customer\": {\n      \"name\": \"<string>\"\n    },\n    \"accessIds\": [\n      {\n        \"ocppIdTag\": \"<string>\",\n        \"authorizationStatus\": \"<string>\"\n      },\n      {\n        \"ocppIdTag\": \"<string>\",\n        \"authorizationStatus\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c269b789-bbe3-47bf-b5f8-2adf9c69b06e",
+              "name": "The created vehicle.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vehicles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"vehicle\": {\n    \"name\": \"string\",\n    \"make\": \"string\",\n    \"model\": \"string\",\n    \"vin\": \"string\",\n    \"licensePlate\": \"string\",\n    \"customer\": {\n      \"name\": \"string\"\n    },\n    \"accessIds\": [\n      {\n        \"ocppIdTag\": \"string\",\n        \"authorizationStatus\": \"Revoked\"\n      },\n      {\n        \"ocppIdTag\": \"string\",\n        \"authorizationStatus\": \"Revoked\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"vehicle\": {\n    \"id\": 6733,\n    \"name\": \"string\",\n    \"make\": \"string\",\n    \"model\": \"string\",\n    \"vin\": \"string\",\n    \"licensePlate\": \"string\",\n    \"hasTelematics\": true,\n    \"customer\": {\n      \"name\": \"string\"\n    },\n    \"accessIds\": [\n      {\n        \"id\": 4502,\n        \"ocppIdTag\": \"string\",\n        \"authorizationStatus\": \"Revoked\"\n      },\n      {\n        \"id\": 1365,\n        \"ocppIdTag\": \"string\",\n        \"authorizationStatus\": \"Revoked\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d42bd75d-df31-4cee-b8a8-419ad0787d52",
+              "name": "Invalid parameters passed to the API endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vehicles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"vehicle\": {\n    \"name\": \"string\",\n    \"make\": \"string\",\n    \"model\": \"string\",\n    \"vin\": \"string\",\n    \"licensePlate\": \"string\",\n    \"customer\": {\n      \"name\": \"string\"\n    },\n    \"accessIds\": [\n      {\n        \"ocppIdTag\": \"string\",\n        \"authorizationStatus\": \"Revoked\"\n      },\n      {\n        \"ocppIdTag\": \"string\",\n        \"authorizationStatus\": \"Revoked\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a9f2ff1e-c789-4dcc-943e-542e2e62ff19",
+              "name": "Invalid API key or Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vehicles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"vehicle\": {\n    \"name\": \"string\",\n    \"make\": \"string\",\n    \"model\": \"string\",\n    \"vin\": \"string\",\n    \"licensePlate\": \"string\",\n    \"customer\": {\n      \"name\": \"string\"\n    },\n    \"accessIds\": [\n      {\n        \"ocppIdTag\": \"string\",\n        \"authorizationStatus\": \"Revoked\"\n      },\n      {\n        \"ocppIdTag\": \"string\",\n        \"authorizationStatus\": \"Revoked\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "820e269f-f9e9-4553-9cf1-7d959c5d45a3",
+          "name": "Get a vehicle",
+          "request": {
+            "name": "Get a vehicle",
+            "description": {
+              "content": "Retrieve the details for a specific vehicle.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vehicles",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8e099200-e39b-4a19-8eaa-5f6791126d5c",
+              "name": "The vehicle.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vehicles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"vehicle\": {\n    \"id\": 6733,\n    \"name\": \"string\",\n    \"make\": \"string\",\n    \"model\": \"string\",\n    \"vin\": \"string\",\n    \"licensePlate\": \"string\",\n    \"hasTelematics\": true,\n    \"customer\": {\n      \"name\": \"string\"\n    },\n    \"accessIds\": [\n      {\n        \"id\": 4502,\n        \"ocppIdTag\": \"string\",\n        \"authorizationStatus\": \"Revoked\"\n      },\n      {\n        \"id\": 1365,\n        \"ocppIdTag\": \"string\",\n        \"authorizationStatus\": \"Revoked\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "70a3673e-da11-4b43-be36-0fbdb1b99efa",
+              "name": "Invalid API key or Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vehicles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "755232a3-8c6c-4397-b3f9-9330d942c7e0",
+              "name": "The requested resource or endpoint does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vehicles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3cfd2e0d-868f-47bd-a29b-dc24f065271e",
+          "name": "Update a vehicle",
+          "request": {
+            "name": "Update a vehicle",
+            "description": {
+              "content": "Update a vehicle. Explicitly providing null deletes an optional value; omitting a field leaves it unchanged.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vehicles",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"vehicle\": {\n    \"name\": \"<string>\",\n    \"make\": \"<string>\",\n    \"model\": \"<string>\",\n    \"vin\": \"<string>\",\n    \"licensePlate\": \"<string>\",\n    \"customer\": {\n      \"name\": \"<string>\"\n    },\n    \"accessIds\": [\n      {\n        \"ocppIdTag\": \"<string>\",\n        \"authorizationStatus\": \"<string>\"\n      },\n      {\n        \"ocppIdTag\": \"<string>\",\n        \"authorizationStatus\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3b68b51a-77d4-4dd6-8950-e42a955bc791",
+              "name": "The updated vehicle.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vehicles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"vehicle\": {\n    \"name\": \"string\",\n    \"make\": \"string\",\n    \"model\": \"string\",\n    \"vin\": \"string\",\n    \"licensePlate\": \"string\",\n    \"customer\": {\n      \"name\": \"string\"\n    },\n    \"accessIds\": [\n      {\n        \"ocppIdTag\": \"string\",\n        \"authorizationStatus\": \"Revoked\"\n      },\n      {\n        \"ocppIdTag\": \"string\",\n        \"authorizationStatus\": \"Revoked\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"vehicle\": {\n    \"id\": 6733,\n    \"name\": \"string\",\n    \"make\": \"string\",\n    \"model\": \"string\",\n    \"vin\": \"string\",\n    \"licensePlate\": \"string\",\n    \"hasTelematics\": true,\n    \"customer\": {\n      \"name\": \"string\"\n    },\n    \"accessIds\": [\n      {\n        \"id\": 4502,\n        \"ocppIdTag\": \"string\",\n        \"authorizationStatus\": \"Revoked\"\n      },\n      {\n        \"id\": 1365,\n        \"ocppIdTag\": \"string\",\n        \"authorizationStatus\": \"Revoked\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1c6af901-82b2-40d9-9091-ac752e2c7c48",
+              "name": "Invalid parameters passed to the API endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vehicles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"vehicle\": {\n    \"name\": \"string\",\n    \"make\": \"string\",\n    \"model\": \"string\",\n    \"vin\": \"string\",\n    \"licensePlate\": \"string\",\n    \"customer\": {\n      \"name\": \"string\"\n    },\n    \"accessIds\": [\n      {\n        \"ocppIdTag\": \"string\",\n        \"authorizationStatus\": \"Revoked\"\n      },\n      {\n        \"ocppIdTag\": \"string\",\n        \"authorizationStatus\": \"Revoked\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0fc04e3a-0928-4a03-98f3-323285ac4f54",
+              "name": "Invalid API key or Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vehicles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"vehicle\": {\n    \"name\": \"string\",\n    \"make\": \"string\",\n    \"model\": \"string\",\n    \"vin\": \"string\",\n    \"licensePlate\": \"string\",\n    \"customer\": {\n      \"name\": \"string\"\n    },\n    \"accessIds\": [\n      {\n        \"ocppIdTag\": \"string\",\n        \"authorizationStatus\": \"Revoked\"\n      },\n      {\n        \"ocppIdTag\": \"string\",\n        \"authorizationStatus\": \"Revoked\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3833c27a-cf89-4241-b1f9-9491967d5b06",
+              "name": "The requested resource or endpoint does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vehicles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"vehicle\": {\n    \"name\": \"string\",\n    \"make\": \"string\",\n    \"model\": \"string\",\n    \"vin\": \"string\",\n    \"licensePlate\": \"string\",\n    \"customer\": {\n      \"name\": \"string\"\n    },\n    \"accessIds\": [\n      {\n        \"ocppIdTag\": \"string\",\n        \"authorizationStatus\": \"Revoked\"\n      },\n      {\n        \"ocppIdTag\": \"string\",\n        \"authorizationStatus\": \"Revoked\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.getflipturn.com/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f6877481-cff0-4352-8cdc-ae6ea73dfe0a",
+    "name": "Flipturn Access IDs Vehicles API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Flipturn API provides read and write access to the Flipturn EV charging management platform: sites, chargers and ports, charging sessions, charger health and uptime, access IDs (RFID cards and vehicles), vehicles, alerts, charger errors, raw OCPP messages, reservations, site power limits, vehicle departure times, and maintenance windows. It is a JSON REST API secured with a bearer API key, designed for integrating Flipturn charging data with ticketing platforms, data warehouses, transportation management systems, and fleet operations tooling. Flipturn also supports OCPI for roaming-partner integration (contact support to enable).\n\nContact Support:\n Name: Flipturn Support\n Email: support@getflipturn.com",
+      "type": "text/plain"
+    }
+  }
+}

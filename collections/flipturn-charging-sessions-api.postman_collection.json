@@ -1,0 +1,605 @@
+{
+  "item": [
+    {
+      "id": "fa77fb33-2094-490b-af25-4a22a51bebc7",
+      "name": "Charging Sessions",
+      "description": {
+        "content": "Historical and in-progress charging sessions.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "949852e9-d71b-4a6a-a31e-ac0951f7f8ae",
+          "name": "List charging sessions",
+          "request": {
+            "name": "List charging sessions",
+            "description": {
+              "content": "Retrieve a paginated list of charging sessions, filterable by start/end time, site, charger, and customer. Optional includes add per-interval statistics, time-of-use energy, and in-progress sessions. Results are paginated with an opaque cursor.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "charging-sessions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "startTimeAfter",
+                  "value": "<dateTime>",
+                  "description": "ISO 8601: only sessions started at or after this time."
+                },
+                {
+                  "disabled": false,
+                  "key": "startTimeBefore",
+                  "value": "<dateTime>",
+                  "description": "ISO 8601: only sessions started before this time."
+                },
+                {
+                  "disabled": false,
+                  "key": "endTimeAfter",
+                  "value": "<dateTime>",
+                  "description": "ISO 8601: only sessions ended at or after this time."
+                },
+                {
+                  "disabled": false,
+                  "key": "endTimeBefore",
+                  "value": "<dateTime>",
+                  "description": "ISO 8601: only sessions ended before this time."
+                },
+                {
+                  "disabled": false,
+                  "key": "includeIntervals",
+                  "value": "<boolean>",
+                  "description": "Include per-15-minute interval statistics and max demand. Limits the key to 1 concurrent request."
+                },
+                {
+                  "disabled": false,
+                  "key": "includeTouEnergy",
+                  "value": "<boolean>",
+                  "description": "Include energy usage grouped into time-of-use periods."
+                },
+                {
+                  "disabled": false,
+                  "key": "includeInProgressSessions",
+                  "value": "<boolean>",
+                  "description": "Include charging sessions that are in progress."
+                },
+                {
+                  "disabled": false,
+                  "key": "siteIds",
+                  "value": "<integer>",
+                  "description": "Filter by site IDs, e.g. siteIds[]=101&siteIds[]=102."
+                },
+                {
+                  "disabled": false,
+                  "key": "siteIds",
+                  "value": "<integer>",
+                  "description": "Filter by site IDs, e.g. siteIds[]=101&siteIds[]=102."
+                },
+                {
+                  "disabled": false,
+                  "key": "chargerIds",
+                  "value": "<integer>",
+                  "description": "Filter by charger IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "chargerIds",
+                  "value": "<integer>",
+                  "description": "Filter by charger IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "customerIds",
+                  "value": "<integer>",
+                  "description": "Filter by customer IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "customerIds",
+                  "value": "<integer>",
+                  "description": "Filter by customer IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "customerNames",
+                  "value": "<string>",
+                  "description": "Filter by customer names."
+                },
+                {
+                  "disabled": false,
+                  "key": "customerNames",
+                  "value": "<string>",
+                  "description": "Filter by customer names."
+                },
+                {
+                  "disabled": false,
+                  "key": "nextPageCursor",
+                  "value": "<string>",
+                  "description": "Opaque cursor from the previous response's pagination.nextPageCursor to fetch the next page. Keep all other parameters identical."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c8b67e56-b6cd-4da9-93fd-4b38042ca7c0",
+              "name": "A paginated list of charging sessions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "charging-sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startTimeAfter",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "startTimeBefore",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endTimeAfter",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endTimeBefore",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "includeIntervals",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeTouEnergy",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeInProgressSessions",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "siteIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "siteIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "chargerIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "chargerIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "customerIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "customerIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "customerNames",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "customerNames",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nextPageCursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 8855,\n      \"startTime\": \"2001-10-31T03:12:53.950Z\",\n      \"endTime\": \"1953-10-23T16:52:00.257Z\",\n      \"updatedAt\": \"1973-06-12T10:00:06.232Z\",\n      \"durationSeconds\": 9911,\n      \"chargingStartTime\": \"2005-01-18T09:58:17.875Z\",\n      \"chargingEndTime\": \"1974-12-20T09:15:29.261Z\",\n      \"chargingDurationSeconds\": 5962,\n      \"socStartPercent\": 4796.904635399991,\n      \"socEndPercent\": 6812.005977290879,\n      \"energyDeliveredKwh\": 3652.187588121455,\n      \"averageDemandKw\": 261.024027123673,\n      \"maxDemandKw\": 3997.6452675733267,\n      \"ocppIdTag\": \"string\",\n      \"ocppTransactionId\": 3148,\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"site\": {\n        \"id\": 8662,\n        \"name\": \"string\",\n        \"locationId\": \"string\"\n      },\n      \"charger\": {\n        \"id\": 4996,\n        \"name\": \"string\",\n        \"manufacturer\": \"string\",\n        \"model\": \"string\",\n        \"serialNumber\": \"string\",\n        \"firmwareVersion\": \"string\",\n        \"latitude\": 6993.3601803363135,\n        \"longitude\": 3760.1557531542408,\n        \"externalId\": \"string\",\n        \"ocppId\": \"string\",\n        \"type\": \"string\",\n        \"networkServiceProvider\": \"string\",\n        \"chargerType\": \"string\",\n        \"numberOfPorts\": 4426,\n        \"powerSharing\": false,\n        \"connectionStatus\": {\n          \"status\": \"string\",\n          \"timestamp\": \"1999-08-22T03:49:07.722Z\"\n        },\n        \"ports\": [\n          {\n            \"id\": 1810,\n            \"name\": \"string\",\n            \"portNumber\": 3152,\n            \"maximumPowerKw\": 4236.852240314094,\n            \"connectorType\": \"string\",\n            \"ocppStatus\": {\n              \"status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"timestamp\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"errorCode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"vendorErrorCode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"info\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"currentChargingSession\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": 3817,\n            \"name\": \"string\",\n            \"portNumber\": 1137,\n            \"maximumPowerKw\": 1795.0450746396673,\n            \"connectorType\": \"string\",\n            \"ocppStatus\": {\n              \"status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"timestamp\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"errorCode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"vendorErrorCode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"info\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"currentChargingSession\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"port\": {\n        \"id\": 563,\n        \"name\": \"string\",\n        \"portNumber\": 5863,\n        \"maximumPowerKw\": 7613.749067287571\n      },\n      \"vehicle\": {\n        \"id\": 1988,\n        \"name\": \"string\",\n        \"make\": \"string\",\n        \"model\": \"string\",\n        \"vin\": \"string\"\n      },\n      \"rfid\": {\n        \"id\": 8566,\n        \"name\": \"string\"\n      },\n      \"customer\": {\n        \"name\": \"string\"\n      },\n      \"organization\": {\n        \"id\": 4450,\n        \"name\": \"string\"\n      }\n    },\n    {\n      \"id\": 6777,\n      \"startTime\": \"2018-07-01T18:40:41.178Z\",\n      \"endTime\": \"2019-12-04T15:21:26.702Z\",\n      \"updatedAt\": \"1967-01-15T22:20:34.265Z\",\n      \"durationSeconds\": 8053,\n      \"chargingStartTime\": \"1973-04-04T13:07:00.916Z\",\n      \"chargingEndTime\": \"2011-11-01T15:11:12.278Z\",\n      \"chargingDurationSeconds\": 754,\n      \"socStartPercent\": 5643.247484333496,\n      \"socEndPercent\": 9066.975783379792,\n      \"energyDeliveredKwh\": 8160.95045120189,\n      \"averageDemandKw\": 6998.763544972912,\n      \"maxDemandKw\": 5897.397414313666,\n      \"ocppIdTag\": \"string\",\n      \"ocppTransactionId\": 7081,\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"site\": {\n        \"id\": 3826,\n        \"name\": \"string\",\n        \"locationId\": \"string\"\n      },\n      \"charger\": {\n        \"id\": 4501,\n        \"name\": \"string\",\n        \"manufacturer\": \"string\",\n        \"model\": \"string\",\n        \"serialNumber\": \"string\",\n        \"firmwareVersion\": \"string\",\n        \"latitude\": 6674.645895682594,\n        \"longitude\": 1565.6774878643287,\n        \"externalId\": \"string\",\n        \"ocppId\": \"string\",\n        \"type\": \"string\",\n        \"networkServiceProvider\": \"string\",\n        \"chargerType\": \"string\",\n        \"numberOfPorts\": 6520,\n        \"powerSharing\": true,\n        \"connectionStatus\": {\n          \"status\": \"string\",\n          \"timestamp\": \"1971-01-08T22:56:32.895Z\"\n        },\n        \"ports\": [\n          {\n            \"id\": 7148,\n            \"name\": \"string\",\n            \"portNumber\": 8580,\n            \"maximumPowerKw\": 3314.0869295886546,\n            \"connectorType\": \"string\",\n            \"ocppStatus\": {\n              \"status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"timestamp\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"errorCode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"vendorErrorCode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"info\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"currentChargingSession\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": 7652,\n            \"name\": \"string\",\n            \"portNumber\": 6530,\n            \"maximumPowerKw\": 341.18367042107576,\n            \"connectorType\": \"string\",\n            \"ocppStatus\": {\n              \"status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"timestamp\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"errorCode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"vendorErrorCode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"info\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"currentChargingSession\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"port\": {\n        \"id\": 7086,\n        \"name\": \"string\",\n        \"portNumber\": 8597,\n        \"maximumPowerKw\": 3044.0511357757637\n      },\n      \"vehicle\": {\n        \"id\": 9637,\n        \"name\": \"string\",\n        \"make\": \"string\",\n        \"model\": \"string\",\n        \"vin\": \"string\"\n      },\n      \"rfid\": {\n        \"id\": 8851,\n        \"name\": \"string\"\n      },\n      \"customer\": {\n        \"name\": \"string\"\n      },\n      \"organization\": {\n        \"id\": 9203,\n        \"name\": \"string\"\n      }\n    }\n  ],\n  \"pagination\": {\n    \"hasNextPage\": true,\n    \"nextPageCursor\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "abaf9ae7-1521-4881-a444-790392727e7e",
+              "name": "Invalid parameters passed to the API endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "charging-sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startTimeAfter",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "startTimeBefore",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endTimeAfter",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endTimeBefore",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "includeIntervals",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeTouEnergy",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeInProgressSessions",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "siteIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "siteIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "chargerIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "chargerIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "customerIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "customerIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "customerNames",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "customerNames",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nextPageCursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e43debb8-c8a0-440a-9d5d-c75ac3567446",
+              "name": "Invalid API key or Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "charging-sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startTimeAfter",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "startTimeBefore",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endTimeAfter",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endTimeBefore",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "includeIntervals",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeTouEnergy",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeInProgressSessions",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "siteIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "siteIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "chargerIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "chargerIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "customerIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "customerIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "customerNames",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "customerNames",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nextPageCursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "421dc03c-9c35-434d-8065-9cdc7b1bb0fc",
+              "name": "Rate limit exceeded (200 requests per minute per API key).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "charging-sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startTimeAfter",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "startTimeBefore",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endTimeAfter",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endTimeBefore",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "includeIntervals",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeTouEnergy",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeInProgressSessions",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "siteIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "siteIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "chargerIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "chargerIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "customerIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "customerIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "customerNames",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "customerNames",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nextPageCursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.getflipturn.com/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ec715ad1-ccb5-47d1-9cf0-3c4187f4f611",
+    "name": "Flipturn Access IDs Charging Sessions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Flipturn API provides read and write access to the Flipturn EV charging management platform: sites, chargers and ports, charging sessions, charger health and uptime, access IDs (RFID cards and vehicles), vehicles, alerts, charger errors, raw OCPP messages, reservations, site power limits, vehicle departure times, and maintenance windows. It is a JSON REST API secured with a bearer API key, designed for integrating Flipturn charging data with ticketing platforms, data warehouses, transportation management systems, and fleet operations tooling. Flipturn also supports OCPI for roaming-partner integration (contact support to enable).\n\nContact Support:\n Name: Flipturn Support\n Email: support@getflipturn.com",
+      "type": "text/plain"
+    }
+  }
+}

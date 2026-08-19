@@ -1,0 +1,81 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Flipturn Access IDs Chargers API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Chargers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a charger by internal ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getflipturn.com/api/chargers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The internal ID of the charger."
+              }
+            ]
+          },
+          "docs": "Retrieve detailed information about a specific charger by its internal Flipturn ID, including ports, connection status, and any ongoing session."
+        },
+        {
+          "info": {
+            "name": "Get a charger by external (network station) ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getflipturn.com/api/chargers/by-external-id/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The external ID (network station ID) of the charger."
+              }
+            ]
+          },
+          "docs": "Retrieve a charger by its external network station ID. Response structure is identical to getCharger."
+        },
+        {
+          "info": {
+            "name": "Get a charger by OCPP ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getflipturn.com/api/chargers/by-ocpp-id/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The OCPP identifier of the charger."
+              }
+            ]
+          },
+          "docs": "Retrieve a charger by its OCPP identifier. Response structure is identical to getCharger."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

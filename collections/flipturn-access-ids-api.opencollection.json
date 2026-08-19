@@ -1,0 +1,113 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Flipturn Access IDs API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Access IDs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List access IDs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getflipturn.com/api/access-ids",
+            "params": [
+              {
+                "name": "nextPageCursor",
+                "value": "",
+                "type": "query",
+                "description": "Opaque cursor from the previous response's pagination.nextPageCursor to fetch the next page. Keep all other parameters identical."
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of all access IDs (RFID cards and vehicle MAC IDs)."
+        },
+        {
+          "info": {
+            "name": "Create an access ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.getflipturn.com/api/access-ids",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new access ID of type RFID or Vehicle. For a Vehicle, either create a new vehicle inline or associate an existing one via vehicleId. An optional customer is created if no case-insensitive name match exists."
+        },
+        {
+          "info": {
+            "name": "Get an access ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getflipturn.com/api/access-ids/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve the details for a specific access ID (RFID card or vehicle)."
+        },
+        {
+          "info": {
+            "name": "Update an access ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.getflipturn.com/api/access-ids/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an access ID. For optional fields, explicitly providing null deletes the value."
+        },
+        {
+          "info": {
+            "name": "Batch create or update access IDs",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.getflipturn.com/api/access-ids/batch",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create or update up to 1000 access IDs in one request, matched by ocppIdTag. Vehicles are matched by case-insensitive name. Access IDs not included are never deleted. Each result carries an outcome of created, updated, or error."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

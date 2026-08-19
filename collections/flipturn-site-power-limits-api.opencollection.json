@@ -1,0 +1,89 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Flipturn Access IDs Site Power Limits API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Site Power Limits",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get site power limits",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getflipturn.com/api/site/:site-id/limits",
+            "params": [
+              {
+                "name": "site-id",
+                "value": "",
+                "type": "path",
+                "description": "Flipturn site ID."
+              }
+            ]
+          },
+          "docs": "Return the active cost and/or capacity power limits for a site (up to one schedule per type). Returns an empty array if none are set."
+        },
+        {
+          "info": {
+            "name": "Create a site power limit",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.getflipturn.com/api/site/:site-id/limits",
+            "params": [
+              {
+                "name": "site-id",
+                "value": "",
+                "type": "path",
+                "description": "Flipturn site ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new site power limit, replacing the current limit of that type. Cost limits are a soft cap; capacity limits are a hard cap. Amp-based limits are not supported on sites containing DCFC chargers."
+        },
+        {
+          "info": {
+            "name": "Delete a site power limit",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.getflipturn.com/api/site/:site-id/limits/:schedule-id",
+            "params": [
+              {
+                "name": "site-id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "schedule-id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Remove a site power limit schedule."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,73 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Flipturn Access IDs OCPP Messages API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "OCPP Messages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List OCPP messages for a charger",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getflipturn.com/api/ocpp-messages",
+            "params": [
+              {
+                "name": "chargerId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the charger to retrieve messages for."
+              },
+              {
+                "name": "startTimestamp",
+                "value": "",
+                "type": "query",
+                "description": "ISO 8601: messages after this time. Defaults to 24 hours ago."
+              },
+              {
+                "name": "endTimestamp",
+                "value": "",
+                "type": "query",
+                "description": "ISO 8601: messages before this time. Defaults to now."
+              },
+              {
+                "name": "messageType",
+                "value": "",
+                "type": "query",
+                "description": "Filter by OCPP message type(s), e.g. Authorize or messageType[]=StartTransaction."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Page size (default 50"
+              },
+              {
+                "name": "nextPageCursor",
+                "value": "",
+                "type": "query",
+                "description": "Opaque cursor from the previous response's pagination.nextPageCursor to fetch the next page. Keep all other parameters identical."
+              }
+            ]
+          },
+          "docs": "Retrieve raw OCPP (Open Charge Point Protocol) messages for a specific charger, newest first. The date range must be under 8 days. Page size is controlled by limit (default 50, max 500)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

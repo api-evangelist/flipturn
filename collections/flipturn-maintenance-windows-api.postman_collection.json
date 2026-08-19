@@ -1,0 +1,291 @@
+{
+  "item": [
+    {
+      "id": "a29807f1-4938-4660-9a8c-11b2c71e4e01",
+      "name": "Maintenance Windows",
+      "description": {
+        "content": "Scheduled maintenance windows for chargers.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ccfa4456-1502-421b-bb82-e4c5fc973cd4",
+          "name": "List maintenance windows",
+          "request": {
+            "name": "List maintenance windows",
+            "description": {
+              "content": "Retrieve a paginated list of maintenance windows across chargers (up to 50 per page). Parent-org keys return windows for all child organizations.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "maintenance-windows"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "afterTimestamp",
+                  "value": "<dateTime>",
+                  "description": "ISO 8601: windows whose end time is after this timestamp."
+                },
+                {
+                  "disabled": false,
+                  "key": "beforeTimestamp",
+                  "value": "<dateTime>",
+                  "description": "ISO 8601: windows whose start time is before this timestamp."
+                },
+                {
+                  "disabled": false,
+                  "key": "chargerIds",
+                  "value": "<integer>",
+                  "description": "Filter to specific charger IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "chargerIds",
+                  "value": "<integer>",
+                  "description": "Filter to specific charger IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "siteIds",
+                  "value": "<integer>",
+                  "description": "Filter to chargers at specific site IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "siteIds",
+                  "value": "<integer>",
+                  "description": "Filter to chargers at specific site IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "organizationIds",
+                  "value": "<integer>",
+                  "description": "Filter to specific organization IDs (parent-org keys only)."
+                },
+                {
+                  "disabled": false,
+                  "key": "organizationIds",
+                  "value": "<integer>",
+                  "description": "Filter to specific organization IDs (parent-org keys only)."
+                },
+                {
+                  "disabled": false,
+                  "key": "nextPageCursor",
+                  "value": "<string>",
+                  "description": "Opaque cursor from the previous response's pagination.nextPageCursor to fetch the next page. Keep all other parameters identical."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7068df33-2244-47d5-bd7c-5fa7cda8ed14",
+              "name": "A paginated list of maintenance windows.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "maintenance-windows"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "afterTimestamp",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "beforeTimestamp",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "chargerIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "chargerIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "siteIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "siteIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "organizationIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "organizationIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "nextPageCursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 8591,\n      \"startTimestamp\": \"2008-04-08T01:31:43.226Z\",\n      \"endTimestamp\": \"1991-03-29T12:05:41.454Z\",\n      \"comment\": \"string\",\n      \"userEmail\": \"string\",\n      \"createdAt\": \"1976-09-15T13:52:42.975Z\",\n      \"updatedAt\": \"2018-03-11T22:04:03.964Z\",\n      \"charger\": {\n        \"id\": 3910,\n        \"name\": \"string\",\n        \"manufacturer\": \"string\",\n        \"model\": \"string\",\n        \"serialNumber\": \"string\",\n        \"firmwareVersion\": \"string\",\n        \"latitude\": 7924.527958184997,\n        \"longitude\": 8232.322772691334,\n        \"externalId\": \"string\",\n        \"ocppId\": \"string\",\n        \"type\": \"string\",\n        \"networkServiceProvider\": \"string\",\n        \"chargerType\": \"string\",\n        \"numberOfPorts\": 9020,\n        \"powerSharing\": true,\n        \"connectionStatus\": {\n          \"status\": \"string\",\n          \"timestamp\": \"2026-08-06T05:06:10.980Z\"\n        },\n        \"ports\": [\n          {\n            \"id\": 148,\n            \"name\": \"string\",\n            \"portNumber\": 5453,\n            \"maximumPowerKw\": 6565.138604867462,\n            \"connectorType\": \"string\",\n            \"ocppStatus\": {\n              \"status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"timestamp\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"errorCode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"vendorErrorCode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"info\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"currentChargingSession\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": 1593,\n            \"name\": \"string\",\n            \"portNumber\": 3950,\n            \"maximumPowerKw\": 932.3178556573475,\n            \"connectorType\": \"string\",\n            \"ocppStatus\": {\n              \"status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"timestamp\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"errorCode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"vendorErrorCode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"info\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"currentChargingSession\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"site\": {\n        \"id\": 4802,\n        \"name\": \"string\",\n        \"locationId\": \"string\"\n      },\n      \"organization\": {\n        \"id\": 9659,\n        \"name\": \"string\"\n      }\n    },\n    {\n      \"id\": 6491,\n      \"startTimestamp\": \"1986-12-05T20:37:29.290Z\",\n      \"endTimestamp\": \"1969-02-27T11:24:40.659Z\",\n      \"comment\": \"string\",\n      \"userEmail\": \"string\",\n      \"createdAt\": \"1995-09-02T06:51:59.102Z\",\n      \"updatedAt\": \"1984-08-05T00:17:10.601Z\",\n      \"charger\": {\n        \"id\": 4909,\n        \"name\": \"string\",\n        \"manufacturer\": \"string\",\n        \"model\": \"string\",\n        \"serialNumber\": \"string\",\n        \"firmwareVersion\": \"string\",\n        \"latitude\": 1891.0733205685192,\n        \"longitude\": 592.342670212046,\n        \"externalId\": \"string\",\n        \"ocppId\": \"string\",\n        \"type\": \"string\",\n        \"networkServiceProvider\": \"string\",\n        \"chargerType\": \"string\",\n        \"numberOfPorts\": 5022,\n        \"powerSharing\": false,\n        \"connectionStatus\": {\n          \"status\": \"string\",\n          \"timestamp\": \"2013-04-07T21:49:51.597Z\"\n        },\n        \"ports\": [\n          {\n            \"id\": 1996,\n            \"name\": \"string\",\n            \"portNumber\": 9390,\n            \"maximumPowerKw\": 7616.298887291058,\n            \"connectorType\": \"string\",\n            \"ocppStatus\": {\n              \"status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"timestamp\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"errorCode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"vendorErrorCode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"info\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"currentChargingSession\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": 4800,\n            \"name\": \"string\",\n            \"portNumber\": 9966,\n            \"maximumPowerKw\": 4626.353017708873,\n            \"connectorType\": \"string\",\n            \"ocppStatus\": {\n              \"status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"timestamp\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"errorCode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"vendorErrorCode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"info\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"currentChargingSession\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"site\": {\n        \"id\": 5569,\n        \"name\": \"string\",\n        \"locationId\": \"string\"\n      },\n      \"organization\": {\n        \"id\": 7930,\n        \"name\": \"string\"\n      }\n    }\n  ],\n  \"pagination\": {\n    \"hasNextPage\": false,\n    \"nextPageCursor\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2a7cfbaf-e329-4c22-b7ea-117d5a30340b",
+              "name": "Invalid API key or Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "maintenance-windows"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "afterTimestamp",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "beforeTimestamp",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "chargerIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "chargerIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "siteIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "siteIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "organizationIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "organizationIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "nextPageCursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.getflipturn.com/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2bee51e4-94fa-48a1-8616-b14ebb6e3df8",
+    "name": "Flipturn Access IDs Maintenance Windows API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Flipturn API provides read and write access to the Flipturn EV charging management platform: sites, chargers and ports, charging sessions, charger health and uptime, access IDs (RFID cards and vehicles), vehicles, alerts, charger errors, raw OCPP messages, reservations, site power limits, vehicle departure times, and maintenance windows. It is a JSON REST API secured with a bearer API key, designed for integrating Flipturn charging data with ticketing platforms, data warehouses, transportation management systems, and fleet operations tooling. Flipturn also supports OCPI for roaming-partner integration (contact support to enable).\n\nContact Support:\n Name: Flipturn Support\n Email: support@getflipturn.com",
+      "type": "text/plain"
+    }
+  }
+}

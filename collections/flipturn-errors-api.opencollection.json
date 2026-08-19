@@ -1,0 +1,73 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Flipturn Access IDs Errors API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Errors",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List charger errors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getflipturn.com/api/errors",
+            "params": [
+              {
+                "name": "afterTimestamp",
+                "value": "",
+                "type": "query",
+                "description": "ISO 8601: errors at or after this time."
+              },
+              {
+                "name": "beforeTimestamp",
+                "value": "",
+                "type": "query",
+                "description": "ISO 8601: errors at or before this time."
+              },
+              {
+                "name": "organizationIds",
+                "value": "",
+                "type": "query",
+                "description": "Filter to organizations (multi-org keys)."
+              },
+              {
+                "name": "siteIds",
+                "value": "",
+                "type": "query",
+                "description": "Restrict to chargers at these sites."
+              },
+              {
+                "name": "chargerIds",
+                "value": "",
+                "type": "query",
+                "description": "Restrict to these chargers."
+              },
+              {
+                "name": "nextPageCursor",
+                "value": "",
+                "type": "query",
+                "description": "Opaque cursor from the previous response's pagination.nextPageCursor to fetch the next page. Keep all other parameters identical."
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of charger errors in reverse chronological order (up to 2000 rows per page). Mirrors the Charger errors report."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

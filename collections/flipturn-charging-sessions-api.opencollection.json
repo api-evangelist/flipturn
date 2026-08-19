@@ -1,0 +1,109 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Flipturn Access IDs Charging Sessions API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Charging Sessions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List charging sessions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getflipturn.com/api/charging-sessions",
+            "params": [
+              {
+                "name": "startTimeAfter",
+                "value": "",
+                "type": "query",
+                "description": "ISO 8601: only sessions started at or after this time."
+              },
+              {
+                "name": "startTimeBefore",
+                "value": "",
+                "type": "query",
+                "description": "ISO 8601: only sessions started before this time."
+              },
+              {
+                "name": "endTimeAfter",
+                "value": "",
+                "type": "query",
+                "description": "ISO 8601: only sessions ended at or after this time."
+              },
+              {
+                "name": "endTimeBefore",
+                "value": "",
+                "type": "query",
+                "description": "ISO 8601: only sessions ended before this time."
+              },
+              {
+                "name": "includeIntervals",
+                "value": "",
+                "type": "query",
+                "description": "Include per-15-minute interval statistics and max demand. Limits the key to 1 concurrent request."
+              },
+              {
+                "name": "includeTouEnergy",
+                "value": "",
+                "type": "query",
+                "description": "Include energy usage grouped into time-of-use periods."
+              },
+              {
+                "name": "includeInProgressSessions",
+                "value": "",
+                "type": "query",
+                "description": "Include charging sessions that are in progress."
+              },
+              {
+                "name": "siteIds",
+                "value": "",
+                "type": "query",
+                "description": "Filter by site IDs, e.g. siteIds[]=101&siteIds[]=102."
+              },
+              {
+                "name": "chargerIds",
+                "value": "",
+                "type": "query",
+                "description": "Filter by charger IDs."
+              },
+              {
+                "name": "customerIds",
+                "value": "",
+                "type": "query",
+                "description": "Filter by customer IDs."
+              },
+              {
+                "name": "customerNames",
+                "value": "",
+                "type": "query",
+                "description": "Filter by customer names."
+              },
+              {
+                "name": "nextPageCursor",
+                "value": "",
+                "type": "query",
+                "description": "Opaque cursor from the previous response's pagination.nextPageCursor to fetch the next page. Keep all other parameters identical."
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of charging sessions, filterable by start/end time, site, charger, and customer. Optional includes add per-interval statistics, time-of-use energy, and in-progress sessions. Results are paginated with an opaque cursor."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

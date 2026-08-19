@@ -1,0 +1,1082 @@
+{
+  "item": [
+    {
+      "id": "cfa0744b-8190-48cb-a7a9-d2558d74fb1d",
+      "name": "Access IDs",
+      "description": {
+        "content": "RFID cards and vehicle MAC IDs used to authorize charging.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8180081d-fda3-4ec2-978f-94327033bc85",
+          "name": "List access IDs",
+          "request": {
+            "name": "List access IDs",
+            "description": {
+              "content": "Retrieve a paginated list of all access IDs (RFID cards and vehicle MAC IDs).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "access-ids"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "nextPageCursor",
+                  "value": "<string>",
+                  "description": "Opaque cursor from the previous response's pagination.nextPageCursor to fetch the next page. Keep all other parameters identical."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d8bcc553-2896-4409-af80-aec45014cae2",
+              "name": "A paginated list of access IDs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-ids"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "nextPageCursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 7051,\n      \"ocppIdTag\": \"string\",\n      \"type\": \"RFID\",\n      \"name\": \"string\",\n      \"authorizationStatus\": \"Authorized\",\n      \"authorizedAt\": \"2013-02-27T23:15:26.723Z\",\n      \"revokedAt\": \"1946-11-21T05:26:10.825Z\",\n      \"createdAt\": \"1948-03-23T18:46:43.228Z\",\n      \"updatedAt\": \"1982-10-06T21:31:28.286Z\",\n      \"vehicle\": {\n        \"id\": 7577,\n        \"name\": \"string\",\n        \"make\": \"string\",\n        \"model\": \"string\",\n        \"vin\": \"string\"\n      },\n      \"customer\": {\n        \"name\": \"string\"\n      }\n    },\n    {\n      \"id\": 3650,\n      \"ocppIdTag\": \"string\",\n      \"type\": \"Vehicle\",\n      \"name\": \"string\",\n      \"authorizationStatus\": \"Authorized\",\n      \"authorizedAt\": \"1970-06-16T13:52:58.596Z\",\n      \"revokedAt\": \"1952-09-22T07:57:56.791Z\",\n      \"createdAt\": \"1963-03-19T01:31:44.678Z\",\n      \"updatedAt\": \"1948-02-20T11:53:21.964Z\",\n      \"vehicle\": {\n        \"id\": 6471,\n        \"name\": \"string\",\n        \"make\": \"string\",\n        \"model\": \"string\",\n        \"vin\": \"string\"\n      },\n      \"customer\": {\n        \"name\": \"string\"\n      }\n    }\n  ],\n  \"pagination\": {\n    \"hasNextPage\": true,\n    \"nextPageCursor\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d37280d-6721-4edb-b6fd-cf2cf8060802",
+              "name": "Invalid API key or Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-ids"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "nextPageCursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "de773a1f-29f5-4a0f-bb12-f67c7328fa63",
+          "name": "Create an access ID",
+          "request": {
+            "name": "Create an access ID",
+            "description": {
+              "content": "Create a new access ID of type RFID or Vehicle. For a Vehicle, either create a new vehicle inline or associate an existing one via vehicleId. An optional customer is created if no case-insensitive name match exists.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "access-ids"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"accessId\": {\n    \"type\": \"<string>\",\n    \"name\": \"<string>\",\n    \"ocppIdTag\": \"<string>\",\n    \"authorizationStatus\": \"Authorized\",\n    \"vehicle\": {\n      \"make\": \"<string>\",\n      \"model\": \"<string>\",\n      \"vin\": \"<string>\"\n    },\n    \"vehicleId\": \"<integer>\",\n    \"customer\": {\n      \"name\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7af84d75-9f0a-43b3-87fb-c6fd479217d4",
+              "name": "The created access ID.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-ids"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accessId\": {\n    \"type\": \"RFID\",\n    \"name\": \"string\",\n    \"ocppIdTag\": \"string\",\n    \"authorizationStatus\": \"Authorized\",\n    \"vehicle\": {\n      \"make\": \"string\",\n      \"model\": \"string\",\n      \"vin\": \"string\"\n    },\n    \"vehicleId\": 5739,\n    \"customer\": {\n      \"name\": \"string\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"accessId\": {\n    \"id\": 628,\n    \"ocppIdTag\": \"string\",\n    \"type\": \"RFID\",\n    \"name\": \"string\",\n    \"authorizationStatus\": \"Revoked\",\n    \"authorizedAt\": \"1956-09-13T13:12:20.932Z\",\n    \"revokedAt\": \"1969-07-02T05:25:20.664Z\",\n    \"createdAt\": \"2012-10-16T22:18:23.361Z\",\n    \"updatedAt\": \"1955-12-09T15:27:29.756Z\",\n    \"vehicle\": {\n      \"id\": 8961,\n      \"name\": \"string\",\n      \"make\": \"string\",\n      \"model\": \"string\",\n      \"vin\": \"string\"\n    },\n    \"customer\": {\n      \"name\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6f5b1c80-3d20-4bbf-944d-c565b3136f07",
+              "name": "Invalid parameters passed to the API endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-ids"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accessId\": {\n    \"type\": \"RFID\",\n    \"name\": \"string\",\n    \"ocppIdTag\": \"string\",\n    \"authorizationStatus\": \"Authorized\",\n    \"vehicle\": {\n      \"make\": \"string\",\n      \"model\": \"string\",\n      \"vin\": \"string\"\n    },\n    \"vehicleId\": 5739,\n    \"customer\": {\n      \"name\": \"string\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2fdaf72b-992e-4784-bf2a-0206fb571c79",
+              "name": "Invalid API key or Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-ids"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accessId\": {\n    \"type\": \"RFID\",\n    \"name\": \"string\",\n    \"ocppIdTag\": \"string\",\n    \"authorizationStatus\": \"Authorized\",\n    \"vehicle\": {\n      \"make\": \"string\",\n      \"model\": \"string\",\n      \"vin\": \"string\"\n    },\n    \"vehicleId\": 5739,\n    \"customer\": {\n      \"name\": \"string\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0a6ff996-062a-4b5b-99d6-e843d3b15e35",
+          "name": "Get an access ID",
+          "request": {
+            "name": "Get an access ID",
+            "description": {
+              "content": "Retrieve the details for a specific access ID (RFID card or vehicle).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "access-ids",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "738f892a-4ea3-441c-9b5c-fc3e632a1ab7",
+              "name": "The access ID.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-ids",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"accessId\": {\n    \"id\": 628,\n    \"ocppIdTag\": \"string\",\n    \"type\": \"RFID\",\n    \"name\": \"string\",\n    \"authorizationStatus\": \"Revoked\",\n    \"authorizedAt\": \"1956-09-13T13:12:20.932Z\",\n    \"revokedAt\": \"1969-07-02T05:25:20.664Z\",\n    \"createdAt\": \"2012-10-16T22:18:23.361Z\",\n    \"updatedAt\": \"1955-12-09T15:27:29.756Z\",\n    \"vehicle\": {\n      \"id\": 8961,\n      \"name\": \"string\",\n      \"make\": \"string\",\n      \"model\": \"string\",\n      \"vin\": \"string\"\n    },\n    \"customer\": {\n      \"name\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "21a69689-8e69-4d4c-b43f-d15b7ec9ec59",
+              "name": "Invalid API key or Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-ids",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aba797bb-b5d8-4319-8e44-98d79c0774eb",
+              "name": "The requested resource or endpoint does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-ids",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d5493b84-b13c-4d39-bc50-d2aeef0cf57f",
+          "name": "Update an access ID",
+          "request": {
+            "name": "Update an access ID",
+            "description": {
+              "content": "Update an access ID. For optional fields, explicitly providing null deletes the value.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "access-ids",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"accessId\": {\n    \"name\": \"<string>\",\n    \"authorizationStatus\": \"<string>\",\n    \"vehicle\": {\n      \"make\": \"<string>\",\n      \"model\": \"<string>\",\n      \"vin\": \"<string>\"\n    },\n    \"customer\": {\n      \"name\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a15dbffc-c1f5-4fb0-a360-74e02f8bf28c",
+              "name": "The updated access ID.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-ids",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accessId\": {\n    \"name\": \"<string>\",\n    \"authorizationStatus\": \"<string>\",\n    \"vehicle\": {\n      \"make\": \"<string>\",\n      \"model\": \"<string>\",\n      \"vin\": \"<string>\"\n    },\n    \"customer\": {\n      \"name\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"accessId\": {\n    \"id\": 628,\n    \"ocppIdTag\": \"string\",\n    \"type\": \"RFID\",\n    \"name\": \"string\",\n    \"authorizationStatus\": \"Revoked\",\n    \"authorizedAt\": \"1956-09-13T13:12:20.932Z\",\n    \"revokedAt\": \"1969-07-02T05:25:20.664Z\",\n    \"createdAt\": \"2012-10-16T22:18:23.361Z\",\n    \"updatedAt\": \"1955-12-09T15:27:29.756Z\",\n    \"vehicle\": {\n      \"id\": 8961,\n      \"name\": \"string\",\n      \"make\": \"string\",\n      \"model\": \"string\",\n      \"vin\": \"string\"\n    },\n    \"customer\": {\n      \"name\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "148e606d-0e5d-45b1-acfe-6f2df1182f9b",
+              "name": "Invalid parameters passed to the API endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-ids",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accessId\": {\n    \"name\": \"<string>\",\n    \"authorizationStatus\": \"<string>\",\n    \"vehicle\": {\n      \"make\": \"<string>\",\n      \"model\": \"<string>\",\n      \"vin\": \"<string>\"\n    },\n    \"customer\": {\n      \"name\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a6a881c2-5a5e-4628-bb04-bda0a4437a36",
+              "name": "Invalid API key or Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-ids",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accessId\": {\n    \"name\": \"<string>\",\n    \"authorizationStatus\": \"<string>\",\n    \"vehicle\": {\n      \"make\": \"<string>\",\n      \"model\": \"<string>\",\n      \"vin\": \"<string>\"\n    },\n    \"customer\": {\n      \"name\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0739d411-0344-4627-974e-f874c77e520f",
+              "name": "The requested resource or endpoint does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-ids",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accessId\": {\n    \"name\": \"<string>\",\n    \"authorizationStatus\": \"<string>\",\n    \"vehicle\": {\n      \"make\": \"<string>\",\n      \"model\": \"<string>\",\n      \"vin\": \"<string>\"\n    },\n    \"customer\": {\n      \"name\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "da041786-03eb-4e59-9ab5-cf8f665d1b1a",
+          "name": "Batch create or update access IDs",
+          "request": {
+            "name": "Batch create or update access IDs",
+            "description": {
+              "content": "Create or update up to 1000 access IDs in one request, matched by ocppIdTag. Vehicles are matched by case-insensitive name. Access IDs not included are never deleted. Each result carries an outcome of created, updated, or error.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "access-ids",
+                "batch"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"accessIds\": [\n    {\n      \"ocppIdTag\": \"<string>\",\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"authorizationStatus\": \"<string>\",\n      \"vehicle\": {\n        \"make\": \"<string>\",\n        \"model\": \"<string>\",\n        \"vin\": \"<string>\"\n      },\n      \"customer\": {\n        \"name\": \"<string>\"\n      }\n    },\n    {\n      \"ocppIdTag\": \"<string>\",\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"authorizationStatus\": \"<string>\",\n      \"vehicle\": {\n        \"make\": \"<string>\",\n        \"model\": \"<string>\",\n        \"vin\": \"<string>\"\n      },\n      \"customer\": {\n        \"name\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7d89eea1-2928-4d3c-8404-7df5fc3f1e06",
+              "name": "Per-item results.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-ids",
+                    "batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accessIds\": [\n    {\n      \"ocppIdTag\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"RFID\",\n      \"authorizationStatus\": \"Revoked\",\n      \"vehicle\": {\n        \"make\": \"string\",\n        \"model\": \"string\",\n        \"vin\": \"string\"\n      },\n      \"customer\": {\n        \"name\": \"string\"\n      }\n    },\n    {\n      \"ocppIdTag\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"RFID\",\n      \"authorizationStatus\": \"Authorized\",\n      \"vehicle\": {\n        \"make\": \"string\",\n        \"model\": \"string\",\n        \"vin\": \"string\"\n      },\n      \"customer\": {\n        \"name\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"ocppIdTag\": \"string\",\n      \"outcome\": \"updated\",\n      \"accessId\": {\n        \"id\": 7512,\n        \"ocppIdTag\": \"string\",\n        \"type\": \"RFID\",\n        \"name\": \"string\",\n        \"authorizationStatus\": \"Authorized\",\n        \"authorizedAt\": \"1985-09-23T15:49:46.473Z\",\n        \"revokedAt\": \"1984-08-06T04:28:03.103Z\",\n        \"createdAt\": \"2013-01-06T10:19:40.454Z\",\n        \"updatedAt\": \"1999-02-01T15:20:08.239Z\",\n        \"vehicle\": {\n          \"id\": 457,\n          \"name\": \"string\",\n          \"make\": \"string\",\n          \"model\": \"string\",\n          \"vin\": \"string\"\n        },\n        \"customer\": {\n          \"name\": \"string\"\n        }\n      },\n      \"error\": \"string\"\n    },\n    {\n      \"ocppIdTag\": \"string\",\n      \"outcome\": \"created\",\n      \"accessId\": {\n        \"id\": 4171,\n        \"ocppIdTag\": \"string\",\n        \"type\": \"RFID\",\n        \"name\": \"string\",\n        \"authorizationStatus\": \"Authorized\",\n        \"authorizedAt\": \"1954-05-15T22:12:10.736Z\",\n        \"revokedAt\": \"2011-10-30T15:58:19.523Z\",\n        \"createdAt\": \"1969-10-27T23:47:46.780Z\",\n        \"updatedAt\": \"1960-05-06T19:29:27.448Z\",\n        \"vehicle\": {\n          \"id\": 9873,\n          \"name\": \"string\",\n          \"make\": \"string\",\n          \"model\": \"string\",\n          \"vin\": \"string\"\n        },\n        \"customer\": {\n          \"name\": \"string\"\n        }\n      },\n      \"error\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "36768b62-cb6d-4b3a-a5e4-21cd4c86da05",
+              "name": "Invalid parameters passed to the API endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-ids",
+                    "batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accessIds\": [\n    {\n      \"ocppIdTag\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"RFID\",\n      \"authorizationStatus\": \"Revoked\",\n      \"vehicle\": {\n        \"make\": \"string\",\n        \"model\": \"string\",\n        \"vin\": \"string\"\n      },\n      \"customer\": {\n        \"name\": \"string\"\n      }\n    },\n    {\n      \"ocppIdTag\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"RFID\",\n      \"authorizationStatus\": \"Authorized\",\n      \"vehicle\": {\n        \"make\": \"string\",\n        \"model\": \"string\",\n        \"vin\": \"string\"\n      },\n      \"customer\": {\n        \"name\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2f7eaba8-e170-49b4-8d24-6760b5771458",
+              "name": "Invalid API key or Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-ids",
+                    "batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accessIds\": [\n    {\n      \"ocppIdTag\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"RFID\",\n      \"authorizationStatus\": \"Revoked\",\n      \"vehicle\": {\n        \"make\": \"string\",\n        \"model\": \"string\",\n        \"vin\": \"string\"\n      },\n      \"customer\": {\n        \"name\": \"string\"\n      }\n    },\n    {\n      \"ocppIdTag\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"RFID\",\n      \"authorizationStatus\": \"Authorized\",\n      \"vehicle\": {\n        \"make\": \"string\",\n        \"model\": \"string\",\n        \"vin\": \"string\"\n      },\n      \"customer\": {\n        \"name\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.getflipturn.com/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "9745dc33-079c-49ed-87bd-b2692ecda0d9",
+    "name": "Flipturn Access IDs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Flipturn API provides read and write access to the Flipturn EV charging management platform: sites, chargers and ports, charging sessions, charger health and uptime, access IDs (RFID cards and vehicles), vehicles, alerts, charger errors, raw OCPP messages, reservations, site power limits, vehicle departure times, and maintenance windows. It is a JSON REST API secured with a bearer API key, designed for integrating Flipturn charging data with ticketing platforms, data warehouses, transportation management systems, and fleet operations tooling. Flipturn also supports OCPI for roaming-partner integration (contact support to enable).\n\nContact Support:\n Name: Flipturn Support\n Email: support@getflipturn.com",
+      "type": "text/plain"
+    }
+  }
+}

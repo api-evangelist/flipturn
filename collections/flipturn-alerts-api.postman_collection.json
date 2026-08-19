@@ -1,0 +1,235 @@
+{
+  "item": [
+    {
+      "id": "8d531a24-bc20-4597-8951-23bc8d4d0f8a",
+      "name": "Alerts",
+      "description": {
+        "content": "Alerts raised by the platform.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5ccc21b3-3364-45d5-a8d3-e9ac70450366",
+          "name": "List alerts",
+          "request": {
+            "name": "List alerts",
+            "description": {
+              "content": "Retrieve a paginated list of alerts (low battery, charging completed, charging session error, offline charger, late charging).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "alerts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "startTimestampAfter",
+                  "value": "<dateTime>",
+                  "description": "ISO 8601: only alerts sent after this time."
+                },
+                {
+                  "disabled": false,
+                  "key": "alertRecipientIds",
+                  "value": "<integer>",
+                  "description": "Filter to alerts sent to specific recipient IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "alertRecipientIds",
+                  "value": "<integer>",
+                  "description": "Filter to alerts sent to specific recipient IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "includeMuted",
+                  "value": "<boolean>",
+                  "description": "Include muted alerts that were not sent to users. Defaults to false."
+                },
+                {
+                  "disabled": false,
+                  "key": "nextPageCursor",
+                  "value": "<string>",
+                  "description": "Opaque cursor from the previous response's pagination.nextPageCursor to fetch the next page. Keep all other parameters identical."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "25806815-83de-4171-9aec-bb21304bb9e7",
+              "name": "A paginated list of alerts.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startTimestampAfter",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "alertRecipientIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "alertRecipientIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "includeMuted",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "nextPageCursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 7501,\n      \"type\": \"lowBattery\",\n      \"startTimestamp\": \"1970-09-01T20:40:39.543Z\",\n      \"muted\": true,\n      \"lowBattery\": {},\n      \"chargingCompleted\": {},\n      \"chargingSessionError\": {},\n      \"offlineCharger\": {},\n      \"lateCharging\": {},\n      \"chargingSession\": {},\n      \"site\": {\n        \"id\": 4057,\n        \"name\": \"string\",\n        \"locationId\": \"string\"\n      },\n      \"charger\": {\n        \"id\": 4310,\n        \"name\": \"string\",\n        \"manufacturer\": \"string\",\n        \"model\": \"string\",\n        \"serialNumber\": \"string\",\n        \"firmwareVersion\": \"string\",\n        \"latitude\": 523.532874691367,\n        \"longitude\": 3937.5965061560105,\n        \"externalId\": \"string\",\n        \"ocppId\": \"string\",\n        \"type\": \"string\",\n        \"networkServiceProvider\": \"string\",\n        \"chargerType\": \"string\",\n        \"numberOfPorts\": 9281,\n        \"powerSharing\": false,\n        \"connectionStatus\": {\n          \"status\": \"string\",\n          \"timestamp\": \"2000-06-06T16:04:55.088Z\"\n        },\n        \"ports\": [\n          {\n            \"id\": 9913,\n            \"name\": \"string\",\n            \"portNumber\": 6649,\n            \"maximumPowerKw\": 3416.176700060013,\n            \"connectorType\": \"string\",\n            \"ocppStatus\": {\n              \"status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"timestamp\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"errorCode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"vendorErrorCode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"info\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"currentChargingSession\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": 6236,\n            \"name\": \"string\",\n            \"portNumber\": 7804,\n            \"maximumPowerKw\": 2340.48065136536,\n            \"connectorType\": \"string\",\n            \"ocppStatus\": {\n              \"status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"timestamp\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"errorCode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"vendorErrorCode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"info\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"currentChargingSession\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    },\n    {\n      \"id\": 6168,\n      \"type\": \"chargingCompleted\",\n      \"startTimestamp\": \"1982-11-08T19:23:34.431Z\",\n      \"muted\": true,\n      \"lowBattery\": {},\n      \"chargingCompleted\": {},\n      \"chargingSessionError\": {},\n      \"offlineCharger\": {},\n      \"lateCharging\": {},\n      \"chargingSession\": {},\n      \"site\": {\n        \"id\": 1070,\n        \"name\": \"string\",\n        \"locationId\": \"string\"\n      },\n      \"charger\": {\n        \"id\": 7751,\n        \"name\": \"string\",\n        \"manufacturer\": \"string\",\n        \"model\": \"string\",\n        \"serialNumber\": \"string\",\n        \"firmwareVersion\": \"string\",\n        \"latitude\": 4760.558701185038,\n        \"longitude\": 6472.787265888407,\n        \"externalId\": \"string\",\n        \"ocppId\": \"string\",\n        \"type\": \"string\",\n        \"networkServiceProvider\": \"string\",\n        \"chargerType\": \"string\",\n        \"numberOfPorts\": 2110,\n        \"powerSharing\": false,\n        \"connectionStatus\": {\n          \"status\": \"string\",\n          \"timestamp\": \"2002-01-07T14:47:08.283Z\"\n        },\n        \"ports\": [\n          {\n            \"id\": 5181,\n            \"name\": \"string\",\n            \"portNumber\": 3793,\n            \"maximumPowerKw\": 3351.9583313205303,\n            \"connectorType\": \"string\",\n            \"ocppStatus\": {\n              \"status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"timestamp\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"errorCode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"vendorErrorCode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"info\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"currentChargingSession\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": 6978,\n            \"name\": \"string\",\n            \"portNumber\": 8352,\n            \"maximumPowerKw\": 3354.076933578947,\n            \"connectorType\": \"string\",\n            \"ocppStatus\": {\n              \"status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"timestamp\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"errorCode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"vendorErrorCode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"info\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"currentChargingSession\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    }\n  ],\n  \"pagination\": {\n    \"hasNextPage\": true,\n    \"nextPageCursor\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1da6c697-22cf-4995-9fe2-bb3d249075dc",
+              "name": "Invalid API key or Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startTimestampAfter",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "alertRecipientIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "alertRecipientIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "includeMuted",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "nextPageCursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.getflipturn.com/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3b778987-26b9-4c06-8814-db5bb89218c2",
+    "name": "Flipturn Access IDs Alerts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Flipturn API provides read and write access to the Flipturn EV charging management platform: sites, chargers and ports, charging sessions, charger health and uptime, access IDs (RFID cards and vehicles), vehicles, alerts, charger errors, raw OCPP messages, reservations, site power limits, vehicle departure times, and maintenance windows. It is a JSON REST API secured with a bearer API key, designed for integrating Flipturn charging data with ticketing platforms, data warehouses, transportation management systems, and fleet operations tooling. Flipturn also supports OCPI for roaming-partner integration (contact support to enable).\n\nContact Support:\n Name: Flipturn Support\n Email: support@getflipturn.com",
+      "type": "text/plain"
+    }
+  }
+}

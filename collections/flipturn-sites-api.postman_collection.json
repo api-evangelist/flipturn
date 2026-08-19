@@ -1,0 +1,205 @@
+{
+  "item": [
+    {
+      "id": "81785253-2e91-4a7e-8ffd-fd332dbcea4f",
+      "name": "Sites",
+      "description": {
+        "content": "Sites, their chargers and ports, and current status.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "05f2df22-5098-48ac-8a0d-b04d3f009258",
+          "name": "List sites",
+          "request": {
+            "name": "List sites",
+            "description": {
+              "content": "Retrieve all of an organization's sites, chargers, and ports, along with their most recent status and details about any ongoing charging sessions. Takes no parameters and returns everything each call.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sites"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "be865177-7301-4750-aece-3f6c6f35fa23",
+              "name": "A nested list of sites, chargers, and ports.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sites"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 7202,\n      \"name\": \"string\",\n      \"address\": \"string\",\n      \"timezone\": \"string\",\n      \"organization\": {\n        \"id\": 2364,\n        \"name\": \"string\"\n      },\n      \"chargers\": [\n        {\n          \"id\": 3452,\n          \"name\": \"string\",\n          \"manufacturer\": \"string\",\n          \"model\": \"string\",\n          \"serialNumber\": \"string\",\n          \"firmwareVersion\": \"string\",\n          \"latitude\": 1471.8126480919557,\n          \"longitude\": 4820.720404394552,\n          \"externalId\": \"string\",\n          \"ocppId\": \"string\",\n          \"type\": \"string\",\n          \"networkServiceProvider\": \"string\",\n          \"chargerType\": \"string\",\n          \"numberOfPorts\": 4496,\n          \"powerSharing\": false,\n          \"connectionStatus\": {\n            \"status\": \"string\",\n            \"timestamp\": \"1955-09-14T05:02:30.438Z\"\n          },\n          \"ports\": [\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"portNumber\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"maximumPowerKw\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"connectorType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ocppStatus\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"currentChargingSession\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"portNumber\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"maximumPowerKw\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"connectorType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ocppStatus\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"currentChargingSession\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"id\": 7815,\n          \"name\": \"string\",\n          \"manufacturer\": \"string\",\n          \"model\": \"string\",\n          \"serialNumber\": \"string\",\n          \"firmwareVersion\": \"string\",\n          \"latitude\": 7125.911547399818,\n          \"longitude\": 8921.5419135861,\n          \"externalId\": \"string\",\n          \"ocppId\": \"string\",\n          \"type\": \"string\",\n          \"networkServiceProvider\": \"string\",\n          \"chargerType\": \"string\",\n          \"numberOfPorts\": 2092,\n          \"powerSharing\": false,\n          \"connectionStatus\": {\n            \"status\": \"string\",\n            \"timestamp\": \"1988-09-23T01:06:54.802Z\"\n          },\n          \"ports\": [\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"portNumber\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"maximumPowerKw\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"connectorType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ocppStatus\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"currentChargingSession\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"portNumber\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"maximumPowerKw\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"connectorType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ocppStatus\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"currentChargingSession\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"id\": 9462,\n      \"name\": \"string\",\n      \"address\": \"string\",\n      \"timezone\": \"string\",\n      \"organization\": {\n        \"id\": 8839,\n        \"name\": \"string\"\n      },\n      \"chargers\": [\n        {\n          \"id\": 6780,\n          \"name\": \"string\",\n          \"manufacturer\": \"string\",\n          \"model\": \"string\",\n          \"serialNumber\": \"string\",\n          \"firmwareVersion\": \"string\",\n          \"latitude\": 7676.198691888191,\n          \"longitude\": 7891.2326794643905,\n          \"externalId\": \"string\",\n          \"ocppId\": \"string\",\n          \"type\": \"string\",\n          \"networkServiceProvider\": \"string\",\n          \"chargerType\": \"string\",\n          \"numberOfPorts\": 8258,\n          \"powerSharing\": true,\n          \"connectionStatus\": {\n            \"status\": \"string\",\n            \"timestamp\": \"1981-08-18T14:48:29.230Z\"\n          },\n          \"ports\": [\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"portNumber\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"maximumPowerKw\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"connectorType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ocppStatus\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"currentChargingSession\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"portNumber\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"maximumPowerKw\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"connectorType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ocppStatus\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"currentChargingSession\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"id\": 2431,\n          \"name\": \"string\",\n          \"manufacturer\": \"string\",\n          \"model\": \"string\",\n          \"serialNumber\": \"string\",\n          \"firmwareVersion\": \"string\",\n          \"latitude\": 4795.547582481391,\n          \"longitude\": 190.21419119485182,\n          \"externalId\": \"string\",\n          \"ocppId\": \"string\",\n          \"type\": \"string\",\n          \"networkServiceProvider\": \"string\",\n          \"chargerType\": \"string\",\n          \"numberOfPorts\": 9641,\n          \"powerSharing\": true,\n          \"connectionStatus\": {\n            \"status\": \"string\",\n            \"timestamp\": \"1962-03-16T06:44:44.097Z\"\n          },\n          \"ports\": [\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"portNumber\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"maximumPowerKw\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"connectorType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ocppStatus\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"currentChargingSession\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"portNumber\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"maximumPowerKw\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"connectorType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ocppStatus\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"currentChargingSession\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7511b1b5-6fe5-4adb-95a2-679bddfed875",
+              "name": "Invalid API key or Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sites"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e95d5e72-aa3f-4e4d-8fd2-4b43e9098d62",
+              "name": "Rate limit exceeded (200 requests per minute per API key).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sites"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.getflipturn.com/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "735e6af0-8ffe-4a9d-9616-fd2ed5e1ad8a",
+    "name": "Flipturn Access IDs Sites API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Flipturn API provides read and write access to the Flipturn EV charging management platform: sites, chargers and ports, charging sessions, charger health and uptime, access IDs (RFID cards and vehicles), vehicles, alerts, charger errors, raw OCPP messages, reservations, site power limits, vehicle departure times, and maintenance windows. It is a JSON REST API secured with a bearer API key, designed for integrating Flipturn charging data with ticketing platforms, data warehouses, transportation management systems, and fleet operations tooling. Flipturn also supports OCPI for roaming-partner integration (contact support to enable).\n\nContact Support:\n Name: Flipturn Support\n Email: support@getflipturn.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,649 @@
+{
+  "item": [
+    {
+      "id": "cfcf1391-fdba-4eea-8d5b-cf0b566f18e8",
+      "name": "Chargers",
+      "description": {
+        "content": "Individual charger detail lookups.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "673e81a4-cd1a-44ea-96e7-b34133d72cf3",
+          "name": "Get a charger by internal ID",
+          "request": {
+            "name": "Get a charger by internal ID",
+            "description": {
+              "content": "Retrieve detailed information about a specific charger by its internal Flipturn ID, including ports, connection status, and any ongoing session.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "chargers",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The internal ID of the charger."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6bc83619-7c6b-41e4-9dd9-260c7178aec1",
+              "name": "Charger detail.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chargers",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The internal ID of the charger."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": 8453,\n    \"name\": \"string\",\n    \"manufacturer\": \"string\",\n    \"model\": \"string\",\n    \"serialNumber\": \"string\",\n    \"firmwareVersion\": \"string\",\n    \"latitude\": 2115.231509738078,\n    \"longitude\": 5203.71467694876,\n    \"externalId\": \"string\",\n    \"ocppId\": \"string\",\n    \"type\": \"string\",\n    \"networkServiceProvider\": \"string\",\n    \"chargerType\": \"string\",\n    \"numberOfPorts\": 9723,\n    \"powerSharing\": false,\n    \"connectionStatus\": {\n      \"status\": \"string\",\n      \"timestamp\": \"1946-12-11T13:10:24.364Z\"\n    },\n    \"ports\": [\n      {\n        \"id\": 5638,\n        \"name\": \"string\",\n        \"portNumber\": 9929,\n        \"maximumPowerKw\": 5517.433018475841,\n        \"connectorType\": \"string\",\n        \"ocppStatus\": {\n          \"status\": \"string\",\n          \"timestamp\": \"1948-08-13T20:56:48.931Z\",\n          \"errorCode\": \"string\",\n          \"vendorErrorCode\": \"string\",\n          \"info\": \"string\"\n        },\n        \"currentChargingSession\": {\n          \"id\": 7312,\n          \"startTime\": \"2020-04-28T07:41:25.981Z\",\n          \"socStartPercent\": 5921.0603904072805,\n          \"energyDeliveredKwh\": 2361.2304840982247,\n          \"ocppIdTag\": \"string\",\n          \"ocppTransactionId\": 340,\n          \"vehicle\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"make\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"model\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"vin\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"customer\": {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      },\n      {\n        \"id\": 3847,\n        \"name\": \"string\",\n        \"portNumber\": 1595,\n        \"maximumPowerKw\": 4298.005297223304,\n        \"connectorType\": \"string\",\n        \"ocppStatus\": {\n          \"status\": \"string\",\n          \"timestamp\": \"1966-07-06T14:22:14.233Z\",\n          \"errorCode\": \"string\",\n          \"vendorErrorCode\": \"string\",\n          \"info\": \"string\"\n        },\n        \"currentChargingSession\": {\n          \"id\": 2169,\n          \"startTime\": \"1971-04-16T15:57:35.958Z\",\n          \"socStartPercent\": 9328.73907717029,\n          \"energyDeliveredKwh\": 1533.1329399068284,\n          \"ocppIdTag\": \"string\",\n          \"ocppTransactionId\": 9887,\n          \"vehicle\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"make\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"model\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"vin\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"customer\": {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a03d66bc-2e0c-4bb2-95ec-8ea89c6571f7",
+              "name": "Invalid API key or Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chargers",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The internal ID of the charger."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fcff6c05-bef9-4e42-8fc8-aa0fc98efbb7",
+              "name": "The requested resource or endpoint does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chargers",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The internal ID of the charger."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "086a6969-5bd9-4664-bba1-56f14126e14f",
+          "name": "Get a charger by external (network station) ID",
+          "request": {
+            "name": "Get a charger by external (network station) ID",
+            "description": {
+              "content": "Retrieve a charger by its external network station ID. Response structure is identical to getCharger.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "chargers",
+                "by-external-id",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The external ID (network station ID) of the charger."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cb04a038-8a79-4371-8194-05d8773cdc5f",
+              "name": "Charger detail.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chargers",
+                    "by-external-id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The external ID (network station ID) of the charger."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": 8453,\n    \"name\": \"string\",\n    \"manufacturer\": \"string\",\n    \"model\": \"string\",\n    \"serialNumber\": \"string\",\n    \"firmwareVersion\": \"string\",\n    \"latitude\": 2115.231509738078,\n    \"longitude\": 5203.71467694876,\n    \"externalId\": \"string\",\n    \"ocppId\": \"string\",\n    \"type\": \"string\",\n    \"networkServiceProvider\": \"string\",\n    \"chargerType\": \"string\",\n    \"numberOfPorts\": 9723,\n    \"powerSharing\": false,\n    \"connectionStatus\": {\n      \"status\": \"string\",\n      \"timestamp\": \"1946-12-11T13:10:24.364Z\"\n    },\n    \"ports\": [\n      {\n        \"id\": 5638,\n        \"name\": \"string\",\n        \"portNumber\": 9929,\n        \"maximumPowerKw\": 5517.433018475841,\n        \"connectorType\": \"string\",\n        \"ocppStatus\": {\n          \"status\": \"string\",\n          \"timestamp\": \"1948-08-13T20:56:48.931Z\",\n          \"errorCode\": \"string\",\n          \"vendorErrorCode\": \"string\",\n          \"info\": \"string\"\n        },\n        \"currentChargingSession\": {\n          \"id\": 7312,\n          \"startTime\": \"2020-04-28T07:41:25.981Z\",\n          \"socStartPercent\": 5921.0603904072805,\n          \"energyDeliveredKwh\": 2361.2304840982247,\n          \"ocppIdTag\": \"string\",\n          \"ocppTransactionId\": 340,\n          \"vehicle\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"make\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"model\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"vin\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"customer\": {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      },\n      {\n        \"id\": 3847,\n        \"name\": \"string\",\n        \"portNumber\": 1595,\n        \"maximumPowerKw\": 4298.005297223304,\n        \"connectorType\": \"string\",\n        \"ocppStatus\": {\n          \"status\": \"string\",\n          \"timestamp\": \"1966-07-06T14:22:14.233Z\",\n          \"errorCode\": \"string\",\n          \"vendorErrorCode\": \"string\",\n          \"info\": \"string\"\n        },\n        \"currentChargingSession\": {\n          \"id\": 2169,\n          \"startTime\": \"1971-04-16T15:57:35.958Z\",\n          \"socStartPercent\": 9328.73907717029,\n          \"energyDeliveredKwh\": 1533.1329399068284,\n          \"ocppIdTag\": \"string\",\n          \"ocppTransactionId\": 9887,\n          \"vehicle\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"make\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"model\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"vin\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"customer\": {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "de0debd7-07f6-4902-8701-e741bdc1ad33",
+              "name": "Invalid API key or Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chargers",
+                    "by-external-id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The external ID (network station ID) of the charger."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1c62e659-a3ee-4e3a-a95d-f8ea57a61049",
+              "name": "The requested resource or endpoint does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chargers",
+                    "by-external-id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The external ID (network station ID) of the charger."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2671a137-d47a-495f-8bd0-2f97a54a5e56",
+          "name": "Get a charger by OCPP ID",
+          "request": {
+            "name": "Get a charger by OCPP ID",
+            "description": {
+              "content": "Retrieve a charger by its OCPP identifier. Response structure is identical to getCharger.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "chargers",
+                "by-ocpp-id",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The OCPP identifier of the charger."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d719a087-ee1e-4450-8a21-e47238a72eed",
+              "name": "Charger detail.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chargers",
+                    "by-ocpp-id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The OCPP identifier of the charger."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": 8453,\n    \"name\": \"string\",\n    \"manufacturer\": \"string\",\n    \"model\": \"string\",\n    \"serialNumber\": \"string\",\n    \"firmwareVersion\": \"string\",\n    \"latitude\": 2115.231509738078,\n    \"longitude\": 5203.71467694876,\n    \"externalId\": \"string\",\n    \"ocppId\": \"string\",\n    \"type\": \"string\",\n    \"networkServiceProvider\": \"string\",\n    \"chargerType\": \"string\",\n    \"numberOfPorts\": 9723,\n    \"powerSharing\": false,\n    \"connectionStatus\": {\n      \"status\": \"string\",\n      \"timestamp\": \"1946-12-11T13:10:24.364Z\"\n    },\n    \"ports\": [\n      {\n        \"id\": 5638,\n        \"name\": \"string\",\n        \"portNumber\": 9929,\n        \"maximumPowerKw\": 5517.433018475841,\n        \"connectorType\": \"string\",\n        \"ocppStatus\": {\n          \"status\": \"string\",\n          \"timestamp\": \"1948-08-13T20:56:48.931Z\",\n          \"errorCode\": \"string\",\n          \"vendorErrorCode\": \"string\",\n          \"info\": \"string\"\n        },\n        \"currentChargingSession\": {\n          \"id\": 7312,\n          \"startTime\": \"2020-04-28T07:41:25.981Z\",\n          \"socStartPercent\": 5921.0603904072805,\n          \"energyDeliveredKwh\": 2361.2304840982247,\n          \"ocppIdTag\": \"string\",\n          \"ocppTransactionId\": 340,\n          \"vehicle\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"make\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"model\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"vin\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"customer\": {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      },\n      {\n        \"id\": 3847,\n        \"name\": \"string\",\n        \"portNumber\": 1595,\n        \"maximumPowerKw\": 4298.005297223304,\n        \"connectorType\": \"string\",\n        \"ocppStatus\": {\n          \"status\": \"string\",\n          \"timestamp\": \"1966-07-06T14:22:14.233Z\",\n          \"errorCode\": \"string\",\n          \"vendorErrorCode\": \"string\",\n          \"info\": \"string\"\n        },\n        \"currentChargingSession\": {\n          \"id\": 2169,\n          \"startTime\": \"1971-04-16T15:57:35.958Z\",\n          \"socStartPercent\": 9328.73907717029,\n          \"energyDeliveredKwh\": 1533.1329399068284,\n          \"ocppIdTag\": \"string\",\n          \"ocppTransactionId\": 9887,\n          \"vehicle\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"make\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"model\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"vin\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"customer\": {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e6a74928-e31a-4a33-9986-782342e2594d",
+              "name": "Invalid API key or Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chargers",
+                    "by-ocpp-id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The OCPP identifier of the charger."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9f8f72ae-43de-46c8-9884-4facb3c434c6",
+              "name": "The requested resource or endpoint does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chargers",
+                    "by-ocpp-id",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The OCPP identifier of the charger."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.getflipturn.com/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a3f59273-a77b-48a9-afee-c52d31fc5426",
+    "name": "Flipturn Access IDs Chargers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Flipturn API provides read and write access to the Flipturn EV charging management platform: sites, chargers and ports, charging sessions, charger health and uptime, access IDs (RFID cards and vehicles), vehicles, alerts, charger errors, raw OCPP messages, reservations, site power limits, vehicle departure times, and maintenance windows. It is a JSON REST API secured with a bearer API key, designed for integrating Flipturn charging data with ticketing platforms, data warehouses, transportation management systems, and fleet operations tooling. Flipturn also supports OCPI for roaming-partner integration (contact support to enable).\n\nContact Support:\n Name: Flipturn Support\n Email: support@getflipturn.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,335 @@
+{
+  "item": [
+    {
+      "id": "cd06fe68-c678-43e3-9866-7cea69118d54",
+      "name": "OCPP Messages",
+      "description": {
+        "content": "Raw OCPP protocol messages for a charger.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2817f404-b7d0-4f83-9d5c-2c2800e5c302",
+          "name": "List OCPP messages for a charger",
+          "request": {
+            "name": "List OCPP messages for a charger",
+            "description": {
+              "content": "Retrieve raw OCPP (Open Charge Point Protocol) messages for a specific charger, newest first. The date range must be under 8 days. Page size is controlled by limit (default 50, max 500).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ocpp-messages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "chargerId",
+                  "value": "<integer>",
+                  "description": "(Required) The ID of the charger to retrieve messages for."
+                },
+                {
+                  "disabled": false,
+                  "key": "startTimestamp",
+                  "value": "<dateTime>",
+                  "description": "ISO 8601: messages after this time. Defaults to 24 hours ago."
+                },
+                {
+                  "disabled": false,
+                  "key": "endTimestamp",
+                  "value": "<dateTime>",
+                  "description": "ISO 8601: messages before this time. Defaults to now."
+                },
+                {
+                  "disabled": false,
+                  "key": "messageType",
+                  "value": "<string>",
+                  "description": "Filter by OCPP message type(s), e.g. Authorize or messageType[]=StartTransaction."
+                },
+                {
+                  "disabled": false,
+                  "key": "messageType",
+                  "value": "<string>",
+                  "description": "Filter by OCPP message type(s), e.g. Authorize or messageType[]=StartTransaction."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Page size (default 50"
+                },
+                {
+                  "disabled": false,
+                  "key": "nextPageCursor",
+                  "value": "<string>",
+                  "description": "Opaque cursor from the previous response's pagination.nextPageCursor to fetch the next page. Keep all other parameters identical."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "06b736ee-0d9e-4336-8b10-78ebd461b94a",
+              "name": "A paginated list of OCPP messages.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ocpp-messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "chargerId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "startTimestamp",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endTimestamp",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "messageType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "messageType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "nextPageCursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 4647,\n      \"createdAt\": \"1983-04-16T22:54:50.325Z\",\n      \"ocppChargerIdentity\": \"string\",\n      \"messageType\": \"string\",\n      \"messagePayload\": \"\",\n      \"messageResponse\": \"\",\n      \"chargerId\": 9052,\n      \"protocol\": \"string\"\n    },\n    {\n      \"id\": 231,\n      \"createdAt\": \"1983-07-12T14:28:16.458Z\",\n      \"ocppChargerIdentity\": \"string\",\n      \"messageType\": \"string\",\n      \"messagePayload\": \"\",\n      \"messageResponse\": \"\",\n      \"chargerId\": 7876,\n      \"protocol\": \"string\"\n    }\n  ],\n  \"pagination\": {\n    \"hasNextPage\": true,\n    \"nextPageCursor\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5198d950-33c7-4ee3-bb0c-202ee73e5630",
+              "name": "Invalid parameters passed to the API endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ocpp-messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "chargerId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "startTimestamp",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endTimestamp",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "messageType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "messageType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "nextPageCursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f1cead3a-aad2-4287-a862-d0f47f5c2854",
+              "name": "Invalid API key or Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ocpp-messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "chargerId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "startTimestamp",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endTimestamp",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "messageType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "messageType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "nextPageCursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.getflipturn.com/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e7292a52-7627-4132-85bf-4ca8de73b7fa",
+    "name": "Flipturn Access IDs OCPP Messages API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Flipturn API provides read and write access to the Flipturn EV charging management platform: sites, chargers and ports, charging sessions, charger health and uptime, access IDs (RFID cards and vehicles), vehicles, alerts, charger errors, raw OCPP messages, reservations, site power limits, vehicle departure times, and maintenance windows. It is a JSON REST API secured with a bearer API key, designed for integrating Flipturn charging data with ticketing platforms, data warehouses, transportation management systems, and fleet operations tooling. Flipturn also supports OCPI for roaming-partner integration (contact support to enable).\n\nContact Support:\n Name: Flipturn Support\n Email: support@getflipturn.com",
+      "type": "text/plain"
+    }
+  }
+}

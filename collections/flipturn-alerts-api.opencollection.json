@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Flipturn Access IDs Alerts API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Alerts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List alerts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getflipturn.com/api/alerts",
+            "params": [
+              {
+                "name": "startTimestampAfter",
+                "value": "",
+                "type": "query",
+                "description": "ISO 8601: only alerts sent after this time."
+              },
+              {
+                "name": "alertRecipientIds",
+                "value": "",
+                "type": "query",
+                "description": "Filter to alerts sent to specific recipient IDs."
+              },
+              {
+                "name": "includeMuted",
+                "value": "",
+                "type": "query",
+                "description": "Include muted alerts that were not sent to users. Defaults to false."
+              },
+              {
+                "name": "nextPageCursor",
+                "value": "",
+                "type": "query",
+                "description": "Opaque cursor from the previous response's pagination.nextPageCursor to fetch the next page. Keep all other parameters identical."
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of alerts (low battery, charging completed, charging session error, offline charger, late charging)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Flipturn Access IDs Charger Health API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Charger Health",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get charger health statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getflipturn.com/api/charger-health",
+            "params": [
+              {
+                "name": "startTimestamp",
+                "value": "",
+                "type": "query",
+                "description": "ISO 8601 start of interval. Defaults to 30 days ago."
+              },
+              {
+                "name": "endTimestamp",
+                "value": "",
+                "type": "query",
+                "description": "ISO 8601 end of interval. Defaults to now; future dates capped at now."
+              },
+              {
+                "name": "siteIds",
+                "value": "",
+                "type": "query",
+                "description": "Filter by site IDs."
+              },
+              {
+                "name": "chargerIds",
+                "value": "",
+                "type": "query",
+                "description": "Filter by charger IDs."
+              }
+            ]
+          },
+          "docs": "Retrieve health, uptime, error, and utilization statistics for all chargers in an organization over a time interval, grouped by charger and port. Defaults to the last 30 days. Subject to stricter rate limits."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

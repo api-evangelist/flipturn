@@ -1,0 +1,503 @@
+{
+  "item": [
+    {
+      "id": "77dafe94-6497-42fd-8abb-5d7af7ab7257",
+      "name": "Departure Times",
+      "description": {
+        "content": "Scheduled vehicle departure times synced from a TMS.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ddd16e3f-e267-446c-b098-461145808fe2",
+          "name": "Sync departure times for a vehicle",
+          "request": {
+            "name": "Sync departure times for a vehicle",
+            "description": {
+              "content": "Atomically replace all future departure times for a single vehicle (identified by vehicleVin or vehicleId, not both). Past departures in the request are skipped; existing past departures are left unchanged.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "departure-times",
+                "vehicle"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"departureTimes\": [\n    {\n      \"departureTime\": \"<dateTime>\",\n      \"shiftName\": \"<string>\",\n      \"routeName\": \"<string>\",\n      \"targetSoc\": 90\n    },\n    {\n      \"departureTime\": \"<dateTime>\",\n      \"shiftName\": \"<string>\",\n      \"routeName\": \"<string>\",\n      \"targetSoc\": 90\n    }\n  ],\n  \"vehicleVin\": \"<string>\",\n  \"vehicleId\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c27e663e-db13-4764-9807-004b5a8eccda",
+              "name": "Per-departure outcomes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "departure-times",
+                    "vehicle"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"departureTimes\": [\n    {\n      \"departureTime\": \"1971-11-16T23:01:06.849Z\",\n      \"shiftName\": \"string\",\n      \"routeName\": \"string\",\n      \"targetSoc\": 90\n    },\n    {\n      \"departureTime\": \"1997-08-02T22:46:03.235Z\",\n      \"shiftName\": \"string\",\n      \"routeName\": \"string\",\n      \"targetSoc\": 90\n    }\n  ],\n  \"vehicleVin\": \"<string>\",\n  \"vehicleId\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"departureTimes\": [\n    {\n      \"departureTime\": \"1986-11-03T19:56:27.172Z\",\n      \"outcome\": \"skipped\",\n      \"id\": 8827,\n      \"vehicleId\": 9216,\n      \"vehicleVin\": \"string\",\n      \"shiftName\": \"string\",\n      \"routeName\": \"string\",\n      \"targetSoc\": 8342\n    },\n    {\n      \"departureTime\": \"1971-01-23T07:13:41.998Z\",\n      \"outcome\": \"skipped\",\n      \"id\": 8815,\n      \"vehicleId\": 6120,\n      \"vehicleVin\": \"string\",\n      \"shiftName\": \"string\",\n      \"routeName\": \"string\",\n      \"targetSoc\": 3595\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "75526aae-90d4-4b73-82df-5e33f37aef56",
+              "name": "Invalid parameters passed to the API endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "departure-times",
+                    "vehicle"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"departureTimes\": [\n    {\n      \"departureTime\": \"1971-11-16T23:01:06.849Z\",\n      \"shiftName\": \"string\",\n      \"routeName\": \"string\",\n      \"targetSoc\": 90\n    },\n    {\n      \"departureTime\": \"1997-08-02T22:46:03.235Z\",\n      \"shiftName\": \"string\",\n      \"routeName\": \"string\",\n      \"targetSoc\": 90\n    }\n  ],\n  \"vehicleVin\": \"<string>\",\n  \"vehicleId\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a7c538b6-35f6-4731-a228-acbe0f6f7b47",
+              "name": "Invalid API key or Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "departure-times",
+                    "vehicle"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"departureTimes\": [\n    {\n      \"departureTime\": \"1971-11-16T23:01:06.849Z\",\n      \"shiftName\": \"string\",\n      \"routeName\": \"string\",\n      \"targetSoc\": 90\n    },\n    {\n      \"departureTime\": \"1997-08-02T22:46:03.235Z\",\n      \"shiftName\": \"string\",\n      \"routeName\": \"string\",\n      \"targetSoc\": 90\n    }\n  ],\n  \"vehicleVin\": \"<string>\",\n  \"vehicleId\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "843c4866-cbc2-45fc-adff-4ad07f542e25",
+              "name": "The requested resource or endpoint does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "departure-times",
+                    "vehicle"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"departureTimes\": [\n    {\n      \"departureTime\": \"1971-11-16T23:01:06.849Z\",\n      \"shiftName\": \"string\",\n      \"routeName\": \"string\",\n      \"targetSoc\": 90\n    },\n    {\n      \"departureTime\": \"1997-08-02T22:46:03.235Z\",\n      \"shiftName\": \"string\",\n      \"routeName\": \"string\",\n      \"targetSoc\": 90\n    }\n  ],\n  \"vehicleVin\": \"<string>\",\n  \"vehicleId\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "00770b7c-1ee9-44f4-9e11-6a14ffd9199b",
+          "name": "Sync departure times for multiple vehicles",
+          "request": {
+            "name": "Sync departure times for multiple vehicles",
+            "description": {
+              "content": "Sync departure times for multiple vehicles in a single request. Each vehicle is processed independently.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "departure-times",
+                "batch"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"vehicles\": [\n    {\n      \"departureTimes\": [\n        {\n          \"departureTime\": \"<dateTime>\",\n          \"shiftName\": \"<string>\",\n          \"routeName\": \"<string>\",\n          \"targetSoc\": 90\n        },\n        {\n          \"departureTime\": \"<dateTime>\",\n          \"shiftName\": \"<string>\",\n          \"routeName\": \"<string>\",\n          \"targetSoc\": 90\n        }\n      ],\n      \"vehicleVin\": \"<string>\",\n      \"vehicleId\": \"<integer>\"\n    },\n    {\n      \"departureTimes\": [\n        {\n          \"departureTime\": \"<dateTime>\",\n          \"shiftName\": \"<string>\",\n          \"routeName\": \"<string>\",\n          \"targetSoc\": 90\n        },\n        {\n          \"departureTime\": \"<dateTime>\",\n          \"shiftName\": \"<string>\",\n          \"routeName\": \"<string>\",\n          \"targetSoc\": 90\n        }\n      ],\n      \"vehicleVin\": \"<string>\",\n      \"vehicleId\": \"<integer>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "86a62232-434a-461f-b409-cf4b44ed3bd7",
+              "name": "Per-vehicle results.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "departure-times",
+                    "batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"vehicles\": [\n    {\n      \"departureTimes\": [\n        {\n          \"departureTime\": \"2013-08-18T20:24:06.877Z\",\n          \"shiftName\": \"string\",\n          \"routeName\": \"string\",\n          \"targetSoc\": 90\n        },\n        {\n          \"departureTime\": \"1977-05-07T08:10:30.238Z\",\n          \"shiftName\": \"string\",\n          \"routeName\": \"string\",\n          \"targetSoc\": 90\n        }\n      ],\n      \"vehicleVin\": \"<string>\",\n      \"vehicleId\": \"<integer>\"\n    },\n    {\n      \"departureTimes\": [\n        {\n          \"departureTime\": \"2023-07-24T00:23:40.863Z\",\n          \"shiftName\": \"string\",\n          \"routeName\": \"string\",\n          \"targetSoc\": 90\n        },\n        {\n          \"departureTime\": \"2003-06-18T08:57:25.901Z\",\n          \"shiftName\": \"string\",\n          \"routeName\": \"string\",\n          \"targetSoc\": 90\n        }\n      ],\n      \"vehicleVin\": \"<string>\",\n      \"vehicleId\": \"<integer>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"vehicleId\": 3883,\n      \"vehicleVin\": \"string\",\n      \"outcome\": \"error\",\n      \"departureTimes\": [\n        {\n          \"departureTime\": \"1975-02-18T19:35:59.460Z\",\n          \"outcome\": \"skipped\",\n          \"id\": 8769,\n          \"vehicleId\": 2644,\n          \"vehicleVin\": \"string\",\n          \"shiftName\": \"string\",\n          \"routeName\": \"string\",\n          \"targetSoc\": 11\n        },\n        {\n          \"departureTime\": \"1982-03-07T08:51:06.483Z\",\n          \"outcome\": \"created\",\n          \"id\": 8419,\n          \"vehicleId\": 8633,\n          \"vehicleVin\": \"string\",\n          \"shiftName\": \"string\",\n          \"routeName\": \"string\",\n          \"targetSoc\": 902\n        }\n      ],\n      \"error\": \"string\"\n    },\n    {\n      \"vehicleId\": 6382,\n      \"vehicleVin\": \"string\",\n      \"outcome\": \"error\",\n      \"departureTimes\": [\n        {\n          \"departureTime\": \"1954-11-02T04:42:10.161Z\",\n          \"outcome\": \"skipped\",\n          \"id\": 1077,\n          \"vehicleId\": 4937,\n          \"vehicleVin\": \"string\",\n          \"shiftName\": \"string\",\n          \"routeName\": \"string\",\n          \"targetSoc\": 3930\n        },\n        {\n          \"departureTime\": \"1983-02-18T00:25:33.036Z\",\n          \"outcome\": \"created\",\n          \"id\": 9574,\n          \"vehicleId\": 2757,\n          \"vehicleVin\": \"string\",\n          \"shiftName\": \"string\",\n          \"routeName\": \"string\",\n          \"targetSoc\": 5987\n        }\n      ],\n      \"error\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3ea03a80-ad5b-4553-a8e0-0b37c8598970",
+              "name": "Invalid parameters passed to the API endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "departure-times",
+                    "batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"vehicles\": [\n    {\n      \"departureTimes\": [\n        {\n          \"departureTime\": \"2013-08-18T20:24:06.877Z\",\n          \"shiftName\": \"string\",\n          \"routeName\": \"string\",\n          \"targetSoc\": 90\n        },\n        {\n          \"departureTime\": \"1977-05-07T08:10:30.238Z\",\n          \"shiftName\": \"string\",\n          \"routeName\": \"string\",\n          \"targetSoc\": 90\n        }\n      ],\n      \"vehicleVin\": \"<string>\",\n      \"vehicleId\": \"<integer>\"\n    },\n    {\n      \"departureTimes\": [\n        {\n          \"departureTime\": \"2023-07-24T00:23:40.863Z\",\n          \"shiftName\": \"string\",\n          \"routeName\": \"string\",\n          \"targetSoc\": 90\n        },\n        {\n          \"departureTime\": \"2003-06-18T08:57:25.901Z\",\n          \"shiftName\": \"string\",\n          \"routeName\": \"string\",\n          \"targetSoc\": 90\n        }\n      ],\n      \"vehicleVin\": \"<string>\",\n      \"vehicleId\": \"<integer>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "628efe28-e50f-4b88-8281-99ad26400fe3",
+              "name": "Invalid API key or Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "departure-times",
+                    "batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"vehicles\": [\n    {\n      \"departureTimes\": [\n        {\n          \"departureTime\": \"2013-08-18T20:24:06.877Z\",\n          \"shiftName\": \"string\",\n          \"routeName\": \"string\",\n          \"targetSoc\": 90\n        },\n        {\n          \"departureTime\": \"1977-05-07T08:10:30.238Z\",\n          \"shiftName\": \"string\",\n          \"routeName\": \"string\",\n          \"targetSoc\": 90\n        }\n      ],\n      \"vehicleVin\": \"<string>\",\n      \"vehicleId\": \"<integer>\"\n    },\n    {\n      \"departureTimes\": [\n        {\n          \"departureTime\": \"2023-07-24T00:23:40.863Z\",\n          \"shiftName\": \"string\",\n          \"routeName\": \"string\",\n          \"targetSoc\": 90\n        },\n        {\n          \"departureTime\": \"2003-06-18T08:57:25.901Z\",\n          \"shiftName\": \"string\",\n          \"routeName\": \"string\",\n          \"targetSoc\": 90\n        }\n      ],\n      \"vehicleVin\": \"<string>\",\n      \"vehicleId\": \"<integer>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.getflipturn.com/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e66b286f-bf74-4601-87a7-5733eaceb9b7",
+    "name": "Flipturn Access IDs Departure Times API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Flipturn API provides read and write access to the Flipturn EV charging management platform: sites, chargers and ports, charging sessions, charger health and uptime, access IDs (RFID cards and vehicles), vehicles, alerts, charger errors, raw OCPP messages, reservations, site power limits, vehicle departure times, and maintenance windows. It is a JSON REST API secured with a bearer API key, designed for integrating Flipturn charging data with ticketing platforms, data warehouses, transportation management systems, and fleet operations tooling. Flipturn also supports OCPI for roaming-partner integration (contact support to enable).\n\nContact Support:\n Name: Flipturn Support\n Email: support@getflipturn.com",
+      "type": "text/plain"
+    }
+  }
+}

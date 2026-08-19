@@ -1,0 +1,291 @@
+{
+  "item": [
+    {
+      "id": "04f050b0-7119-4be7-a5b4-caaf71ea5d68",
+      "name": "Errors",
+      "description": {
+        "content": "Charger error records.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "31ac76ac-098d-4896-a3c3-cdf9742282e5",
+          "name": "List charger errors",
+          "request": {
+            "name": "List charger errors",
+            "description": {
+              "content": "Retrieve a paginated list of charger errors in reverse chronological order (up to 2000 rows per page). Mirrors the Charger errors report.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "errors"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "afterTimestamp",
+                  "value": "<dateTime>",
+                  "description": "ISO 8601: errors at or after this time."
+                },
+                {
+                  "disabled": false,
+                  "key": "beforeTimestamp",
+                  "value": "<dateTime>",
+                  "description": "ISO 8601: errors at or before this time."
+                },
+                {
+                  "disabled": false,
+                  "key": "organizationIds",
+                  "value": "<integer>",
+                  "description": "Filter to organizations (multi-org keys)."
+                },
+                {
+                  "disabled": false,
+                  "key": "organizationIds",
+                  "value": "<integer>",
+                  "description": "Filter to organizations (multi-org keys)."
+                },
+                {
+                  "disabled": false,
+                  "key": "siteIds",
+                  "value": "<integer>",
+                  "description": "Restrict to chargers at these sites."
+                },
+                {
+                  "disabled": false,
+                  "key": "siteIds",
+                  "value": "<integer>",
+                  "description": "Restrict to chargers at these sites."
+                },
+                {
+                  "disabled": false,
+                  "key": "chargerIds",
+                  "value": "<integer>",
+                  "description": "Restrict to these chargers."
+                },
+                {
+                  "disabled": false,
+                  "key": "chargerIds",
+                  "value": "<integer>",
+                  "description": "Restrict to these chargers."
+                },
+                {
+                  "disabled": false,
+                  "key": "nextPageCursor",
+                  "value": "<string>",
+                  "description": "Opaque cursor from the previous response's pagination.nextPageCursor to fetch the next page. Keep all other parameters identical."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4e6d19f7-f5f1-4262-8491-ee2143e50e07",
+              "name": "A paginated list of charger errors.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "errors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "afterTimestamp",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "beforeTimestamp",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "organizationIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "organizationIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "siteIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "siteIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "chargerIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "chargerIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "nextPageCursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 3221,\n      \"timestamp\": \"1994-05-28T08:33:08.102Z\",\n      \"ocppErrorCode\": \"string\",\n      \"vendorErrorCode\": \"string\",\n      \"ocppInfo\": \"string\",\n      \"ocppStatus\": \"string\",\n      \"errorCategory\": \"muted\",\n      \"chargingSession\": {},\n      \"site\": {\n        \"id\": 8164,\n        \"name\": \"string\",\n        \"locationId\": \"string\"\n      },\n      \"charger\": {\n        \"id\": 7950,\n        \"name\": \"string\",\n        \"manufacturer\": \"string\",\n        \"model\": \"string\",\n        \"serialNumber\": \"string\",\n        \"firmwareVersion\": \"string\",\n        \"latitude\": 5522.65683047679,\n        \"longitude\": 7983.441157524569,\n        \"externalId\": \"string\",\n        \"ocppId\": \"string\",\n        \"type\": \"string\",\n        \"networkServiceProvider\": \"string\",\n        \"chargerType\": \"string\",\n        \"numberOfPorts\": 7188,\n        \"powerSharing\": true,\n        \"connectionStatus\": {\n          \"status\": \"string\",\n          \"timestamp\": \"2013-06-10T21:05:07.759Z\"\n        },\n        \"ports\": [\n          {\n            \"id\": 2141,\n            \"name\": \"string\",\n            \"portNumber\": 5674,\n            \"maximumPowerKw\": 5967.970738579425,\n            \"connectorType\": \"string\",\n            \"ocppStatus\": {\n              \"status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"timestamp\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"errorCode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"vendorErrorCode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"info\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"currentChargingSession\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": 1250,\n            \"name\": \"string\",\n            \"portNumber\": 4074,\n            \"maximumPowerKw\": 6650.80258099857,\n            \"connectorType\": \"string\",\n            \"ocppStatus\": {\n              \"status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"timestamp\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"errorCode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"vendorErrorCode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"info\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"currentChargingSession\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"port\": {\n        \"id\": 5579,\n        \"name\": \"string\",\n        \"portNumber\": 3760,\n        \"maximumPowerKw\": 7874.318532878551\n      },\n      \"organization\": {\n        \"id\": 7871,\n        \"name\": \"string\"\n      }\n    },\n    {\n      \"id\": 6868,\n      \"timestamp\": \"2012-07-10T22:56:23.662Z\",\n      \"ocppErrorCode\": \"string\",\n      \"vendorErrorCode\": \"string\",\n      \"ocppInfo\": \"string\",\n      \"ocppStatus\": \"string\",\n      \"errorCategory\": \"other\",\n      \"chargingSession\": {},\n      \"site\": {\n        \"id\": 5991,\n        \"name\": \"string\",\n        \"locationId\": \"string\"\n      },\n      \"charger\": {\n        \"id\": 747,\n        \"name\": \"string\",\n        \"manufacturer\": \"string\",\n        \"model\": \"string\",\n        \"serialNumber\": \"string\",\n        \"firmwareVersion\": \"string\",\n        \"latitude\": 8416.92757642208,\n        \"longitude\": 9760.831598654735,\n        \"externalId\": \"string\",\n        \"ocppId\": \"string\",\n        \"type\": \"string\",\n        \"networkServiceProvider\": \"string\",\n        \"chargerType\": \"string\",\n        \"numberOfPorts\": 2632,\n        \"powerSharing\": true,\n        \"connectionStatus\": {\n          \"status\": \"string\",\n          \"timestamp\": \"1956-10-01T11:26:59.129Z\"\n        },\n        \"ports\": [\n          {\n            \"id\": 7666,\n            \"name\": \"string\",\n            \"portNumber\": 5818,\n            \"maximumPowerKw\": 6782.897135632441,\n            \"connectorType\": \"string\",\n            \"ocppStatus\": {\n              \"status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"timestamp\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"errorCode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"vendorErrorCode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"info\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"currentChargingSession\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": 5582,\n            \"name\": \"string\",\n            \"portNumber\": 3215,\n            \"maximumPowerKw\": 417.6949441250222,\n            \"connectorType\": \"string\",\n            \"ocppStatus\": {\n              \"status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"timestamp\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"errorCode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"vendorErrorCode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"info\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"currentChargingSession\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"port\": {\n        \"id\": 6991,\n        \"name\": \"string\",\n        \"portNumber\": 2302,\n        \"maximumPowerKw\": 9559.853017075307\n      },\n      \"organization\": {\n        \"id\": 6760,\n        \"name\": \"string\"\n      }\n    }\n  ],\n  \"pagination\": {\n    \"hasNextPage\": true,\n    \"nextPageCursor\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a0081668-538f-40b5-b010-fe061caf0d85",
+              "name": "Invalid API key or Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "errors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "afterTimestamp",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "beforeTimestamp",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "organizationIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "organizationIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "siteIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "siteIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "chargerIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "chargerIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "nextPageCursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.getflipturn.com/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c17cd251-a1fb-401b-979a-09e53c045ef2",
+    "name": "Flipturn Access IDs Errors API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Flipturn API provides read and write access to the Flipturn EV charging management platform: sites, chargers and ports, charging sessions, charger health and uptime, access IDs (RFID cards and vehicles), vehicles, alerts, charger errors, raw OCPP messages, reservations, site power limits, vehicle departure times, and maintenance windows. It is a JSON REST API secured with a bearer API key, designed for integrating Flipturn charging data with ticketing platforms, data warehouses, transportation management systems, and fleet operations tooling. Flipturn also supports OCPI for roaming-partner integration (contact support to enable).\n\nContact Support:\n Name: Flipturn Support\n Email: support@getflipturn.com",
+      "type": "text/plain"
+    }
+  }
+}

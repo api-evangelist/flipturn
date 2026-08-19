@@ -1,0 +1,317 @@
+{
+  "item": [
+    {
+      "id": "ca45a63e-6455-48f7-9980-8186b8ed7b4d",
+      "name": "Charger Health",
+      "description": {
+        "content": "Uptime, error, and utilization statistics.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "44a52c6d-014d-4c04-8614-cc1d14b35e72",
+          "name": "Get charger health statistics",
+          "request": {
+            "name": "Get charger health statistics",
+            "description": {
+              "content": "Retrieve health, uptime, error, and utilization statistics for all chargers in an organization over a time interval, grouped by charger and port. Defaults to the last 30 days. Subject to stricter rate limits.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "charger-health"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "startTimestamp",
+                  "value": "<dateTime>",
+                  "description": "ISO 8601 start of interval. Defaults to 30 days ago."
+                },
+                {
+                  "disabled": false,
+                  "key": "endTimestamp",
+                  "value": "<dateTime>",
+                  "description": "ISO 8601 end of interval. Defaults to now; future dates capped at now."
+                },
+                {
+                  "disabled": false,
+                  "key": "siteIds",
+                  "value": "<integer>",
+                  "description": "Filter by site IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "siteIds",
+                  "value": "<integer>",
+                  "description": "Filter by site IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "chargerIds",
+                  "value": "<integer>",
+                  "description": "Filter by charger IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "chargerIds",
+                  "value": "<integer>",
+                  "description": "Filter by charger IDs."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "76592324-e00f-4cc9-988a-cd94bbe83e89",
+              "name": "Aggregate summary plus per-charger and per-port statistics.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "charger-health"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startTimestamp",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endTimestamp",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "siteIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "siteIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "chargerIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "chargerIds",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"summary\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c7b484c-f9cb-4af1-944a-e1ef77131af9",
+              "name": "Invalid API key or Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "charger-health"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startTimestamp",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endTimestamp",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "siteIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "siteIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "chargerIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "chargerIds",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4b99360d-f700-4ea3-881a-6188187d704c",
+              "name": "Rate limit exceeded (200 requests per minute per API key).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "charger-health"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startTimestamp",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endTimestamp",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "siteIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "siteIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "chargerIds",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "chargerIds",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.getflipturn.com/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e0cc47dc-4148-435a-bd0d-3db017ab16e1",
+    "name": "Flipturn Access IDs Charger Health API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Flipturn API provides read and write access to the Flipturn EV charging management platform: sites, chargers and ports, charging sessions, charger health and uptime, access IDs (RFID cards and vehicles), vehicles, alerts, charger errors, raw OCPP messages, reservations, site power limits, vehicle departure times, and maintenance windows. It is a JSON REST API secured with a bearer API key, designed for integrating Flipturn charging data with ticketing platforms, data warehouses, transportation management systems, and fleet operations tooling. Flipturn also supports OCPI for roaming-partner integration (contact support to enable).\n\nContact Support:\n Name: Flipturn Support\n Email: support@getflipturn.com",
+      "type": "text/plain"
+    }
+  }
+}
