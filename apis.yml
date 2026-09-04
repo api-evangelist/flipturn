@@ -29,15 +29,17 @@ deliveryModel:
   method: derived
 accessModel:
   pricing: unknown
-  onboarding: self-serve
+  onboarding: unknown
   trial: false
   try_now: false
   public: false
-  label: Self-serve signup
-  confidence: medium
+  label: Unknown
+  confidence: low
   source:
   - authentication
-  generated: '2026-07-22'
+  - rate-limits
+  - security
+  generated: '2026-09-03'
   method: derived
 image: https://cdn.prod.website-files.com/64b825ce3428b050ac90c545/6a0deea6bb9839d3ec28999f_Opengraph_hi-res.avif
 x-type: company
@@ -428,8 +430,9 @@ common:
   url: errors/flipturn-problem-types.yml
 - type: LLMsTxt
   url: llms/flipturn-llms.txt
-- type: MCPServer
+- type: X-MCPServerCandidate
   url: mcp/flipturn-mcp.yml
+  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type surfaces with a server that does not exist.'
 - type: AgentSkill
   url: skills/_index.yml
 - type: AgenticAccess
