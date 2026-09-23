@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Flipturn Access IDs API
   version: '1.0'
-  description: 'The Flipturn API provides read and write access to the Flipturn EV charging management platform: sites, chargers and ports, charging sessions, charger health and uptime, access IDs (RFID cards and vehicles), vehicles, alerts, charger errors, raw OCPP messages, reservations, site power limits, vehicle departure times, and maintenance windows. It is a JSON REST API secured with a bearer API key, designed for integrating Flipturn charging data with ticketing platforms, data warehouses, transportation management systems, and fleet operations tooling. Flipturn also supports OCPI for roaming-partner integration (contact support to enable).'
+  description: 'The Flipturn API provides read and write access to the Flipturn EV charging management platform: sites, chargers and ports, charging sessions, charger health and uptime, access IDs (RFID cards and vehicles), vehicles, alerts, charger errors, raw OCPP messages, reservations, site power limits, vehicle departure times, and maintenance windows.'
   contact:
     name: Flipturn Support
     email: support@getflipturn.com
@@ -215,24 +215,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    VehicleRef:
-      type: object
-      nullable: true
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-          nullable: true
-        make:
-          type: string
-          nullable: true
-        model:
-          type: string
-          nullable: true
-        vin:
-          type: string
-          nullable: true
     Error:
       type: object
       description: Flipturn error envelope.
@@ -240,6 +222,14 @@ components:
         error:
           type: string
           description: Human-readable error message.
+    Pagination:
+      type: object
+      properties:
+        hasNextPage:
+          type: boolean
+        nextPageCursor:
+          type: string
+          nullable: true
     AccessIdCreate:
       type: object
       required:
@@ -310,11 +300,24 @@ components:
               nullable: true
         customer:
           $ref: '#/components/schemas/Customer'
-    Customer:
+    VehicleRef:
       type: object
+      nullable: true
       properties:
+        id:
+          type: integer
         name:
           type: string
+          nullable: true
+        make:
+          type: string
+          nullable: true
+        model:
+          type: string
+          nullable: true
+        vin:
+          type: string
+          nullable: true
     AccessId:
       type: object
       properties:
@@ -351,17 +354,21 @@ components:
           $ref: '#/components/schemas/VehicleRef'
         customer:
           $ref: '#/components/schemas/Customer'
-    Pagination:
+    Customer:
       type: object
       properties:
-        hasNextPage:
-          type: boolean
-        nextPageCursor:
+        name:
           type: string
-          nullable: true
+  parameters:
+    NextPageCursor:
+      name: nextPageCursor
+      in: query
+      description: Opaque cursor from the previous response's pagination.nextPageCursor to fetch the next page. Keep all other parameters identical.
+      schema:
+        type: string
   responses:
-    NotFound:
-      description: The requested resource or endpoint does not exist.
+    Unauthorized:
+      description: Invalid API key or Authorization header.
       content:
         application/json:
           schema:
@@ -372,19 +379,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Invalid API key or Authorization header.
+    NotFound:
+      description: The requested resource or endpoint does not exist.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  parameters:
-    NextPageCursor:
-      name: nextPageCursor
-      in: query
-      description: Opaque cursor from the previous response's pagination.nextPageCursor to fetch the next page. Keep all other parameters identical.
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http

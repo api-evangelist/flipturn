@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Flipturn Access IDs Alerts API
+  title: Flipturn Alerts API
   version: '1.0'
-  description: 'The Flipturn API provides read and write access to the Flipturn EV charging management platform: sites, chargers and ports, charging sessions, charger health and uptime, access IDs (RFID cards and vehicles), vehicles, alerts, charger errors, raw OCPP messages, reservations, site power limits, vehicle departure times, and maintenance windows. It is a JSON REST API secured with a bearer API key, designed for integrating Flipturn charging data with ticketing platforms, data warehouses, transportation management systems, and fleet operations tooling. Flipturn also supports OCPI for roaming-partner integration (contact support to enable).'
+  description: 'The Flipturn API provides read and write access to the Flipturn EV charging management platform: sites, chargers and ports, charging sessions, charger health and uptime, access IDs (RFID cards and vehicles), vehicles, alerts, charger errors, raw OCPP messages, reservations, site power limits, vehicle departure times, and maintenance windows.'
   contact:
     name: Flipturn Support
     email: support@getflipturn.com
@@ -64,48 +64,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    CurrentChargingSession:
-      type: object
-      nullable: true
-      properties:
-        id:
-          type: integer
-        startTime:
-          type: string
-          format: date-time
-        socStartPercent:
-          type: number
-          nullable: true
-        energyDeliveredKwh:
-          type: number
-        ocppIdTag:
-          type: string
-          nullable: true
-        ocppTransactionId:
-          type: integer
-          nullable: true
-        vehicle:
-          $ref: '#/components/schemas/VehicleRef'
-        customer:
-          $ref: '#/components/schemas/Customer'
-    VehicleRef:
-      type: object
-      nullable: true
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-          nullable: true
-        make:
-          type: string
-          nullable: true
-        model:
-          type: string
-          nullable: true
-        vin:
-          type: string
-          nullable: true
     SiteRef:
       type: object
       properties:
@@ -157,6 +115,101 @@ components:
               nullable: true
         currentChargingSession:
           $ref: '#/components/schemas/CurrentChargingSession'
+    CurrentChargingSession:
+      type: object
+      nullable: true
+      properties:
+        id:
+          type: integer
+        startTime:
+          type: string
+          format: date-time
+        socStartPercent:
+          type: number
+          nullable: true
+        energyDeliveredKwh:
+          type: number
+        ocppIdTag:
+          type: string
+          nullable: true
+        ocppTransactionId:
+          type: integer
+          nullable: true
+        vehicle:
+          $ref: '#/components/schemas/VehicleRef'
+        customer:
+          $ref: '#/components/schemas/Customer'
+    Customer:
+      type: object
+      properties:
+        name:
+          type: string
+    Pagination:
+      type: object
+      properties:
+        hasNextPage:
+          type: boolean
+        nextPageCursor:
+          type: string
+          nullable: true
+    VehicleRef:
+      type: object
+      nullable: true
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+          nullable: true
+        make:
+          type: string
+          nullable: true
+        model:
+          type: string
+          nullable: true
+        vin:
+          type: string
+          nullable: true
+    Alert:
+      type: object
+      properties:
+        id:
+          type: integer
+        type:
+          type: string
+          enum:
+          - lowBattery
+          - chargingCompleted
+          - chargingSessionError
+          - offlineCharger
+          - lateCharging
+        startTimestamp:
+          type: string
+          format: date-time
+        muted:
+          type: boolean
+        lowBattery:
+          type: object
+          nullable: true
+        chargingCompleted:
+          type: object
+          nullable: true
+        chargingSessionError:
+          type: object
+          nullable: true
+        offlineCharger:
+          type: object
+          nullable: true
+        lateCharging:
+          type: object
+          nullable: true
+        chargingSession:
+          type: object
+          nullable: true
+        site:
+          $ref: '#/components/schemas/SiteRef'
+        charger:
+          $ref: '#/components/schemas/Charger'
     Charger:
       type: object
       properties:
@@ -212,66 +265,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Port'
-    Alert:
-      type: object
-      properties:
-        id:
-          type: integer
-        type:
-          type: string
-          enum:
-          - lowBattery
-          - chargingCompleted
-          - chargingSessionError
-          - offlineCharger
-          - lateCharging
-        startTimestamp:
-          type: string
-          format: date-time
-        muted:
-          type: boolean
-        lowBattery:
-          type: object
-          nullable: true
-        chargingCompleted:
-          type: object
-          nullable: true
-        chargingSessionError:
-          type: object
-          nullable: true
-        offlineCharger:
-          type: object
-          nullable: true
-        lateCharging:
-          type: object
-          nullable: true
-        chargingSession:
-          type: object
-          nullable: true
-        site:
-          $ref: '#/components/schemas/SiteRef'
-        charger:
-          $ref: '#/components/schemas/Charger'
-    Customer:
-      type: object
-      properties:
-        name:
-          type: string
-    Pagination:
-      type: object
-      properties:
-        hasNextPage:
-          type: boolean
-        nextPageCursor:
-          type: string
-          nullable: true
-  responses:
-    Unauthorized:
-      description: Invalid API key or Authorization header.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
     NextPageCursor:
       name: nextPageCursor
@@ -279,6 +272,13 @@ components:
       description: Opaque cursor from the previous response's pagination.nextPageCursor to fetch the next page. Keep all other parameters identical.
       schema:
         type: string
+  responses:
+    Unauthorized:
+      description: Invalid API key or Authorization header.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http

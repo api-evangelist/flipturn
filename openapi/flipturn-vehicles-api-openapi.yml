@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Flipturn Access IDs Vehicles API
+  title: Flipturn Vehicles API
   version: '1.0'
-  description: 'The Flipturn API provides read and write access to the Flipturn EV charging management platform: sites, chargers and ports, charging sessions, charger health and uptime, access IDs (RFID cards and vehicles), vehicles, alerts, charger errors, raw OCPP messages, reservations, site power limits, vehicle departure times, and maintenance windows. It is a JSON REST API secured with a bearer API key, designed for integrating Flipturn charging data with ticketing platforms, data warehouses, transportation management systems, and fleet operations tooling. Flipturn also supports OCPI for roaming-partner integration (contact support to enable).'
+  description: 'The Flipturn API provides read and write access to the Flipturn EV charging management platform: sites, chargers and ports, charging sessions, charger health and uptime, access IDs (RFID cards and vehicles), vehicles, alerts, charger errors, raw OCPP messages, reservations, site power limits, vehicle departure times, and maintenance windows.'
   contact:
     name: Flipturn Support
     email: support@getflipturn.com
@@ -143,6 +143,21 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    Error:
+      type: object
+      description: Flipturn error envelope.
+      properties:
+        error:
+          type: string
+          description: Human-readable error message.
+    Pagination:
+      type: object
+      properties:
+        hasNextPage:
+          type: boolean
+        nextPageCursor:
+          type: string
+          nullable: true
     Vehicle:
       type: object
       properties:
@@ -181,13 +196,6 @@ components:
                 enum:
                 - Authorized
                 - Revoked
-    Error:
-      type: object
-      description: Flipturn error envelope.
-      properties:
-        error:
-          type: string
-          description: Human-readable error message.
     VehicleCreate:
       type: object
       properties:
@@ -224,17 +232,16 @@ components:
       properties:
         name:
           type: string
-    Pagination:
-      type: object
-      properties:
-        hasNextPage:
-          type: boolean
-        nextPageCursor:
-          type: string
-          nullable: true
+  parameters:
+    NextPageCursor:
+      name: nextPageCursor
+      in: query
+      description: Opaque cursor from the previous response's pagination.nextPageCursor to fetch the next page. Keep all other parameters identical.
+      schema:
+        type: string
   responses:
-    NotFound:
-      description: The requested resource or endpoint does not exist.
+    Unauthorized:
+      description: Invalid API key or Authorization header.
       content:
         application/json:
           schema:
@@ -245,19 +252,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Invalid API key or Authorization header.
+    NotFound:
+      description: The requested resource or endpoint does not exist.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  parameters:
-    NextPageCursor:
-      name: nextPageCursor
-      in: query
-      description: Opaque cursor from the previous response's pagination.nextPageCursor to fetch the next page. Keep all other parameters identical.
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http

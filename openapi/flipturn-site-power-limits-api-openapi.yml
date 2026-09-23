@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Flipturn Access IDs Site Power Limits API
+  title: Flipturn Site Power Limits API
   version: '1.0'
-  description: 'The Flipturn API provides read and write access to the Flipturn EV charging management platform: sites, chargers and ports, charging sessions, charger health and uptime, access IDs (RFID cards and vehicles), vehicles, alerts, charger errors, raw OCPP messages, reservations, site power limits, vehicle departure times, and maintenance windows. It is a JSON REST API secured with a bearer API key, designed for integrating Flipturn charging data with ticketing platforms, data warehouses, transportation management systems, and fleet operations tooling. Flipturn also supports OCPI for roaming-partner integration (contact support to enable).'
+  description: 'The Flipturn API provides read and write access to the Flipturn EV charging management platform: sites, chargers and ports, charging sessions, charger health and uptime, access IDs (RFID cards and vehicles), vehicles, alerts, charger errors, raw OCPP messages, reservations, site power limits, vehicle departure times, and maintenance windows.'
   contact:
     name: Flipturn Support
     email: support@getflipturn.com
@@ -132,25 +132,6 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    NotFound:
-      description: The requested resource or endpoint does not exist.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid parameters passed to the API endpoint.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Invalid API key or Authorization header.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
     Error:
       type: object
@@ -198,6 +179,25 @@ components:
                       type: integer
                     limit:
                       type: number
+  responses:
+    Unauthorized:
+      description: Invalid API key or Authorization header.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid parameters passed to the API endpoint.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource or endpoint does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http
