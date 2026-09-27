@@ -215,56 +215,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    Error:
-      type: object
-      description: Flipturn error envelope.
-      properties:
-        error:
-          type: string
-          description: Human-readable error message.
-    Pagination:
-      type: object
-      properties:
-        hasNextPage:
-          type: boolean
-        nextPageCursor:
-          type: string
-          nullable: true
-    AccessIdCreate:
-      type: object
-      required:
-      - type
-      - name
-      - ocppIdTag
-      properties:
-        type:
-          type: string
-          enum:
-          - RFID
-          - Vehicle
-        name:
-          type: string
-        ocppIdTag:
-          type: string
-        authorizationStatus:
-          type: string
-          enum:
-          - Authorized
-          - Revoked
-          default: Authorized
-        vehicle:
-          type: object
-          properties:
-            make:
-              type: string
-            model:
-              type: string
-            vin:
-              type: string
-        vehicleId:
-          type: integer
-        customer:
-          $ref: '#/components/schemas/Customer'
     AccessIdBatchItem:
       type: object
       required:
@@ -300,6 +250,11 @@ components:
               nullable: true
         customer:
           $ref: '#/components/schemas/Customer'
+    Customer:
+      type: object
+      properties:
+        name:
+          type: string
     VehicleRef:
       type: object
       nullable: true
@@ -354,11 +309,56 @@ components:
           $ref: '#/components/schemas/VehicleRef'
         customer:
           $ref: '#/components/schemas/Customer'
-    Customer:
+    Error:
       type: object
+      description: Flipturn error envelope.
       properties:
+        error:
+          type: string
+          description: Human-readable error message.
+    AccessIdCreate:
+      type: object
+      required:
+      - type
+      - name
+      - ocppIdTag
+      properties:
+        type:
+          type: string
+          enum:
+          - RFID
+          - Vehicle
         name:
           type: string
+        ocppIdTag:
+          type: string
+        authorizationStatus:
+          type: string
+          enum:
+          - Authorized
+          - Revoked
+          default: Authorized
+        vehicle:
+          type: object
+          properties:
+            make:
+              type: string
+            model:
+              type: string
+            vin:
+              type: string
+        vehicleId:
+          type: integer
+        customer:
+          $ref: '#/components/schemas/Customer'
+    Pagination:
+      type: object
+      properties:
+        hasNextPage:
+          type: boolean
+        nextPageCursor:
+          type: string
+          nullable: true
   parameters:
     NextPageCursor:
       name: nextPageCursor
@@ -373,14 +373,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid parameters passed to the API endpoint.
+    NotFound:
+      description: The requested resource or endpoint does not exist.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource or endpoint does not exist.
+    BadRequest:
+      description: Invalid parameters passed to the API endpoint.
       content:
         application/json:
           schema:

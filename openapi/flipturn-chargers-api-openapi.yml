@@ -105,37 +105,29 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    Error:
+    Customer:
       type: object
-      description: Flipturn error envelope.
       properties:
-        error:
+        name:
           type: string
-          description: Human-readable error message.
-    CurrentChargingSession:
+    VehicleRef:
       type: object
       nullable: true
       properties:
         id:
           type: integer
-        startTime:
-          type: string
-          format: date-time
-        socStartPercent:
-          type: number
-          nullable: true
-        energyDeliveredKwh:
-          type: number
-        ocppIdTag:
+        name:
           type: string
           nullable: true
-        ocppTransactionId:
-          type: integer
+        make:
+          type: string
           nullable: true
-        vehicle:
-          $ref: '#/components/schemas/VehicleRef'
-        customer:
-          $ref: '#/components/schemas/Customer'
+        model:
+          type: string
+          nullable: true
+        vin:
+          type: string
+          nullable: true
     Port:
       type: object
       properties:
@@ -170,29 +162,37 @@ components:
               nullable: true
         currentChargingSession:
           $ref: '#/components/schemas/CurrentChargingSession'
-    Customer:
-      type: object
-      properties:
-        name:
-          type: string
-    VehicleRef:
+    CurrentChargingSession:
       type: object
       nullable: true
       properties:
         id:
           type: integer
-        name:
+        startTime:
+          type: string
+          format: date-time
+        socStartPercent:
+          type: number
+          nullable: true
+        energyDeliveredKwh:
+          type: number
+        ocppIdTag:
           type: string
           nullable: true
-        make:
-          type: string
+        ocppTransactionId:
+          type: integer
           nullable: true
-        model:
+        vehicle:
+          $ref: '#/components/schemas/VehicleRef'
+        customer:
+          $ref: '#/components/schemas/Customer'
+    Error:
+      type: object
+      description: Flipturn error envelope.
+      properties:
+        error:
           type: string
-          nullable: true
-        vin:
-          type: string
-          nullable: true
+          description: Human-readable error message.
     Charger:
       type: object
       properties:

@@ -79,6 +79,18 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    Organization:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+    Customer:
+      type: object
+      properties:
+        name:
+          type: string
     SiteRef:
       type: object
       properties:
@@ -89,35 +101,36 @@ components:
         locationId:
           type: string
           nullable: true
-    CurrentChargingSession:
+    PortRef:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        portNumber:
+          type: integer
+        maximumPowerKw:
+          type: number
+          nullable: true
+    VehicleRef:
       type: object
       nullable: true
       properties:
         id:
           type: integer
-        startTime:
-          type: string
-          format: date-time
-        socStartPercent:
-          type: number
-          nullable: true
-        energyDeliveredKwh:
-          type: number
-        ocppIdTag:
-          type: string
-          nullable: true
-        ocppTransactionId:
-          type: integer
-          nullable: true
-        vehicle:
-          $ref: '#/components/schemas/VehicleRef'
-        customer:
-          $ref: '#/components/schemas/Customer'
-    Customer:
-      type: object
-      properties:
         name:
           type: string
+          nullable: true
+        make:
+          type: string
+          nullable: true
+        model:
+          type: string
+          nullable: true
+        vin:
+          type: string
+          nullable: true
     Port:
       type: object
       properties:
@@ -152,6 +165,30 @@ components:
               nullable: true
         currentChargingSession:
           $ref: '#/components/schemas/CurrentChargingSession'
+    CurrentChargingSession:
+      type: object
+      nullable: true
+      properties:
+        id:
+          type: integer
+        startTime:
+          type: string
+          format: date-time
+        socStartPercent:
+          type: number
+          nullable: true
+        energyDeliveredKwh:
+          type: number
+        ocppIdTag:
+          type: string
+          nullable: true
+        ocppTransactionId:
+          type: integer
+          nullable: true
+        vehicle:
+          $ref: '#/components/schemas/VehicleRef'
+        customer:
+          $ref: '#/components/schemas/Customer'
     Error:
       type: object
       description: Flipturn error envelope.
@@ -166,18 +203,6 @@ components:
           type: boolean
         nextPageCursor:
           type: string
-          nullable: true
-    PortRef:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        portNumber:
-          type: integer
-        maximumPowerKw:
-          type: number
           nullable: true
     ChargerError:
       type: object
@@ -215,24 +240,6 @@ components:
           $ref: '#/components/schemas/PortRef'
         organization:
           $ref: '#/components/schemas/Organization'
-    VehicleRef:
-      type: object
-      nullable: true
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-          nullable: true
-        make:
-          type: string
-          nullable: true
-        model:
-          type: string
-          nullable: true
-        vin:
-          type: string
-          nullable: true
     Charger:
       type: object
       properties:
@@ -288,13 +295,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Port'
-    Organization:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
   parameters:
     NextPageCursor:
       name: nextPageCursor

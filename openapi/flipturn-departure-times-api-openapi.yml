@@ -129,13 +129,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    Error:
-      type: object
-      description: Flipturn error envelope.
-      properties:
-        error:
-          type: string
-          description: Human-readable error message.
     DepartureTimeInput:
       type: object
       required:
@@ -182,6 +175,13 @@ components:
         targetSoc:
           type: integer
           nullable: true
+    Error:
+      type: object
+      description: Flipturn error envelope.
+      properties:
+        error:
+          type: string
+          description: Human-readable error message.
   responses:
     Unauthorized:
       description: Invalid API key or Authorization header.
@@ -189,14 +189,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid parameters passed to the API endpoint.
+    NotFound:
+      description: The requested resource or endpoint does not exist.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource or endpoint does not exist.
+    BadRequest:
+      description: Invalid parameters passed to the API endpoint.
       content:
         application/json:
           schema:

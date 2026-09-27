@@ -79,34 +79,18 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    MaintenanceWindow:
+    Organization:
       type: object
       properties:
         id:
           type: integer
-        startTimestamp:
+        name:
           type: string
-          format: date-time
-        endTimestamp:
+    Customer:
+      type: object
+      properties:
+        name:
           type: string
-          format: date-time
-        comment:
-          type: string
-          nullable: true
-        userEmail:
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-        charger:
-          $ref: '#/components/schemas/Charger'
-        site:
-          $ref: '#/components/schemas/SiteRef'
-        organization:
-          $ref: '#/components/schemas/Organization'
     SiteRef:
       type: object
       properties:
@@ -117,13 +101,24 @@ components:
         locationId:
           type: string
           nullable: true
-    Error:
+    VehicleRef:
       type: object
-      description: Flipturn error envelope.
+      nullable: true
       properties:
-        error:
+        id:
+          type: integer
+        name:
           type: string
-          description: Human-readable error message.
+          nullable: true
+        make:
+          type: string
+          nullable: true
+        model:
+          type: string
+          nullable: true
+        vin:
+          type: string
+          nullable: true
     Port:
       type: object
       properties:
@@ -182,35 +177,47 @@ components:
           $ref: '#/components/schemas/VehicleRef'
         customer:
           $ref: '#/components/schemas/Customer'
-    Customer:
+    MaintenanceWindow:
       type: object
       properties:
-        name:
+        id:
+          type: integer
+        startTimestamp:
           type: string
+          format: date-time
+        endTimestamp:
+          type: string
+          format: date-time
+        comment:
+          type: string
+          nullable: true
+        userEmail:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        charger:
+          $ref: '#/components/schemas/Charger'
+        site:
+          $ref: '#/components/schemas/SiteRef'
+        organization:
+          $ref: '#/components/schemas/Organization'
+    Error:
+      type: object
+      description: Flipturn error envelope.
+      properties:
+        error:
+          type: string
+          description: Human-readable error message.
     Pagination:
       type: object
       properties:
         hasNextPage:
           type: boolean
         nextPageCursor:
-          type: string
-          nullable: true
-    VehicleRef:
-      type: object
-      nullable: true
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-          nullable: true
-        make:
-          type: string
-          nullable: true
-        model:
-          type: string
-          nullable: true
-        vin:
           type: string
           nullable: true
     Charger:
@@ -268,13 +275,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Port'
-    Organization:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
   parameters:
     NextPageCursor:
       name: nextPageCursor

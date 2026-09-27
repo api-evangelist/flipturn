@@ -80,41 +80,6 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  schemas:
-    Error:
-      type: object
-      description: Flipturn error envelope.
-      properties:
-        error:
-          type: string
-          description: Human-readable error message.
-    Pagination:
-      type: object
-      properties:
-        hasNextPage:
-          type: boolean
-        nextPageCursor:
-          type: string
-          nullable: true
-    OcppMessage:
-      type: object
-      properties:
-        id:
-          type: integer
-        createdAt:
-          type: string
-          format: date-time
-        ocppChargerIdentity:
-          type: string
-        messageType:
-          type: string
-        messagePayload: {}
-        messageResponse: {}
-        chargerId:
-          type: integer
-        protocol:
-          type: string
-          description: '''ocpp1.6'' or ''ocpp2.0.1''.'
   parameters:
     NextPageCursor:
       name: nextPageCursor
@@ -135,6 +100,41 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  schemas:
+    OcppMessage:
+      type: object
+      properties:
+        id:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+        ocppChargerIdentity:
+          type: string
+        messageType:
+          type: string
+        messagePayload: {}
+        messageResponse: {}
+        chargerId:
+          type: integer
+        protocol:
+          type: string
+          description: '''ocpp1.6'' or ''ocpp2.0.1''.'
+    Error:
+      type: object
+      description: Flipturn error envelope.
+      properties:
+        error:
+          type: string
+          description: Human-readable error message.
+    Pagination:
+      type: object
+      properties:
+        hasNextPage:
+          type: boolean
+        nextPageCursor:
+          type: string
+          nullable: true
   securitySchemes:
     bearerAuth:
       type: http

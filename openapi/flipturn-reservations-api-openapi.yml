@@ -134,14 +134,14 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   responses:
-    BadRequest:
-      description: Invalid parameters passed to the API endpoint.
+    Unauthorized:
+      description: Invalid API key or Authorization header.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Invalid API key or Authorization header.
+    BadRequest:
+      description: Invalid parameters passed to the API endpoint.
       content:
         application/json:
           schema:

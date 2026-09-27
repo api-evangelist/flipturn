@@ -64,6 +64,11 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    Customer:
+      type: object
+      properties:
+        name:
+          type: string
     SiteRef:
       type: object
       properties:
@@ -74,13 +79,24 @@ components:
         locationId:
           type: string
           nullable: true
-    Error:
+    VehicleRef:
       type: object
-      description: Flipturn error envelope.
+      nullable: true
       properties:
-        error:
+        id:
+          type: integer
+        name:
           type: string
-          description: Human-readable error message.
+          nullable: true
+        make:
+          type: string
+          nullable: true
+        model:
+          type: string
+          nullable: true
+        vin:
+          type: string
+          nullable: true
     Port:
       type: object
       properties:
@@ -139,37 +155,13 @@ components:
           $ref: '#/components/schemas/VehicleRef'
         customer:
           $ref: '#/components/schemas/Customer'
-    Customer:
+    Error:
       type: object
+      description: Flipturn error envelope.
       properties:
-        name:
+        error:
           type: string
-    Pagination:
-      type: object
-      properties:
-        hasNextPage:
-          type: boolean
-        nextPageCursor:
-          type: string
-          nullable: true
-    VehicleRef:
-      type: object
-      nullable: true
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-          nullable: true
-        make:
-          type: string
-          nullable: true
-        model:
-          type: string
-          nullable: true
-        vin:
-          type: string
-          nullable: true
+          description: Human-readable error message.
     Alert:
       type: object
       properties:
@@ -210,6 +202,14 @@ components:
           $ref: '#/components/schemas/SiteRef'
         charger:
           $ref: '#/components/schemas/Charger'
+    Pagination:
+      type: object
+      properties:
+        hasNextPage:
+          type: boolean
+        nextPageCursor:
+          type: string
+          nullable: true
     Charger:
       type: object
       properties:

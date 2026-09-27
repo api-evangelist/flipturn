@@ -44,37 +44,36 @@ paths:
           $ref: '#/components/responses/RateLimited'
 components:
   schemas:
-    Error:
+    Organization:
       type: object
-      description: Flipturn error envelope.
       properties:
-        error:
+        id:
+          type: integer
+        name:
           type: string
-          description: Human-readable error message.
-    CurrentChargingSession:
+    Customer:
+      type: object
+      properties:
+        name:
+          type: string
+    VehicleRef:
       type: object
       nullable: true
       properties:
         id:
           type: integer
-        startTime:
-          type: string
-          format: date-time
-        socStartPercent:
-          type: number
-          nullable: true
-        energyDeliveredKwh:
-          type: number
-        ocppIdTag:
+        name:
           type: string
           nullable: true
-        ocppTransactionId:
-          type: integer
+        make:
+          type: string
           nullable: true
-        vehicle:
-          $ref: '#/components/schemas/VehicleRef'
-        customer:
-          $ref: '#/components/schemas/Customer'
+        model:
+          type: string
+          nullable: true
+        vin:
+          type: string
+          nullable: true
     Port:
       type: object
       properties:
@@ -109,29 +108,37 @@ components:
               nullable: true
         currentChargingSession:
           $ref: '#/components/schemas/CurrentChargingSession'
-    Customer:
-      type: object
-      properties:
-        name:
-          type: string
-    VehicleRef:
+    CurrentChargingSession:
       type: object
       nullable: true
       properties:
         id:
           type: integer
-        name:
+        startTime:
+          type: string
+          format: date-time
+        socStartPercent:
+          type: number
+          nullable: true
+        energyDeliveredKwh:
+          type: number
+        ocppIdTag:
           type: string
           nullable: true
-        make:
-          type: string
+        ocppTransactionId:
+          type: integer
           nullable: true
-        model:
+        vehicle:
+          $ref: '#/components/schemas/VehicleRef'
+        customer:
+          $ref: '#/components/schemas/Customer'
+    Error:
+      type: object
+      description: Flipturn error envelope.
+      properties:
+        error:
           type: string
-          nullable: true
-        vin:
-          type: string
-          nullable: true
+          description: Human-readable error message.
     Site:
       type: object
       properties:
@@ -206,22 +213,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Port'
-    Organization:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
   responses:
-    Unauthorized:
-      description: Invalid API key or Authorization header.
+    RateLimited:
+      description: Rate limit exceeded (200 requests per minute per API key).
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    RateLimited:
-      description: Rate limit exceeded (200 requests per minute per API key).
+    Unauthorized:
+      description: Invalid API key or Authorization header.
       content:
         application/json:
           schema:

@@ -117,6 +117,195 @@ paths:
           $ref: '#/components/responses/RateLimited'
 components:
   schemas:
+    Organization:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+    Customer:
+      type: object
+      properties:
+        name:
+          type: string
+    SiteRef:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        locationId:
+          type: string
+          nullable: true
+    PortRef:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        portNumber:
+          type: integer
+        maximumPowerKw:
+          type: number
+          nullable: true
+    VehicleRef:
+      type: object
+      nullable: true
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+          nullable: true
+        make:
+          type: string
+          nullable: true
+        model:
+          type: string
+          nullable: true
+        vin:
+          type: string
+          nullable: true
+    RfidRef:
+      type: object
+      nullable: true
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+          nullable: true
+    Port:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        portNumber:
+          type: integer
+        maximumPowerKw:
+          type: number
+          nullable: true
+        connectorType:
+          type: string
+          description: CCS1, J1772, or NACS.
+        ocppStatus:
+          type: object
+          nullable: true
+          properties:
+            status:
+              type: string
+            timestamp:
+              type: string
+              format: date-time
+            errorCode:
+              type: string
+            vendorErrorCode:
+              type: string
+              nullable: true
+            info:
+              type: string
+              nullable: true
+        currentChargingSession:
+          $ref: '#/components/schemas/CurrentChargingSession'
+    CurrentChargingSession:
+      type: object
+      nullable: true
+      properties:
+        id:
+          type: integer
+        startTime:
+          type: string
+          format: date-time
+        socStartPercent:
+          type: number
+          nullable: true
+        energyDeliveredKwh:
+          type: number
+        ocppIdTag:
+          type: string
+          nullable: true
+        ocppTransactionId:
+          type: integer
+          nullable: true
+        vehicle:
+          $ref: '#/components/schemas/VehicleRef'
+        customer:
+          $ref: '#/components/schemas/Customer'
+    Error:
+      type: object
+      description: Flipturn error envelope.
+      properties:
+        error:
+          type: string
+          description: Human-readable error message.
+    Pagination:
+      type: object
+      properties:
+        hasNextPage:
+          type: boolean
+        nextPageCursor:
+          type: string
+          nullable: true
+    Charger:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        manufacturer:
+          type: string
+          nullable: true
+        model:
+          type: string
+          nullable: true
+        serialNumber:
+          type: string
+          nullable: true
+        firmwareVersion:
+          type: string
+          nullable: true
+        latitude:
+          type: number
+          nullable: true
+        longitude:
+          type: number
+          nullable: true
+        externalId:
+          type: string
+          nullable: true
+        ocppId:
+          type: string
+          nullable: true
+        type:
+          type: string
+          description: '"DCFC" or "Level 2".'
+        networkServiceProvider:
+          type: string
+        chargerType:
+          type: string
+        numberOfPorts:
+          type: integer
+        powerSharing:
+          type: boolean
+        connectionStatus:
+          type: object
+          nullable: true
+          properties:
+            status:
+              type: string
+            timestamp:
+              type: string
+              format: date-time
+        ports:
+          type: array
+          items:
+            $ref: '#/components/schemas/Port'
     ChargingSession:
       type: object
       properties:
@@ -184,195 +373,6 @@ components:
           $ref: '#/components/schemas/Customer'
         organization:
           $ref: '#/components/schemas/Organization'
-    SiteRef:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        locationId:
-          type: string
-          nullable: true
-    Error:
-      type: object
-      description: Flipturn error envelope.
-      properties:
-        error:
-          type: string
-          description: Human-readable error message.
-    Port:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        portNumber:
-          type: integer
-        maximumPowerKw:
-          type: number
-          nullable: true
-        connectorType:
-          type: string
-          description: CCS1, J1772, or NACS.
-        ocppStatus:
-          type: object
-          nullable: true
-          properties:
-            status:
-              type: string
-            timestamp:
-              type: string
-              format: date-time
-            errorCode:
-              type: string
-            vendorErrorCode:
-              type: string
-              nullable: true
-            info:
-              type: string
-              nullable: true
-        currentChargingSession:
-          $ref: '#/components/schemas/CurrentChargingSession'
-    CurrentChargingSession:
-      type: object
-      nullable: true
-      properties:
-        id:
-          type: integer
-        startTime:
-          type: string
-          format: date-time
-        socStartPercent:
-          type: number
-          nullable: true
-        energyDeliveredKwh:
-          type: number
-        ocppIdTag:
-          type: string
-          nullable: true
-        ocppTransactionId:
-          type: integer
-          nullable: true
-        vehicle:
-          $ref: '#/components/schemas/VehicleRef'
-        customer:
-          $ref: '#/components/schemas/Customer'
-    Pagination:
-      type: object
-      properties:
-        hasNextPage:
-          type: boolean
-        nextPageCursor:
-          type: string
-          nullable: true
-    PortRef:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        portNumber:
-          type: integer
-        maximumPowerKw:
-          type: number
-          nullable: true
-    VehicleRef:
-      type: object
-      nullable: true
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-          nullable: true
-        make:
-          type: string
-          nullable: true
-        model:
-          type: string
-          nullable: true
-        vin:
-          type: string
-          nullable: true
-    RfidRef:
-      type: object
-      nullable: true
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-          nullable: true
-    Charger:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        manufacturer:
-          type: string
-          nullable: true
-        model:
-          type: string
-          nullable: true
-        serialNumber:
-          type: string
-          nullable: true
-        firmwareVersion:
-          type: string
-          nullable: true
-        latitude:
-          type: number
-          nullable: true
-        longitude:
-          type: number
-          nullable: true
-        externalId:
-          type: string
-          nullable: true
-        ocppId:
-          type: string
-          nullable: true
-        type:
-          type: string
-          description: '"DCFC" or "Level 2".'
-        networkServiceProvider:
-          type: string
-        chargerType:
-          type: string
-        numberOfPorts:
-          type: integer
-        powerSharing:
-          type: boolean
-        connectionStatus:
-          type: object
-          nullable: true
-          properties:
-            status:
-              type: string
-            timestamp:
-              type: string
-              format: date-time
-        ports:
-          type: array
-          items:
-            $ref: '#/components/schemas/Port'
-    Customer:
-      type: object
-      properties:
-        name:
-          type: string
-    Organization:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
   parameters:
     NextPageCursor:
       name: nextPageCursor
@@ -381,6 +381,12 @@ components:
       schema:
         type: string
   responses:
+    RateLimited:
+      description: Rate limit exceeded (200 requests per minute per API key).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     Unauthorized:
       description: Invalid API key or Authorization header.
       content:
@@ -389,12 +395,6 @@ components:
             $ref: '#/components/schemas/Error'
     BadRequest:
       description: Invalid parameters passed to the API endpoint.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    RateLimited:
-      description: Rate limit exceeded (200 requests per minute per API key).
       content:
         application/json:
           schema:
