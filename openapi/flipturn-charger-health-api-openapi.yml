@@ -73,14 +73,14 @@ paths:
           $ref: '#/components/responses/RateLimited'
 components:
   responses:
-    RateLimited:
-      description: Rate limit exceeded (200 requests per minute per API key).
+    Unauthorized:
+      description: Invalid API key or Authorization header.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Invalid API key or Authorization header.
+    RateLimited:
+      description: Rate limit exceeded (200 requests per minute per API key).
       content:
         application/json:
           schema:

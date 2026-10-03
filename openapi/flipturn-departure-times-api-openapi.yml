@@ -128,7 +128,33 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    Unauthorized:
+      description: Invalid API key or Authorization header.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid parameters passed to the API endpoint.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource or endpoint does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      description: Flipturn error envelope.
+      properties:
+        error:
+          type: string
+          description: Human-readable error message.
     DepartureTimeInput:
       type: object
       required:
@@ -175,32 +201,6 @@ components:
         targetSoc:
           type: integer
           nullable: true
-    Error:
-      type: object
-      description: Flipturn error envelope.
-      properties:
-        error:
-          type: string
-          description: Human-readable error message.
-  responses:
-    Unauthorized:
-      description: Invalid API key or Authorization header.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource or endpoint does not exist.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid parameters passed to the API endpoint.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http

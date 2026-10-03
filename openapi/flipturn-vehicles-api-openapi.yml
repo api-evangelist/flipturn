@@ -142,12 +142,77 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    Unauthorized:
+      description: Invalid API key or Authorization header.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid parameters passed to the API endpoint.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource or endpoint does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    VehicleCreate:
+      type: object
+      properties:
+        name:
+          type: string
+        make:
+          type: string
+          nullable: true
+        model:
+          type: string
+          nullable: true
+        vin:
+          type: string
+          nullable: true
+        licensePlate:
+          type: string
+          nullable: true
+        customer:
+          $ref: '#/components/schemas/Customer'
+        accessIds:
+          type: array
+          items:
+            type: object
+            properties:
+              ocppIdTag:
+                type: string
+              authorizationStatus:
+                type: string
+                enum:
+                - Authorized
+                - Revoked
     Customer:
       type: object
       properties:
         name:
           type: string
+    Error:
+      type: object
+      description: Flipturn error envelope.
+      properties:
+        error:
+          type: string
+          description: Human-readable error message.
+    Pagination:
+      type: object
+      properties:
+        hasNextPage:
+          type: boolean
+        nextPageCursor:
+          type: string
+          nullable: true
     Vehicle:
       type: object
       properties:
@@ -186,52 +251,6 @@ components:
                 enum:
                 - Authorized
                 - Revoked
-    Error:
-      type: object
-      description: Flipturn error envelope.
-      properties:
-        error:
-          type: string
-          description: Human-readable error message.
-    VehicleCreate:
-      type: object
-      properties:
-        name:
-          type: string
-        make:
-          type: string
-          nullable: true
-        model:
-          type: string
-          nullable: true
-        vin:
-          type: string
-          nullable: true
-        licensePlate:
-          type: string
-          nullable: true
-        customer:
-          $ref: '#/components/schemas/Customer'
-        accessIds:
-          type: array
-          items:
-            type: object
-            properties:
-              ocppIdTag:
-                type: string
-              authorizationStatus:
-                type: string
-                enum:
-                - Authorized
-                - Revoked
-    Pagination:
-      type: object
-      properties:
-        hasNextPage:
-          type: boolean
-        nextPageCursor:
-          type: string
-          nullable: true
   parameters:
     NextPageCursor:
       name: nextPageCursor
@@ -239,25 +258,6 @@ components:
       description: Opaque cursor from the previous response's pagination.nextPageCursor to fetch the next page. Keep all other parameters identical.
       schema:
         type: string
-  responses:
-    Unauthorized:
-      description: Invalid API key or Authorization header.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource or endpoint does not exist.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid parameters passed to the API endpoint.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http

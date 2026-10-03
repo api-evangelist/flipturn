@@ -56,24 +56,13 @@ components:
       properties:
         name:
           type: string
-    VehicleRef:
+    Error:
       type: object
-      nullable: true
+      description: Flipturn error envelope.
       properties:
-        id:
-          type: integer
-        name:
+        error:
           type: string
-          nullable: true
-        make:
-          type: string
-          nullable: true
-        model:
-          type: string
-          nullable: true
-        vin:
-          type: string
-          nullable: true
+          description: Human-readable error message.
     Port:
       type: object
       properties:
@@ -132,13 +121,24 @@ components:
           $ref: '#/components/schemas/VehicleRef'
         customer:
           $ref: '#/components/schemas/Customer'
-    Error:
+    VehicleRef:
       type: object
-      description: Flipturn error envelope.
+      nullable: true
       properties:
-        error:
+        id:
+          type: integer
+        name:
           type: string
-          description: Human-readable error message.
+          nullable: true
+        make:
+          type: string
+          nullable: true
+        model:
+          type: string
+          nullable: true
+        vin:
+          type: string
+          nullable: true
     Site:
       type: object
       properties:
@@ -214,14 +214,14 @@ components:
           items:
             $ref: '#/components/schemas/Port'
   responses:
-    RateLimited:
-      description: Rate limit exceeded (200 requests per minute per API key).
+    Unauthorized:
+      description: Invalid API key or Authorization header.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Invalid API key or Authorization header.
+    RateLimited:
+      description: Rate limit exceeded (200 requests per minute per API key).
       content:
         application/json:
           schema:

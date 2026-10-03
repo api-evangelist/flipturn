@@ -91,34 +91,49 @@ components:
       properties:
         name:
           type: string
-    SiteRef:
+    Pagination:
+      type: object
+      properties:
+        hasNextPage:
+          type: boolean
+        nextPageCursor:
+          type: string
+          nullable: true
+    Error:
+      type: object
+      description: Flipturn error envelope.
+      properties:
+        error:
+          type: string
+          description: Human-readable error message.
+    MaintenanceWindow:
       type: object
       properties:
         id:
           type: integer
-        name:
+        startTimestamp:
           type: string
-        locationId:
+          format: date-time
+        endTimestamp:
           type: string
-          nullable: true
-    VehicleRef:
-      type: object
-      nullable: true
-      properties:
-        id:
-          type: integer
-        name:
+          format: date-time
+        comment:
           type: string
           nullable: true
-        make:
+        userEmail:
           type: string
-          nullable: true
-        model:
+        createdAt:
           type: string
-          nullable: true
-        vin:
+          format: date-time
+        updatedAt:
           type: string
-          nullable: true
+          format: date-time
+        charger:
+          $ref: '#/components/schemas/Charger'
+        site:
+          $ref: '#/components/schemas/SiteRef'
+        organization:
+          $ref: '#/components/schemas/Organization'
     Port:
       type: object
       properties:
@@ -177,47 +192,32 @@ components:
           $ref: '#/components/schemas/VehicleRef'
         customer:
           $ref: '#/components/schemas/Customer'
-    MaintenanceWindow:
+    VehicleRef:
+      type: object
+      nullable: true
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+          nullable: true
+        make:
+          type: string
+          nullable: true
+        model:
+          type: string
+          nullable: true
+        vin:
+          type: string
+          nullable: true
+    SiteRef:
       type: object
       properties:
         id:
           type: integer
-        startTimestamp:
+        name:
           type: string
-          format: date-time
-        endTimestamp:
-          type: string
-          format: date-time
-        comment:
-          type: string
-          nullable: true
-        userEmail:
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-        charger:
-          $ref: '#/components/schemas/Charger'
-        site:
-          $ref: '#/components/schemas/SiteRef'
-        organization:
-          $ref: '#/components/schemas/Organization'
-    Error:
-      type: object
-      description: Flipturn error envelope.
-      properties:
-        error:
-          type: string
-          description: Human-readable error message.
-    Pagination:
-      type: object
-      properties:
-        hasNextPage:
-          type: boolean
-        nextPageCursor:
+        locationId:
           type: string
           nullable: true
     Charger:
@@ -275,13 +275,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Port'
-  parameters:
-    NextPageCursor:
-      name: nextPageCursor
-      in: query
-      description: Opaque cursor from the previous response's pagination.nextPageCursor to fetch the next page. Keep all other parameters identical.
-      schema:
-        type: string
   responses:
     Unauthorized:
       description: Invalid API key or Authorization header.
@@ -289,6 +282,13 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  parameters:
+    NextPageCursor:
+      name: nextPageCursor
+      in: query
+      description: Opaque cursor from the previous response's pagination.nextPageCursor to fetch the next page. Keep all other parameters identical.
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

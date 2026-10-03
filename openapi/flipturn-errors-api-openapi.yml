@@ -91,46 +91,57 @@ components:
       properties:
         name:
           type: string
-    SiteRef:
+    Pagination:
+      type: object
+      properties:
+        hasNextPage:
+          type: boolean
+        nextPageCursor:
+          type: string
+          nullable: true
+    Error:
+      type: object
+      description: Flipturn error envelope.
+      properties:
+        error:
+          type: string
+          description: Human-readable error message.
+    ChargerError:
       type: object
       properties:
         id:
           type: integer
-        name:
+        timestamp:
           type: string
-        locationId:
+          format: date-time
+        ocppErrorCode:
           type: string
-          nullable: true
-    PortRef:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        portNumber:
-          type: integer
-        maximumPowerKw:
-          type: number
-          nullable: true
-    VehicleRef:
-      type: object
-      nullable: true
-      properties:
-        id:
-          type: integer
-        name:
+        vendorErrorCode:
           type: string
           nullable: true
-        make:
+        ocppInfo:
           type: string
           nullable: true
-        model:
+        ocppStatus:
           type: string
-          nullable: true
-        vin:
+        errorCategory:
           type: string
+          enum:
+          - endedCharging
+          - preventedCharging
+          - muted
+          - other
+        chargingSession:
+          type: object
           nullable: true
+        site:
+          $ref: '#/components/schemas/SiteRef'
+        charger:
+          $ref: '#/components/schemas/Charger'
+        port:
+          $ref: '#/components/schemas/PortRef'
+        organization:
+          $ref: '#/components/schemas/Organization'
     Port:
       type: object
       properties:
@@ -189,57 +200,46 @@ components:
           $ref: '#/components/schemas/VehicleRef'
         customer:
           $ref: '#/components/schemas/Customer'
-    Error:
+    VehicleRef:
       type: object
-      description: Flipturn error envelope.
+      nullable: true
       properties:
-        error:
-          type: string
-          description: Human-readable error message.
-    Pagination:
-      type: object
-      properties:
-        hasNextPage:
-          type: boolean
-        nextPageCursor:
+        id:
+          type: integer
+        name:
           type: string
           nullable: true
-    ChargerError:
+        make:
+          type: string
+          nullable: true
+        model:
+          type: string
+          nullable: true
+        vin:
+          type: string
+          nullable: true
+    PortRef:
       type: object
       properties:
         id:
           type: integer
-        timestamp:
+        name:
           type: string
-          format: date-time
-        ocppErrorCode:
+        portNumber:
+          type: integer
+        maximumPowerKw:
+          type: number
+          nullable: true
+    SiteRef:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
           type: string
-        vendorErrorCode:
+        locationId:
           type: string
           nullable: true
-        ocppInfo:
-          type: string
-          nullable: true
-        ocppStatus:
-          type: string
-        errorCategory:
-          type: string
-          enum:
-          - endedCharging
-          - preventedCharging
-          - muted
-          - other
-        chargingSession:
-          type: object
-          nullable: true
-        site:
-          $ref: '#/components/schemas/SiteRef'
-        charger:
-          $ref: '#/components/schemas/Charger'
-        port:
-          $ref: '#/components/schemas/PortRef'
-        organization:
-          $ref: '#/components/schemas/Organization'
     Charger:
       type: object
       properties:
@@ -295,13 +295,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Port'
-  parameters:
-    NextPageCursor:
-      name: nextPageCursor
-      in: query
-      description: Opaque cursor from the previous response's pagination.nextPageCursor to fetch the next page. Keep all other parameters identical.
-      schema:
-        type: string
   responses:
     Unauthorized:
       description: Invalid API key or Authorization header.
@@ -309,6 +302,13 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  parameters:
+    NextPageCursor:
+      name: nextPageCursor
+      in: query
+      description: Opaque cursor from the previous response's pagination.nextPageCursor to fetch the next page. Keep all other parameters identical.
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

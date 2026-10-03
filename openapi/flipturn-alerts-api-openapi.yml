@@ -63,38 +63,32 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    Unauthorized:
+      description: Invalid API key or Authorization header.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     Customer:
       type: object
       properties:
         name:
           type: string
-    SiteRef:
+    Error:
+      type: object
+      description: Flipturn error envelope.
+      properties:
+        error:
+          type: string
+          description: Human-readable error message.
+    Pagination:
       type: object
       properties:
-        id:
-          type: integer
-        name:
-          type: string
-        locationId:
-          type: string
-          nullable: true
-    VehicleRef:
-      type: object
-      nullable: true
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-          nullable: true
-        make:
-          type: string
-          nullable: true
-        model:
-          type: string
-          nullable: true
-        vin:
+        hasNextPage:
+          type: boolean
+        nextPageCursor:
           type: string
           nullable: true
     Port:
@@ -155,13 +149,24 @@ components:
           $ref: '#/components/schemas/VehicleRef'
         customer:
           $ref: '#/components/schemas/Customer'
-    Error:
+    VehicleRef:
       type: object
-      description: Flipturn error envelope.
+      nullable: true
       properties:
-        error:
+        id:
+          type: integer
+        name:
           type: string
-          description: Human-readable error message.
+          nullable: true
+        make:
+          type: string
+          nullable: true
+        model:
+          type: string
+          nullable: true
+        vin:
+          type: string
+          nullable: true
     Alert:
       type: object
       properties:
@@ -202,12 +207,14 @@ components:
           $ref: '#/components/schemas/SiteRef'
         charger:
           $ref: '#/components/schemas/Charger'
-    Pagination:
+    SiteRef:
       type: object
       properties:
-        hasNextPage:
-          type: boolean
-        nextPageCursor:
+        id:
+          type: integer
+        name:
+          type: string
+        locationId:
           type: string
           nullable: true
     Charger:
@@ -272,13 +279,6 @@ components:
       description: Opaque cursor from the previous response's pagination.nextPageCursor to fetch the next page. Keep all other parameters identical.
       schema:
         type: string
-  responses:
-    Unauthorized:
-      description: Invalid API key or Authorization header.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http
