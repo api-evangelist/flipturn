@@ -143,8 +143,8 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   responses:
-    Unauthorized:
-      description: Invalid API key or Authorization header.
+    NotFound:
+      description: The requested resource or endpoint does not exist.
       content:
         application/json:
           schema:
@@ -155,64 +155,20 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource or endpoint does not exist.
+    Unauthorized:
+      description: Invalid API key or Authorization header.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  parameters:
+    NextPageCursor:
+      name: nextPageCursor
+      in: query
+      description: Opaque cursor from the previous response's pagination.nextPageCursor to fetch the next page. Keep all other parameters identical.
+      schema:
+        type: string
   schemas:
-    VehicleCreate:
-      type: object
-      properties:
-        name:
-          type: string
-        make:
-          type: string
-          nullable: true
-        model:
-          type: string
-          nullable: true
-        vin:
-          type: string
-          nullable: true
-        licensePlate:
-          type: string
-          nullable: true
-        customer:
-          $ref: '#/components/schemas/Customer'
-        accessIds:
-          type: array
-          items:
-            type: object
-            properties:
-              ocppIdTag:
-                type: string
-              authorizationStatus:
-                type: string
-                enum:
-                - Authorized
-                - Revoked
-    Customer:
-      type: object
-      properties:
-        name:
-          type: string
-    Error:
-      type: object
-      description: Flipturn error envelope.
-      properties:
-        error:
-          type: string
-          description: Human-readable error message.
-    Pagination:
-      type: object
-      properties:
-        hasNextPage:
-          type: boolean
-        nextPageCursor:
-          type: string
-          nullable: true
     Vehicle:
       type: object
       properties:
@@ -251,13 +207,57 @@ components:
                 enum:
                 - Authorized
                 - Revoked
-  parameters:
-    NextPageCursor:
-      name: nextPageCursor
-      in: query
-      description: Opaque cursor from the previous response's pagination.nextPageCursor to fetch the next page. Keep all other parameters identical.
-      schema:
-        type: string
+    Error:
+      type: object
+      description: Flipturn error envelope.
+      properties:
+        error:
+          type: string
+          description: Human-readable error message.
+    Customer:
+      type: object
+      properties:
+        name:
+          type: string
+    VehicleCreate:
+      type: object
+      properties:
+        name:
+          type: string
+        make:
+          type: string
+          nullable: true
+        model:
+          type: string
+          nullable: true
+        vin:
+          type: string
+          nullable: true
+        licensePlate:
+          type: string
+          nullable: true
+        customer:
+          $ref: '#/components/schemas/Customer'
+        accessIds:
+          type: array
+          items:
+            type: object
+            properties:
+              ocppIdTag:
+                type: string
+              authorizationStatus:
+                type: string
+                enum:
+                - Authorized
+                - Revoked
+    Pagination:
+      type: object
+      properties:
+        hasNextPage:
+          type: boolean
+        nextPageCursor:
+          type: string
+          nullable: true
   securitySchemes:
     bearerAuth:
       type: http

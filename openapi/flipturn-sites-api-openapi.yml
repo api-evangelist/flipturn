@@ -51,113 +51,6 @@ components:
           type: integer
         name:
           type: string
-    Customer:
-      type: object
-      properties:
-        name:
-          type: string
-    Error:
-      type: object
-      description: Flipturn error envelope.
-      properties:
-        error:
-          type: string
-          description: Human-readable error message.
-    Port:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        portNumber:
-          type: integer
-        maximumPowerKw:
-          type: number
-          nullable: true
-        connectorType:
-          type: string
-          description: CCS1, J1772, or NACS.
-        ocppStatus:
-          type: object
-          nullable: true
-          properties:
-            status:
-              type: string
-            timestamp:
-              type: string
-              format: date-time
-            errorCode:
-              type: string
-            vendorErrorCode:
-              type: string
-              nullable: true
-            info:
-              type: string
-              nullable: true
-        currentChargingSession:
-          $ref: '#/components/schemas/CurrentChargingSession'
-    CurrentChargingSession:
-      type: object
-      nullable: true
-      properties:
-        id:
-          type: integer
-        startTime:
-          type: string
-          format: date-time
-        socStartPercent:
-          type: number
-          nullable: true
-        energyDeliveredKwh:
-          type: number
-        ocppIdTag:
-          type: string
-          nullable: true
-        ocppTransactionId:
-          type: integer
-          nullable: true
-        vehicle:
-          $ref: '#/components/schemas/VehicleRef'
-        customer:
-          $ref: '#/components/schemas/Customer'
-    VehicleRef:
-      type: object
-      nullable: true
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-          nullable: true
-        make:
-          type: string
-          nullable: true
-        model:
-          type: string
-          nullable: true
-        vin:
-          type: string
-          nullable: true
-    Site:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        address:
-          type: string
-          nullable: true
-        timezone:
-          type: string
-          description: IANA timezone.
-        organization:
-          $ref: '#/components/schemas/Organization'
-        chargers:
-          type: array
-          items:
-            $ref: '#/components/schemas/Charger'
     Charger:
       type: object
       properties:
@@ -213,6 +106,113 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Port'
+    Error:
+      type: object
+      description: Flipturn error envelope.
+      properties:
+        error:
+          type: string
+          description: Human-readable error message.
+    CurrentChargingSession:
+      type: object
+      nullable: true
+      properties:
+        id:
+          type: integer
+        startTime:
+          type: string
+          format: date-time
+        socStartPercent:
+          type: number
+          nullable: true
+        energyDeliveredKwh:
+          type: number
+        ocppIdTag:
+          type: string
+          nullable: true
+        ocppTransactionId:
+          type: integer
+          nullable: true
+        vehicle:
+          $ref: '#/components/schemas/VehicleRef'
+        customer:
+          $ref: '#/components/schemas/Customer'
+    Customer:
+      type: object
+      properties:
+        name:
+          type: string
+    Port:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        portNumber:
+          type: integer
+        maximumPowerKw:
+          type: number
+          nullable: true
+        connectorType:
+          type: string
+          description: CCS1, J1772, or NACS.
+        ocppStatus:
+          type: object
+          nullable: true
+          properties:
+            status:
+              type: string
+            timestamp:
+              type: string
+              format: date-time
+            errorCode:
+              type: string
+            vendorErrorCode:
+              type: string
+              nullable: true
+            info:
+              type: string
+              nullable: true
+        currentChargingSession:
+          $ref: '#/components/schemas/CurrentChargingSession'
+    VehicleRef:
+      type: object
+      nullable: true
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+          nullable: true
+        make:
+          type: string
+          nullable: true
+        model:
+          type: string
+          nullable: true
+        vin:
+          type: string
+          nullable: true
+    Site:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        address:
+          type: string
+          nullable: true
+        timezone:
+          type: string
+          description: IANA timezone.
+        organization:
+          $ref: '#/components/schemas/Organization'
+        chargers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Charger'
   responses:
     Unauthorized:
       description: Invalid API key or Authorization header.

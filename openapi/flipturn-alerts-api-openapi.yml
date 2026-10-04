@@ -63,150 +63,7 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    Unauthorized:
-      description: Invalid API key or Authorization header.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    Customer:
-      type: object
-      properties:
-        name:
-          type: string
-    Error:
-      type: object
-      description: Flipturn error envelope.
-      properties:
-        error:
-          type: string
-          description: Human-readable error message.
-    Pagination:
-      type: object
-      properties:
-        hasNextPage:
-          type: boolean
-        nextPageCursor:
-          type: string
-          nullable: true
-    Port:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        portNumber:
-          type: integer
-        maximumPowerKw:
-          type: number
-          nullable: true
-        connectorType:
-          type: string
-          description: CCS1, J1772, or NACS.
-        ocppStatus:
-          type: object
-          nullable: true
-          properties:
-            status:
-              type: string
-            timestamp:
-              type: string
-              format: date-time
-            errorCode:
-              type: string
-            vendorErrorCode:
-              type: string
-              nullable: true
-            info:
-              type: string
-              nullable: true
-        currentChargingSession:
-          $ref: '#/components/schemas/CurrentChargingSession'
-    CurrentChargingSession:
-      type: object
-      nullable: true
-      properties:
-        id:
-          type: integer
-        startTime:
-          type: string
-          format: date-time
-        socStartPercent:
-          type: number
-          nullable: true
-        energyDeliveredKwh:
-          type: number
-        ocppIdTag:
-          type: string
-          nullable: true
-        ocppTransactionId:
-          type: integer
-          nullable: true
-        vehicle:
-          $ref: '#/components/schemas/VehicleRef'
-        customer:
-          $ref: '#/components/schemas/Customer'
-    VehicleRef:
-      type: object
-      nullable: true
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-          nullable: true
-        make:
-          type: string
-          nullable: true
-        model:
-          type: string
-          nullable: true
-        vin:
-          type: string
-          nullable: true
-    Alert:
-      type: object
-      properties:
-        id:
-          type: integer
-        type:
-          type: string
-          enum:
-          - lowBattery
-          - chargingCompleted
-          - chargingSessionError
-          - offlineCharger
-          - lateCharging
-        startTimestamp:
-          type: string
-          format: date-time
-        muted:
-          type: boolean
-        lowBattery:
-          type: object
-          nullable: true
-        chargingCompleted:
-          type: object
-          nullable: true
-        chargingSessionError:
-          type: object
-          nullable: true
-        offlineCharger:
-          type: object
-          nullable: true
-        lateCharging:
-          type: object
-          nullable: true
-        chargingSession:
-          type: object
-          nullable: true
-        site:
-          $ref: '#/components/schemas/SiteRef'
-        charger:
-          $ref: '#/components/schemas/Charger'
     SiteRef:
       type: object
       properties:
@@ -272,6 +129,142 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Port'
+    Error:
+      type: object
+      description: Flipturn error envelope.
+      properties:
+        error:
+          type: string
+          description: Human-readable error message.
+    CurrentChargingSession:
+      type: object
+      nullable: true
+      properties:
+        id:
+          type: integer
+        startTime:
+          type: string
+          format: date-time
+        socStartPercent:
+          type: number
+          nullable: true
+        energyDeliveredKwh:
+          type: number
+        ocppIdTag:
+          type: string
+          nullable: true
+        ocppTransactionId:
+          type: integer
+          nullable: true
+        vehicle:
+          $ref: '#/components/schemas/VehicleRef'
+        customer:
+          $ref: '#/components/schemas/Customer'
+    Customer:
+      type: object
+      properties:
+        name:
+          type: string
+    Port:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        portNumber:
+          type: integer
+        maximumPowerKw:
+          type: number
+          nullable: true
+        connectorType:
+          type: string
+          description: CCS1, J1772, or NACS.
+        ocppStatus:
+          type: object
+          nullable: true
+          properties:
+            status:
+              type: string
+            timestamp:
+              type: string
+              format: date-time
+            errorCode:
+              type: string
+            vendorErrorCode:
+              type: string
+              nullable: true
+            info:
+              type: string
+              nullable: true
+        currentChargingSession:
+          $ref: '#/components/schemas/CurrentChargingSession'
+    Pagination:
+      type: object
+      properties:
+        hasNextPage:
+          type: boolean
+        nextPageCursor:
+          type: string
+          nullable: true
+    Alert:
+      type: object
+      properties:
+        id:
+          type: integer
+        type:
+          type: string
+          enum:
+          - lowBattery
+          - chargingCompleted
+          - chargingSessionError
+          - offlineCharger
+          - lateCharging
+        startTimestamp:
+          type: string
+          format: date-time
+        muted:
+          type: boolean
+        lowBattery:
+          type: object
+          nullable: true
+        chargingCompleted:
+          type: object
+          nullable: true
+        chargingSessionError:
+          type: object
+          nullable: true
+        offlineCharger:
+          type: object
+          nullable: true
+        lateCharging:
+          type: object
+          nullable: true
+        chargingSession:
+          type: object
+          nullable: true
+        site:
+          $ref: '#/components/schemas/SiteRef'
+        charger:
+          $ref: '#/components/schemas/Charger'
+    VehicleRef:
+      type: object
+      nullable: true
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+          nullable: true
+        make:
+          type: string
+          nullable: true
+        model:
+          type: string
+          nullable: true
+        vin:
+          type: string
+          nullable: true
   parameters:
     NextPageCursor:
       name: nextPageCursor
@@ -279,6 +272,13 @@ components:
       description: Opaque cursor from the previous response's pagination.nextPageCursor to fetch the next page. Keep all other parameters identical.
       schema:
         type: string
+  responses:
+    Unauthorized:
+      description: Invalid API key or Authorization header.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http

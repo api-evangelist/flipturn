@@ -117,25 +117,6 @@ paths:
           $ref: '#/components/responses/RateLimited'
 components:
   schemas:
-    Organization:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-    Customer:
-      type: object
-      properties:
-        name:
-          type: string
-    Error:
-      type: object
-      description: Flipturn error envelope.
-      properties:
-        error:
-          type: string
-          description: Human-readable error message.
     ChargingSession:
       type: object
       properties:
@@ -203,23 +184,6 @@ components:
           $ref: '#/components/schemas/Customer'
         organization:
           $ref: '#/components/schemas/Organization'
-    Pagination:
-      type: object
-      properties:
-        hasNextPage:
-          type: boolean
-        nextPageCursor:
-          type: string
-          nullable: true
-    RfidRef:
-      type: object
-      nullable: true
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-          nullable: true
     Port:
       type: object
       properties:
@@ -254,70 +218,13 @@ components:
               nullable: true
         currentChargingSession:
           $ref: '#/components/schemas/CurrentChargingSession'
-    CurrentChargingSession:
-      type: object
-      nullable: true
-      properties:
-        id:
-          type: integer
-        startTime:
-          type: string
-          format: date-time
-        socStartPercent:
-          type: number
-          nullable: true
-        energyDeliveredKwh:
-          type: number
-        ocppIdTag:
-          type: string
-          nullable: true
-        ocppTransactionId:
-          type: integer
-          nullable: true
-        vehicle:
-          $ref: '#/components/schemas/VehicleRef'
-        customer:
-          $ref: '#/components/schemas/Customer'
-    VehicleRef:
-      type: object
-      nullable: true
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-          nullable: true
-        make:
-          type: string
-          nullable: true
-        model:
-          type: string
-          nullable: true
-        vin:
-          type: string
-          nullable: true
-    PortRef:
+    Organization:
       type: object
       properties:
         id:
           type: integer
         name:
           type: string
-        portNumber:
-          type: integer
-        maximumPowerKw:
-          type: number
-          nullable: true
-    SiteRef:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        locationId:
-          type: string
-          nullable: true
     Charger:
       type: object
       properties:
@@ -373,15 +280,115 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Port'
+    Error:
+      type: object
+      description: Flipturn error envelope.
+      properties:
+        error:
+          type: string
+          description: Human-readable error message.
+    RfidRef:
+      type: object
+      nullable: true
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+          nullable: true
+    CurrentChargingSession:
+      type: object
+      nullable: true
+      properties:
+        id:
+          type: integer
+        startTime:
+          type: string
+          format: date-time
+        socStartPercent:
+          type: number
+          nullable: true
+        energyDeliveredKwh:
+          type: number
+        ocppIdTag:
+          type: string
+          nullable: true
+        ocppTransactionId:
+          type: integer
+          nullable: true
+        vehicle:
+          $ref: '#/components/schemas/VehicleRef'
+        customer:
+          $ref: '#/components/schemas/Customer'
+    Customer:
+      type: object
+      properties:
+        name:
+          type: string
+    SiteRef:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        locationId:
+          type: string
+          nullable: true
+    Pagination:
+      type: object
+      properties:
+        hasNextPage:
+          type: boolean
+        nextPageCursor:
+          type: string
+          nullable: true
+    VehicleRef:
+      type: object
+      nullable: true
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+          nullable: true
+        make:
+          type: string
+          nullable: true
+        model:
+          type: string
+          nullable: true
+        vin:
+          type: string
+          nullable: true
+    PortRef:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        portNumber:
+          type: integer
+        maximumPowerKw:
+          type: number
+          nullable: true
+  parameters:
+    NextPageCursor:
+      name: nextPageCursor
+      in: query
+      description: Opaque cursor from the previous response's pagination.nextPageCursor to fetch the next page. Keep all other parameters identical.
+      schema:
+        type: string
   responses:
-    Unauthorized:
-      description: Invalid API key or Authorization header.
+    BadRequest:
+      description: Invalid parameters passed to the API endpoint.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid parameters passed to the API endpoint.
+    Unauthorized:
+      description: Invalid API key or Authorization header.
       content:
         application/json:
           schema:
@@ -392,13 +399,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  parameters:
-    NextPageCursor:
-      name: nextPageCursor
-      in: query
-      description: Opaque cursor from the previous response's pagination.nextPageCursor to fetch the next page. Keep all other parameters identical.
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http
