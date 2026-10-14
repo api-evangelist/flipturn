@@ -29,3 +29,15 @@
     detected: '2026-10-13'
   status: not-a-workflow
   arazzo: null
+- slug: flipturn-geotab-own
+  label: Geotab (own)
+  partner: geotab
+  partner_name: Geotab (own)
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.geotab.com/partner/flipturn-inc./
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
