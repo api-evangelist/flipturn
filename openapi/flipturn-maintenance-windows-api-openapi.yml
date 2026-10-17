@@ -79,23 +79,30 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    SiteRef:
+    CurrentChargingSession:
       type: object
+      nullable: true
       properties:
         id:
           type: integer
-        name:
+        startTime:
           type: string
-        locationId:
+          format: date-time
+        socStartPercent:
+          type: number
+          nullable: true
+        energyDeliveredKwh:
+          type: number
+        ocppIdTag:
           type: string
           nullable: true
-    Organization:
-      type: object
-      properties:
-        id:
+        ocppTransactionId:
           type: integer
-        name:
-          type: string
+          nullable: true
+        vehicle:
+          $ref: '#/components/schemas/VehicleRef'
+        customer:
+          $ref: '#/components/schemas/Customer'
     Charger:
       type: object
       properties:
@@ -151,58 +158,32 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Port'
-    MaintenanceWindow:
+    Pagination:
       type: object
       properties:
-        id:
-          type: integer
-        startTimestamp:
-          type: string
-          format: date-time
-        endTimestamp:
-          type: string
-          format: date-time
-        comment:
+        hasNextPage:
+          type: boolean
+        nextPageCursor:
           type: string
           nullable: true
-        userEmail:
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-        charger:
-          $ref: '#/components/schemas/Charger'
-        site:
-          $ref: '#/components/schemas/SiteRef'
-        organization:
-          $ref: '#/components/schemas/Organization'
-    CurrentChargingSession:
+    VehicleRef:
       type: object
       nullable: true
       properties:
         id:
           type: integer
-        startTime:
-          type: string
-          format: date-time
-        socStartPercent:
-          type: number
-          nullable: true
-        energyDeliveredKwh:
-          type: number
-        ocppIdTag:
+        name:
           type: string
           nullable: true
-        ocppTransactionId:
-          type: integer
+        make:
+          type: string
           nullable: true
-        vehicle:
-          $ref: '#/components/schemas/VehicleRef'
-        customer:
-          $ref: '#/components/schemas/Customer'
+        model:
+          type: string
+          nullable: true
+        vin:
+          type: string
+          nullable: true
     Error:
       type: object
       description: Flipturn error envelope.
@@ -215,6 +196,16 @@ components:
       properties:
         name:
           type: string
+    SiteRef:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        locationId:
+          type: string
+          nullable: true
     Port:
       type: object
       properties:
@@ -249,39 +240,41 @@ components:
               nullable: true
         currentChargingSession:
           $ref: '#/components/schemas/CurrentChargingSession'
-    Pagination:
+    MaintenanceWindow:
       type: object
       properties:
-        hasNextPage:
-          type: boolean
-        nextPageCursor:
+        id:
+          type: integer
+        startTimestamp:
+          type: string
+          format: date-time
+        endTimestamp:
+          type: string
+          format: date-time
+        comment:
           type: string
           nullable: true
-    VehicleRef:
+        userEmail:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        charger:
+          $ref: '#/components/schemas/Charger'
+        site:
+          $ref: '#/components/schemas/SiteRef'
+        organization:
+          $ref: '#/components/schemas/Organization'
+    Organization:
       type: object
-      nullable: true
       properties:
         id:
           type: integer
         name:
           type: string
-          nullable: true
-        make:
-          type: string
-          nullable: true
-        model:
-          type: string
-          nullable: true
-        vin:
-          type: string
-          nullable: true
-  parameters:
-    NextPageCursor:
-      name: nextPageCursor
-      in: query
-      description: Opaque cursor from the previous response's pagination.nextPageCursor to fetch the next page. Keep all other parameters identical.
-      schema:
-        type: string
   responses:
     Unauthorized:
       description: Invalid API key or Authorization header.
@@ -289,6 +282,13 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  parameters:
+    NextPageCursor:
+      name: nextPageCursor
+      in: query
+      description: Opaque cursor from the previous response's pagination.nextPageCursor to fetch the next page. Keep all other parameters identical.
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

@@ -214,33 +214,75 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    NotFound:
-      description: The requested resource or endpoint does not exist.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid parameters passed to the API endpoint.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Invalid API key or Authorization header.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-  parameters:
-    NextPageCursor:
-      name: nextPageCursor
-      in: query
-      description: Opaque cursor from the previous response's pagination.nextPageCursor to fetch the next page. Keep all other parameters identical.
-      schema:
-        type: string
   schemas:
+    AccessIdCreate:
+      type: object
+      required:
+      - type
+      - name
+      - ocppIdTag
+      properties:
+        type:
+          type: string
+          enum:
+          - RFID
+          - Vehicle
+        name:
+          type: string
+        ocppIdTag:
+          type: string
+        authorizationStatus:
+          type: string
+          enum:
+          - Authorized
+          - Revoked
+          default: Authorized
+        vehicle:
+          type: object
+          properties:
+            make:
+              type: string
+            model:
+              type: string
+            vin:
+              type: string
+        vehicleId:
+          type: integer
+        customer:
+          $ref: '#/components/schemas/Customer'
+    Pagination:
+      type: object
+      properties:
+        hasNextPage:
+          type: boolean
+        nextPageCursor:
+          type: string
+          nullable: true
+    VehicleRef:
+      type: object
+      nullable: true
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+          nullable: true
+        make:
+          type: string
+          nullable: true
+        model:
+          type: string
+          nullable: true
+        vin:
+          type: string
+          nullable: true
+    Error:
+      type: object
+      description: Flipturn error envelope.
+      properties:
+        error:
+          type: string
+          description: Human-readable error message.
     AccessIdBatchItem:
       type: object
       required:
@@ -276,6 +318,11 @@ components:
               nullable: true
         customer:
           $ref: '#/components/schemas/Customer'
+    Customer:
+      type: object
+      properties:
+        name:
+          type: string
     AccessId:
       type: object
       properties:
@@ -312,79 +359,32 @@ components:
           $ref: '#/components/schemas/VehicleRef'
         customer:
           $ref: '#/components/schemas/Customer'
-    AccessIdCreate:
-      type: object
-      required:
-      - type
-      - name
-      - ocppIdTag
-      properties:
-        type:
-          type: string
-          enum:
-          - RFID
-          - Vehicle
-        name:
-          type: string
-        ocppIdTag:
-          type: string
-        authorizationStatus:
-          type: string
-          enum:
-          - Authorized
-          - Revoked
-          default: Authorized
-        vehicle:
-          type: object
-          properties:
-            make:
-              type: string
-            model:
-              type: string
-            vin:
-              type: string
-        vehicleId:
-          type: integer
-        customer:
-          $ref: '#/components/schemas/Customer'
-    Error:
-      type: object
-      description: Flipturn error envelope.
-      properties:
-        error:
-          type: string
-          description: Human-readable error message.
-    Customer:
-      type: object
-      properties:
-        name:
-          type: string
-    Pagination:
-      type: object
-      properties:
-        hasNextPage:
-          type: boolean
-        nextPageCursor:
-          type: string
-          nullable: true
-    VehicleRef:
-      type: object
-      nullable: true
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-          nullable: true
-        make:
-          type: string
-          nullable: true
-        model:
-          type: string
-          nullable: true
-        vin:
-          type: string
-          nullable: true
+  responses:
+    NotFound:
+      description: The requested resource or endpoint does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid parameters passed to the API endpoint.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Invalid API key or Authorization header.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    NextPageCursor:
+      name: nextPageCursor
+      in: query
+      description: Opaque cursor from the previous response's pagination.nextPageCursor to fetch the next page. Keep all other parameters identical.
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

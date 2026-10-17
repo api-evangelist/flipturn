@@ -44,13 +44,30 @@ paths:
           $ref: '#/components/responses/RateLimited'
 components:
   schemas:
-    Organization:
+    CurrentChargingSession:
       type: object
+      nullable: true
       properties:
         id:
           type: integer
-        name:
+        startTime:
           type: string
+          format: date-time
+        socStartPercent:
+          type: number
+          nullable: true
+        energyDeliveredKwh:
+          type: number
+        ocppIdTag:
+          type: string
+          nullable: true
+        ocppTransactionId:
+          type: integer
+          nullable: true
+        vehicle:
+          $ref: '#/components/schemas/VehicleRef'
+        customer:
+          $ref: '#/components/schemas/Customer'
     Charger:
       type: object
       properties:
@@ -106,6 +123,43 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Port'
+    VehicleRef:
+      type: object
+      nullable: true
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+          nullable: true
+        make:
+          type: string
+          nullable: true
+        model:
+          type: string
+          nullable: true
+        vin:
+          type: string
+          nullable: true
+    Site:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        address:
+          type: string
+          nullable: true
+        timezone:
+          type: string
+          description: IANA timezone.
+        organization:
+          $ref: '#/components/schemas/Organization'
+        chargers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Charger'
     Error:
       type: object
       description: Flipturn error envelope.
@@ -113,30 +167,6 @@ components:
         error:
           type: string
           description: Human-readable error message.
-    CurrentChargingSession:
-      type: object
-      nullable: true
-      properties:
-        id:
-          type: integer
-        startTime:
-          type: string
-          format: date-time
-        socStartPercent:
-          type: number
-          nullable: true
-        energyDeliveredKwh:
-          type: number
-        ocppIdTag:
-          type: string
-          nullable: true
-        ocppTransactionId:
-          type: integer
-          nullable: true
-        vehicle:
-          $ref: '#/components/schemas/VehicleRef'
-        customer:
-          $ref: '#/components/schemas/Customer'
     Customer:
       type: object
       properties:
@@ -176,52 +206,22 @@ components:
               nullable: true
         currentChargingSession:
           $ref: '#/components/schemas/CurrentChargingSession'
-    VehicleRef:
-      type: object
-      nullable: true
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-          nullable: true
-        make:
-          type: string
-          nullable: true
-        model:
-          type: string
-          nullable: true
-        vin:
-          type: string
-          nullable: true
-    Site:
+    Organization:
       type: object
       properties:
         id:
           type: integer
         name:
           type: string
-        address:
-          type: string
-          nullable: true
-        timezone:
-          type: string
-          description: IANA timezone.
-        organization:
-          $ref: '#/components/schemas/Organization'
-        chargers:
-          type: array
-          items:
-            $ref: '#/components/schemas/Charger'
   responses:
-    Unauthorized:
-      description: Invalid API key or Authorization header.
+    RateLimited:
+      description: Rate limit exceeded (200 requests per minute per API key).
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    RateLimited:
-      description: Rate limit exceeded (200 requests per minute per API key).
+    Unauthorized:
+      description: Invalid API key or Authorization header.
       content:
         application/json:
           schema:

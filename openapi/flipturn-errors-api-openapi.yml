@@ -79,59 +79,30 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    SiteRef:
+    CurrentChargingSession:
       type: object
+      nullable: true
       properties:
         id:
           type: integer
-        name:
-          type: string
-        locationId:
-          type: string
-          nullable: true
-    ChargerError:
-      type: object
-      properties:
-        id:
-          type: integer
-        timestamp:
+        startTime:
           type: string
           format: date-time
-        ocppErrorCode:
-          type: string
-        vendorErrorCode:
+        socStartPercent:
+          type: number
+          nullable: true
+        energyDeliveredKwh:
+          type: number
+        ocppIdTag:
           type: string
           nullable: true
-        ocppInfo:
-          type: string
-          nullable: true
-        ocppStatus:
-          type: string
-        errorCategory:
-          type: string
-          enum:
-          - endedCharging
-          - preventedCharging
-          - muted
-          - other
-        chargingSession:
-          type: object
-          nullable: true
-        site:
-          $ref: '#/components/schemas/SiteRef'
-        charger:
-          $ref: '#/components/schemas/Charger'
-        port:
-          $ref: '#/components/schemas/PortRef'
-        organization:
-          $ref: '#/components/schemas/Organization'
-    Organization:
-      type: object
-      properties:
-        id:
+        ocppTransactionId:
           type: integer
-        name:
-          type: string
+          nullable: true
+        vehicle:
+          $ref: '#/components/schemas/VehicleRef'
+        customer:
+          $ref: '#/components/schemas/Customer'
     Charger:
       type: object
       properties:
@@ -187,6 +158,44 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Port'
+    Pagination:
+      type: object
+      properties:
+        hasNextPage:
+          type: boolean
+        nextPageCursor:
+          type: string
+          nullable: true
+    PortRef:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        portNumber:
+          type: integer
+        maximumPowerKw:
+          type: number
+          nullable: true
+    VehicleRef:
+      type: object
+      nullable: true
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+          nullable: true
+        make:
+          type: string
+          nullable: true
+        model:
+          type: string
+          nullable: true
+        vin:
+          type: string
+          nullable: true
     Error:
       type: object
       description: Flipturn error envelope.
@@ -194,35 +203,21 @@ components:
         error:
           type: string
           description: Human-readable error message.
-    CurrentChargingSession:
-      type: object
-      nullable: true
-      properties:
-        id:
-          type: integer
-        startTime:
-          type: string
-          format: date-time
-        socStartPercent:
-          type: number
-          nullable: true
-        energyDeliveredKwh:
-          type: number
-        ocppIdTag:
-          type: string
-          nullable: true
-        ocppTransactionId:
-          type: integer
-          nullable: true
-        vehicle:
-          $ref: '#/components/schemas/VehicleRef'
-        customer:
-          $ref: '#/components/schemas/Customer'
     Customer:
       type: object
       properties:
         name:
           type: string
+    SiteRef:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        locationId:
+          type: string
+          nullable: true
     Port:
       type: object
       properties:
@@ -257,51 +252,49 @@ components:
               nullable: true
         currentChargingSession:
           $ref: '#/components/schemas/CurrentChargingSession'
-    Pagination:
-      type: object
-      properties:
-        hasNextPage:
-          type: boolean
-        nextPageCursor:
-          type: string
-          nullable: true
-    VehicleRef:
-      type: object
-      nullable: true
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-          nullable: true
-        make:
-          type: string
-          nullable: true
-        model:
-          type: string
-          nullable: true
-        vin:
-          type: string
-          nullable: true
-    PortRef:
+    Organization:
       type: object
       properties:
         id:
           type: integer
         name:
           type: string
-        portNumber:
+    ChargerError:
+      type: object
+      properties:
+        id:
           type: integer
-        maximumPowerKw:
-          type: number
+        timestamp:
+          type: string
+          format: date-time
+        ocppErrorCode:
+          type: string
+        vendorErrorCode:
+          type: string
           nullable: true
-  parameters:
-    NextPageCursor:
-      name: nextPageCursor
-      in: query
-      description: Opaque cursor from the previous response's pagination.nextPageCursor to fetch the next page. Keep all other parameters identical.
-      schema:
-        type: string
+        ocppInfo:
+          type: string
+          nullable: true
+        ocppStatus:
+          type: string
+        errorCategory:
+          type: string
+          enum:
+          - endedCharging
+          - preventedCharging
+          - muted
+          - other
+        chargingSession:
+          type: object
+          nullable: true
+        site:
+          $ref: '#/components/schemas/SiteRef'
+        charger:
+          $ref: '#/components/schemas/Charger'
+        port:
+          $ref: '#/components/schemas/PortRef'
+        organization:
+          $ref: '#/components/schemas/Organization'
   responses:
     Unauthorized:
       description: Invalid API key or Authorization header.
@@ -309,6 +302,13 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  parameters:
+    NextPageCursor:
+      name: nextPageCursor
+      in: query
+      description: Opaque cursor from the previous response's pagination.nextPageCursor to fetch the next page. Keep all other parameters identical.
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http
