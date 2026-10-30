@@ -64,33 +64,151 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Flipturn is an EV charging management platform for businesses and fleet
-operators — charger monitoring, energy management, fleet charging, access
-control, and payments/billing — sitting on top of OCPP 1.6/2.0.1 chargers (with
-OCPI for roaming partners). Backed by Accel and CRV.
+Flipturn is an EV charging management platform that gives businesses and fleet operators one system to monitor chargers, manage energy costs, run fleet charging operations, control access, and handle payments and billing. Its software layer sits on top of OCPP 1.6 and 2.0.1 chargers (with OCPI support for roaming partners) and serves delivery fleets, transit agencies, multifamily housing, dealerships, workplaces, hospitality, retail, parking, and valet. Flipturn also publishes a JSON REST API, secured with a bearer API key, that exposes sites, chargers and ports, charging sessions, charger health and uptime, access IDs (RFID cards and vehicles), vehicles, alerts, charger errors, raw OCPP messages, port reservations, site power limits, vehicle departure times, and maintenance windows — designed for integrating charging data with ticketing platforms, data warehouses, and transportation management systems. Flipturn is backed by Accel and CRV.
 
-- Website: https://www.getflipturn.com
-- API docs: https://api-docs.getflipturn.com/ (base URL `https://api.getflipturn.com/api`)
-- Status: https://status.getflipturn.com/
-- Security/compliance: https://www.getflipturn.com/product/security (SOC 2, GDPR)
+**Areas:** Company · EV Charging · Electric Vehicles · Fleet Management · Energy · Charging Infrastructure · OCPP · OCPI · Mobility · REST API
 
-## Artifacts
+## Flipturn on APIs.io
 
-This profile was enriched by the API Evangelist pipeline. The Flipturn API
-publishes no OpenAPI, so the spec here is generated from the public GitBook docs
-(`llms.txt` + markdown pages). Captured artifacts:
+Everything profiled for Flipturn is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/flipturn/](https://apis.io/providers/flipturn/)** — or go straight to one of the APIs or properties below.
 
-- `openapi/` — OpenAPI 3.1 generated from the docs (26 operations across 13 resources)
-- `overlays/` — API Evangelist enhancements overlay
-- `authentication/` — bearer API-key auth profile
-- `conventions/` — pagination, rate limiting, error envelope, versioning
-- `errors/` — error/response-code catalog
-- `rate-limits/` — 200 req/min per key
-- `data-model/` — entity-relationship graph
-- `conformance/` — OCPP/OCPI/auth/pagination + SOC 2/GDPR
-- `mcp/` — candidate MCP tool list (one per operation)
-- `skills/` — agent skills (export sessions, sync fleet access IDs, monitor health)
-- `agentic-access/` — recommended x-agentic-access contracts
-- `lifecycle/` — versioning + status page
-- `security/` — domain-security probe + trust center
-- `llms/` — verbatim `llms.txt`
+### APIs (13)
+
+- [Flipturn Access IDs API](https://apis.io/apis/flipturn/flipturn-access-ids-api/) — RFID cards and vehicle MAC IDs used to authorize charging.
+- [Flipturn Alerts API](https://apis.io/apis/flipturn/flipturn-alerts-api/) — Alerts raised by the platform.
+- [Flipturn Charger Health API](https://apis.io/apis/flipturn/flipturn-charger-health-api/) — Uptime, error, and utilization statistics.
+- [Flipturn Chargers API](https://apis.io/apis/flipturn/flipturn-chargers-api/) — Individual charger detail lookups.
+- [Flipturn Charging Sessions API](https://apis.io/apis/flipturn/flipturn-charging-sessions-api/) — Historical and in-progress charging sessions.
+- [Flipturn Departure Times API](https://apis.io/apis/flipturn/flipturn-departure-times-api/) — Scheduled vehicle departure times synced from a TMS.
+- [Flipturn Errors API](https://apis.io/apis/flipturn/flipturn-errors-api/) — Charger error records.
+- [Flipturn Maintenance Windows API](https://apis.io/apis/flipturn/flipturn-maintenance-windows-api/) — Scheduled maintenance windows for chargers.
+- [Flipturn OCPP Messages API](https://apis.io/apis/flipturn/flipturn-ocpp-messages-api/) — Raw OCPP protocol messages for a charger.
+- [Flipturn Reservations API](https://apis.io/apis/flipturn/flipturn-reservations-api/) — OCPP ReserveNow / CancelReservation port reservations.
+- [Flipturn Site Power Limits API](https://apis.io/apis/flipturn/flipturn-site-power-limits-api/) — Cost and capacity power limits for a site.
+- [Flipturn Sites API](https://apis.io/apis/flipturn/flipturn-sites-api/) — Sites, their chargers and ports, and current status.
+- [Flipturn Vehicles API](https://apis.io/apis/flipturn/flipturn-vehicles-api/) — Electric vehicles and their associated access IDs.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [flipturn](https://apis.io/servers/flipturn/flipturn/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Flipturn Agentic Access](https://apis.io/agentic-access/flipturn/flipturn-agentic-access/)
+
+#### Collections (13)
+
+Postman and Open Collection request collections.
+
+- [Flipturn Access IDs API](https://apis.io/collections/flipturn/open-flipturn-access-ids-api/)
+- [Flipturn Access IDs Alerts API](https://apis.io/collections/flipturn/open-flipturn-alerts-api/)
+- [Flipturn Access IDs Charger Health API](https://apis.io/collections/flipturn/open-flipturn-charger-health-api/)
+- [Flipturn Access IDs Chargers API](https://apis.io/collections/flipturn/open-flipturn-chargers-api/)
+- [Flipturn Access IDs Charging Sessions API](https://apis.io/collections/flipturn/open-flipturn-charging-sessions-api/)
+- [Flipturn Access IDs Departure Times API](https://apis.io/collections/flipturn/open-flipturn-departure-times-api/)
+- [Flipturn Access IDs Errors API](https://apis.io/collections/flipturn/open-flipturn-errors-api/)
+- [Flipturn Access IDs Maintenance Windows API](https://apis.io/collections/flipturn/open-flipturn-maintenance-windows-api/)
+- [Flipturn Access IDs OCPP Messages API](https://apis.io/collections/flipturn/open-flipturn-ocpp-messages-api/)
+- [Flipturn Access IDs Reservations API](https://apis.io/collections/flipturn/open-flipturn-reservations-api/)
+- [Flipturn Access IDs Site Power Limits API](https://apis.io/collections/flipturn/open-flipturn-site-power-limits-api/)
+- [Flipturn Access IDs Sites API](https://apis.io/collections/flipturn/open-flipturn-sites-api/)
+- [Flipturn Access IDs Vehicles API](https://apis.io/collections/flipturn/open-flipturn-vehicles-api/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Flipturn Openapi Overlay](https://apis.io/overlays/flipturn/flipturn-openapi-overlay/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Flipturn Authentication](https://apis.io/security/flipturn/flipturn-authentication/)
+- [Flipturn Domain Security](https://apis.io/security/flipturn/flipturn-domain-security/)
+- [Flipturn Trust Center](https://apis.io/security/flipturn/flipturn-trust-center/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Flipturn Rate Limits](https://apis.io/rate-limits/flipturn/flipturn-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](http://www.getflipturn.com)
+- [Documentation](https://api-docs.getflipturn.com/)
+- [Getting started](https://api-docs.getflipturn.com/authorization.md)
+- [API reference](https://api-docs.getflipturn.com/)
+- [Sign up](https://www.getflipturn.com/getdemo)
+- [Support](https://www.getflipturn.com/contact-us)
+- [Blog](https://www.getflipturn.com/blog)
+- [Compliance](https://www.getflipturn.com/product/security)
+- [Terms of service](https://www.getflipturn.com/terms-of-service)
+- [Privacy policy](https://www.getflipturn.com/privacy-policy)
+- [Status](https://status.getflipturn.com/)
+
+## API Evangelist rating
+
+**Kin Score 46.8** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 14.6 |
+| Contract governance | 18.2 |
+| Operational transparency | 36.8 |
+| Developer ergonomics | 58.9 |
+| Access clarity | 50.0 |
+
+**Agent readiness 26.0** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 24.6** — Energy & Utilities
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/flipturn/](https://apis.io/providers/flipturn/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Flipturn: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/flipturn/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
